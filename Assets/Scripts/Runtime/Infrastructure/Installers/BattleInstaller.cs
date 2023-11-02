@@ -8,15 +8,20 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 {
   public class BattleInstaller : MonoInstaller, IInitializable
   {
-    [InjectOptional] private IProgressWatcherService _progressWatcherService;
+    private void OnApplicationQuit()
+    {
+      Container.Resolve<ISaveService>().Save();
+    }
 
-    public void Initialize()
+    public async void Initialize()
     {
       Debug.Log("Gameplay scene initializing");
       if (SceneEntrance.InitializedScene == SceneEntrance.SceneName.NotInitialized)
         InitializeAsInitialScene();
       else
         InitializeAsSubsequentScene();
+
+      await Container.Resolve<ILoadService>().LoadAsync();
     }
 
     public override void InstallBindings()
@@ -26,23 +31,6 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .FromInstance(this)
         .AsSingle();
 
-      if (SceneEntrance.InitializedScene == SceneEntrance.SceneName.NotInitialized)
-        InstallBindingsFromPassedScenes();
-    }
-
-    private void InitializeAsInitialScene()
-    {
-      Debug.Log("Gameplay scene initializing as initial scene");
-      _progressWatcherService ??= Container.Resolve<IProgressWatcherService>();
-    }
-
-    private void InitializeAsSubsequentScene()
-    {
-      Debug.Log("Gameplay scene initializing as subsequent scene");
-    }
-
-    private void InstallBindingsFromPassedScenes()
-    {
       Container
         .Bind<IPersistentProgress>()
         .To<PersistentProgress>()
@@ -66,6 +54,23 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .To<ProgressWatcherService>()
         .FromNew()
         .AsSingle();
+
+      if (SceneEntrance.InitializedScene == SceneEntrance.SceneName.NotInitialized)
+        InstallBindingsFromPassedScenes();
+    }
+
+    private void InitializeAsInitialScene()
+    {
+      Debug.Log("Gameplay scene initializing as initial scene");
+    }
+
+    private void InitializeAsSubsequentScene()
+    {
+      Debug.Log("Gameplay scene initializing as subsequent scene");
+    }
+
+    private void InstallBindingsFromPassedScenes()
+    {
     }
   }
 }
