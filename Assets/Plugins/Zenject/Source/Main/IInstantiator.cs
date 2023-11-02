@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Object = UnityEngine.Object;
 
 #if !NOT_UNITY3D
 using UnityEngine;

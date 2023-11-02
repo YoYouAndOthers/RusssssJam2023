@@ -1,6 +1,7 @@
 using RussSurvivor.Runtime.Application.Progress;
 using RussSurvivor.Runtime.Application.Progress.Watchers;
 using RussSurvivor.Runtime.Application.SaveLoad;
+using RussSurvivor.Runtime.Gameplay.Battle.Characters;
 using UnityEngine;
 using Zenject;
 
@@ -52,6 +53,12 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<IProgressWatcherService>()
         .To<ProgressWatcherService>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<ICharacterRegistry>()
+        .To<CharacterRegistry>()
         .FromNew()
         .AsSingle();
 
