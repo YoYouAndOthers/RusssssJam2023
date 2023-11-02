@@ -2,6 +2,8 @@ using RussSurvivor.Runtime.Application.Progress;
 using RussSurvivor.Runtime.Application.Progress.Watchers;
 using RussSurvivor.Runtime.Application.SaveLoad;
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
+using RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles;
+using RussSurvivor.Runtime.Gameplay.Cinema;
 using UnityEngine;
 using Zenject;
 
@@ -9,11 +11,9 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 {
   public class BattleInstaller : MonoInstaller, IInitializable
   {
-    private void OnApplicationQuit()
-    {
-      Container.Resolve<ISaveService>().Save();
-    }
-
+    [SerializeField] private PlayerBattleSpawnPoint _playerSpawnPoint;
+    [SerializeField] private CameraFollower _cameraFollower;
+    
     public async void Initialize()
     {
       Debug.Log("Gameplay scene initializing");
@@ -23,6 +23,14 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         InitializeAsSubsequentScene();
 
       await Container.Resolve<ILoadService>().LoadAsync();
+      _playerSpawnPoint.Initialize();
+      _cameraFollower.Initialize();
+      Container.Resolve<ObstacleSpawner>().SpawnObstacles();
+    }
+
+    private void OnApplicationQuit()
+    {
+      Container.Resolve<ISaveService>().Save();
     }
 
     public override void InstallBindings()
@@ -59,6 +67,11 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<ICharacterRegistry>()
         .To<CharacterRegistry>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<ObstacleSpawner>()
         .FromNew()
         .AsSingle();
 

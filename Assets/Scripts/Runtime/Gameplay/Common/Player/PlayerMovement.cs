@@ -7,6 +7,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
   public class PlayerMovement : MonoBehaviour
   {
     [SerializeField] private float _speed = 5f;
+    [SerializeField] private Rigidbody2D _rigidbody2D;
     private IInputService _inputService;
 
     [Inject]
@@ -18,7 +19,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
     private void Update()
     {
       Vector2 direction = GetIsometricDirection(_inputService.GetMovementInput());
-      transform.Translate(direction * (_speed * Time.deltaTime));
+      _rigidbody2D.velocity = direction * _speed;
     }
 
     private Vector2 GetIsometricDirection(Vector2 getMovementInput)

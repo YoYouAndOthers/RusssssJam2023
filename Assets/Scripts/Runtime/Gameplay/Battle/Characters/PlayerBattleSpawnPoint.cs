@@ -17,6 +17,11 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Characters
       _characterRegistry = characterRegistry;
     }
 
+    public async void Initialize()
+    {
+      
+    }
+    
     public async void Awake()
     {
       var config = await Resources.LoadAsync<PlayerConfig>("Configs/PlayerConfig") as PlayerConfig;
