@@ -12,7 +12,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Scenes
       new()
       {
         { SceneEntrance.SceneName.Bootstrap, "Bootstrap" },
-        { SceneEntrance.SceneName.Gameplay, "Gameplay" }
+        { SceneEntrance.SceneName.Battle, "Battle" }
       };
 
     public async UniTask LoadSceneAsync(SceneEntrance.SceneName sceneName,

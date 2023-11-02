@@ -5,7 +5,7 @@ using Zenject;
 
 namespace RussSurvivor.Runtime.Infrastructure.Installers
 {
-  public class GameplayInstaller : MonoInstaller, IInitializable
+  public class BattleInstaller : MonoInstaller, IInitializable
   {
     public void Initialize()
     {
@@ -19,7 +19,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     public override void InstallBindings()
     {
       Container
-        .BindInterfacesTo<GameplayInstaller>()
+        .BindInterfacesTo<BattleInstaller>()
         .FromInstance(this)
         .AsSingle();
 

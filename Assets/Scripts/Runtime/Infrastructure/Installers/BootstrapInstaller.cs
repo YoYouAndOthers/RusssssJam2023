@@ -9,6 +9,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 {
   public class BootstrapInstaller : MonoInstaller, IInitializable
   {
+    [SerializeField] private Camera _camera;
     private ISceneLoader _sceneLoader;
 
     [Inject]
@@ -22,7 +23,8 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Debug.Log("Bootstrap scene initializing");
       SceneEntrance.InitializedScene = SceneEntrance.SceneName.Bootstrap;
       await Container.Resolve<ILoadService>().LoadAsync();
-      await _sceneLoader.LoadSceneAsync(SceneEntrance.SceneName.Gameplay, LoadSceneMode.Additive);
+      await _sceneLoader.LoadSceneAsync(SceneEntrance.SceneName.Battle, LoadSceneMode.Additive);
+      Destroy(_camera.gameObject);
     }
 
     public override void InstallBindings()

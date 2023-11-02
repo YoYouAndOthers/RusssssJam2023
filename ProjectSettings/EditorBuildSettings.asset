@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Bootstrap.unity
     guid: a78efd4647b9746428fda9abff8b8040
   - enabled: 1
-    path: Assets/Scenes/Gameplay.unity
+    path: Assets/Scenes/Battle.unity
     guid: a7d3eabdaf9b67149a0ac1b48aec53c8
   m_configObjects: {}

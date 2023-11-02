@@ -506,8 +506,10 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks: []
-  Banks: []
+  MasterBanks:
+  - Master
+  Banks:
+  - TEST
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
@@ -520,20 +522,20 @@ MonoBehaviour:
   SharedLibraryUpdateStage: 0
   SharedLibraryTimeSinceStart: 0
   CurrentVersion: 131608
-  HideSetupWizard: 0
+  HideSetupWizard: 1
   LastEventReferenceScanVersion: 131608
   Platforms:
-  - {fileID: -5399471047109010319}
-  - {fileID: 359564861443120985}
-  - {fileID: -846526537795082749}
-  - {fileID: -7580524521170155340}
-  - {fileID: -5145079160607464147}
-  - {fileID: 281997479350875638}
-  - {fileID: -2948494933500843876}
-  - {fileID: 5994583353181033956}
-  - {fileID: 5810497333863689631}
-  - {fileID: -7763206167281660110}
   - {fileID: -8770270686896487067}
+  - {fileID: -7763206167281660110}
+  - {fileID: -7580524521170155340}
+  - {fileID: -5399471047109010319}
+  - {fileID: -5145079160607464147}
+  - {fileID: -2948494933500843876}
+  - {fileID: -846526537795082749}
+  - {fileID: 281997479350875638}
+  - {fileID: 359564861443120985}
+  - {fileID: 5810497333863689631}
+  - {fileID: 5994583353181033956}
   MigratedPlatforms: 0500000012000000060000000b000000080000000a000000090000000c000000150000000200000001000000
 --- !u!114 &281997479350875638
 MonoBehaviour:
@@ -666,15 +668,15 @@ MonoBehaviour:
     HasValue: 0
   displaySortOrder: 0
   childIdentifiers:
-  - 46fbfdf3fc43db0458918377fd40293e
+  - fd7c55dab0fce234b8c25f6ffca523c1
+  - e7a046c753c3c3d4aacc91f6597f310d
   - 2fea114e74ecf3c4f920e1d5cc1c4c40
   - 52eb9df5db46521439908db3a29a1bbb
-  - b7716510a1f36934c87976f3a81dbf3d
   - 2c5177b11d81d824dbb064f9ac8527da
-  - 0f8eb3f400726694eb47beb1a9f94ce8
+  - 46fbfdf3fc43db0458918377fd40293e
+  - b7716510a1f36934c87976f3a81dbf3d
   - c88d16e5272a4e241b0ef0ac2e53b73d
-  - e7a046c753c3c3d4aacc91f6597f310d
-  - fd7c55dab0fce234b8c25f6ffca523c1
+  - 0f8eb3f400726694eb47beb1a9f94ce8
   codecChannels:
     Value: []
     HasValue: 0
