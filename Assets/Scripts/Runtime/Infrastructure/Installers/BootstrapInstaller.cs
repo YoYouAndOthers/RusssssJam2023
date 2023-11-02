@@ -1,5 +1,8 @@
+using RussSurvivor.Runtime.Application.Progress;
+using RussSurvivor.Runtime.Application.SaveLoad;
 using RussSurvivor.Runtime.Infrastructure.Inputs;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace RussSurvivor.Runtime.Infrastructure.Installers
@@ -9,13 +12,8 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     public void Initialize()
     {
       Debug.Log("Bootstrap scene initializing");
-    }
-
-    [Inject] IInputService _inputService;
-    
-    private void Update()
-    {
-      Debug.Log(_inputService.GetMovementInput());
+      SceneEntrance.InitializedScene = SceneEntrance.SceneName.Bootstrap;
+      SceneManager.LoadScene("Gameplay", LoadSceneMode.Single);
     }
 
     public override void InstallBindings()
@@ -23,6 +21,24 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .BindInterfacesTo<BootstrapInstaller>()
         .FromInstance(this)
+        .AsSingle();
+
+      Container
+        .Bind<IPersistentProgress>()
+        .To<PersistentProgress>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<ILoadService>()
+        .To<JsonLoadService>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<ISaveService>()
+        .To<JsonSaveService>()
+        .FromNew()
         .AsSingle();
     }
   }

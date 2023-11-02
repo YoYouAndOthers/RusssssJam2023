@@ -10,7 +10,20 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     public void Initialize()
     {
       Debug.Log("Gameplay scene initializing");
-      Container.Resolve<ILoadService>().Load();
+      if (SceneEntrance.InitializedScene == SceneEntrance.SceneName.NotInitialized)
+        InitializeAsInitialScene();
+      else
+        InitializeAsSubsequentScene();
+    }
+
+    private void InitializeAsInitialScene()
+    {
+      Debug.Log("Gameplay scene initializing as initial scene");
+    }
+
+    private void InitializeAsSubsequentScene()
+    {
+      Debug.Log("Gameplay scene initializing as subsequent scene");
     }
 
     public override void InstallBindings()
@@ -20,12 +33,18 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .FromInstance(this)
         .AsSingle();
 
+      if (SceneEntrance.InitializedScene == SceneEntrance.SceneName.NotInitialized)
+        InstallBindingsFromPassedScenes();
+    }
+
+    private void InstallBindingsFromPassedScenes()
+    {
       Container
         .Bind<IPersistentProgress>()
         .To<PersistentProgress>()
         .FromNew()
         .AsSingle();
-      
+
       Container
         .Bind<ILoadService>()
         .To<JsonLoadService>()
