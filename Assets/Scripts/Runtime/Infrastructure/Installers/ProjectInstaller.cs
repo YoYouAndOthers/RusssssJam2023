@@ -18,7 +18,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .BindInterfacesTo<ProjectInstaller>()
         .FromInstance(this)
         .AsSingle();
-      
+
       Container
         .Bind<IInputService>()
         .To<InputService>()

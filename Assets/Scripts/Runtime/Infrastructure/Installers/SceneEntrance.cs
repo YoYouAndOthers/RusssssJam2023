@@ -8,7 +8,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Bootstrap = 1,
       Gameplay = 2
     }
-    
+
     public static SceneName InitializedScene = SceneName.NotInitialized;
   }
 }

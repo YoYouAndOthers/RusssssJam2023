@@ -16,16 +16,6 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         InitializeAsSubsequentScene();
     }
 
-    private void InitializeAsInitialScene()
-    {
-      Debug.Log("Gameplay scene initializing as initial scene");
-    }
-
-    private void InitializeAsSubsequentScene()
-    {
-      Debug.Log("Gameplay scene initializing as subsequent scene");
-    }
-
     public override void InstallBindings()
     {
       Container
@@ -35,6 +25,16 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 
       if (SceneEntrance.InitializedScene == SceneEntrance.SceneName.NotInitialized)
         InstallBindingsFromPassedScenes();
+    }
+
+    private void InitializeAsInitialScene()
+    {
+      Debug.Log("Gameplay scene initializing as initial scene");
+    }
+
+    private void InitializeAsSubsequentScene()
+    {
+      Debug.Log("Gameplay scene initializing as subsequent scene");
     }
 
     private void InstallBindingsFromPassedScenes()

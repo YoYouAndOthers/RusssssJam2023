@@ -1,6 +1,6 @@
+using Cysharp.Threading.Tasks;
 using RussSurvivor.Runtime.Application.Progress;
 using RussSurvivor.Runtime.Application.SaveLoad;
-using RussSurvivor.Runtime.Infrastructure.Inputs;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -9,11 +9,12 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 {
   public class BootstrapInstaller : MonoInstaller, IInitializable
   {
-    public void Initialize()
+    public async void Initialize()
     {
       Debug.Log("Bootstrap scene initializing");
       SceneEntrance.InitializedScene = SceneEntrance.SceneName.Bootstrap;
-      SceneManager.LoadScene("Gameplay", LoadSceneMode.Single);
+      await Container.Resolve<ILoadService>().LoadAsync();
+      await SceneManager.LoadSceneAsync("Gameplay", LoadSceneMode.Single);
     }
 
     public override void InstallBindings()

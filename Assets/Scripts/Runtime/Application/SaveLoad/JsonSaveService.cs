@@ -6,7 +6,7 @@ namespace RussSurvivor.Runtime.Application.SaveLoad
 {
   public class JsonSaveService : ISaveService
   {
-    private IPersistentProgress _persistentProgress;
+    private readonly IPersistentProgress _persistentProgress;
 
     public JsonSaveService(IPersistentProgress persistentProgress) =>
       _persistentProgress = persistentProgress;
