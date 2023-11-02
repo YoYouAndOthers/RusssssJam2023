@@ -1,4 +1,5 @@
 using RussSurvivor.Runtime.Infrastructure.Inputs;
+using RussSurvivor.Runtime.Infrastructure.Scenes;
 using UnityEngine;
 using Zenject;
 
@@ -22,6 +23,12 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<IInputService>()
         .To<InputService>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<ISceneLoader>()
+        .To<SceneLoader>()
         .FromNew()
         .AsSingle();
     }
