@@ -1,4 +1,5 @@
 using RussSurvivor.Runtime.Application.Progress;
+using RussSurvivor.Runtime.Application.Progress.Watchers;
 using RussSurvivor.Runtime.Application.SaveLoad;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
 using UnityEngine;
@@ -49,6 +50,12 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<ISaveService>()
         .To<JsonSaveService>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<IProgressWatcherService>()
+        .To<ProgressWatcherService>()
         .FromNew()
         .AsSingle();
     }

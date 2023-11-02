@@ -1,4 +1,5 @@
 using RussSurvivor.Runtime.Application.Progress;
+using RussSurvivor.Runtime.Application.Progress.Watchers;
 using RussSurvivor.Runtime.Application.SaveLoad;
 using UnityEngine;
 using Zenject;
@@ -7,6 +8,8 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 {
   public class BattleInstaller : MonoInstaller, IInitializable
   {
+    [InjectOptional] private IProgressWatcherService _progressWatcherService;
+
     public void Initialize()
     {
       Debug.Log("Gameplay scene initializing");
@@ -30,6 +33,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     private void InitializeAsInitialScene()
     {
       Debug.Log("Gameplay scene initializing as initial scene");
+      _progressWatcherService ??= Container.Resolve<IProgressWatcherService>();
     }
 
     private void InitializeAsSubsequentScene()
@@ -54,6 +58,12 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<ISaveService>()
         .To<JsonSaveService>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<IProgressWatcherService>()
+        .To<ProgressWatcherService>()
         .FromNew()
         .AsSingle();
     }
