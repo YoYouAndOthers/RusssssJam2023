@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{8f7eff0e-af76-411c-aec6-5c6b8fcc7f72}">
+		<property name="assetPath">
+			<value>Balalaika Loop by paul_sutyrin Id-262454 2.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>10.164761904761905</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2f47a307-88ff-47ac-a93b-e488bf836257}</destination>
+		</relationship>
+	</object>
+</objects>
