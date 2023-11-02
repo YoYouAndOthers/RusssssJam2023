@@ -96,6 +96,34 @@ namespace RussSurvivor.Runtime.Infrastructure.Inputs
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""6bbb4f98-a0e4-4c01-8f4e-2aa3889a2cdc"",
+            ""actions"": [
+                {
+                    ""name"": ""CallConsole"",
+                    ""type"": ""Button"",
+                    ""id"": ""0166d3c7-211e-49b7-8c60-acd07e8d30fd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""123b9dfd-d083-4125-ae11-eb9fc013179e"",
+                    ""path"": ""<Keyboard>/backquote"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CallConsole"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -103,6 +131,9 @@ namespace RussSurvivor.Runtime.Infrastructure.Inputs
             // Gameplay
             m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
             m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
+            // Debug
+            m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+            m_Debug_CallConsole = m_Debug.FindAction("CallConsole", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -206,9 +237,59 @@ namespace RussSurvivor.Runtime.Infrastructure.Inputs
             }
         }
         public GameplayActions @Gameplay => new GameplayActions(this);
+
+        // Debug
+        private readonly InputActionMap m_Debug;
+        private List<IDebugActions> m_DebugActionsCallbackInterfaces = new List<IDebugActions>();
+        private readonly InputAction m_Debug_CallConsole;
+        public struct DebugActions
+        {
+            private @InputControls m_Wrapper;
+            public DebugActions(@InputControls wrapper) { m_Wrapper = wrapper; }
+            public InputAction @CallConsole => m_Wrapper.m_Debug_CallConsole;
+            public InputActionMap Get() { return m_Wrapper.m_Debug; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+            public void AddCallbacks(IDebugActions instance)
+            {
+                if (instance == null || m_Wrapper.m_DebugActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_DebugActionsCallbackInterfaces.Add(instance);
+                @CallConsole.started += instance.OnCallConsole;
+                @CallConsole.performed += instance.OnCallConsole;
+                @CallConsole.canceled += instance.OnCallConsole;
+            }
+
+            private void UnregisterCallbacks(IDebugActions instance)
+            {
+                @CallConsole.started -= instance.OnCallConsole;
+                @CallConsole.performed -= instance.OnCallConsole;
+                @CallConsole.canceled -= instance.OnCallConsole;
+            }
+
+            public void RemoveCallbacks(IDebugActions instance)
+            {
+                if (m_Wrapper.m_DebugActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IDebugActions instance)
+            {
+                foreach (var item in m_Wrapper.m_DebugActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_DebugActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public DebugActions @Debug => new DebugActions(this);
         public interface IGameplayActions
         {
             void OnMovement(InputAction.CallbackContext context);
+        }
+        public interface IDebugActions
+        {
+            void OnCallConsole(InputAction.CallbackContext context);
         }
     }
 }

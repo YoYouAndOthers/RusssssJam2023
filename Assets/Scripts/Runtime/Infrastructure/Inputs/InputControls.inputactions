@@ -72,6 +72,34 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "Debug",
+            "id": "6bbb4f98-a0e4-4c01-8f4e-2aa3889a2cdc",
+            "actions": [
+                {
+                    "name": "CallConsole",
+                    "type": "Button",
+                    "id": "0166d3c7-211e-49b7-8c60-acd07e8d30fd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "123b9dfd-d083-4125-ae11-eb9fc013179e",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CallConsole",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
