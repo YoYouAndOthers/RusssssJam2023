@@ -15,7 +15,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
     [Tooltip("Direction of weapon attack")] public DamageDirectionType DamageDirectionType;
     public float BaseSize;
     public WeaponBehaviourBase Prefab;
-    public SerializedDictionary<WeaponEffectType, float> WeaponStats = new();
+    public SerializedDictionary<WeaponStatType, float> WeaponStats = new();
     public int DamagableLayers;
     public float Reach;
 

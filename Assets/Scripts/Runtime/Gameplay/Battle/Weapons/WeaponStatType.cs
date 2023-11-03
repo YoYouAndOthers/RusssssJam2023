@@ -1,6 +1,6 @@
 namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
 {
-  public enum WeaponEffectType
+  public enum WeaponStatType
   {
     None = 0,
     ProjectileCount = 1,

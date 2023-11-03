@@ -1,3 +1,4 @@
+using System.Threading;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Damage;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
       IDamageMaker damageMaker)
     {
       base.Initialize(config, owner, targetDirectionPickStrategy, damageMaker);
-      _fists.Initialize(config.DamagableLayers);
+      _fists.Initialize(config.DamagableLayers, config.WeaponStats[WeaponStatType.Piercing]);
       _reach = config.Reach;
     }
 
