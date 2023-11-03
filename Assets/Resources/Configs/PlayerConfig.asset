@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3deb1fbcc43042f288222e25ed5d01f2, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  BattlePrefab: {fileID: 5068279386405574588, guid: 4b59fc74d158e4a4696641c76f5fdd52, type: 3}
-  BasePrefab: {fileID: 8915673379511837037, guid: 8f17f967b9ab19242a47132332031726, type: 3}
+  BattlePrefab: {fileID: 7382353469973125324, guid: 4b59fc74d158e4a4696641c76f5fdd52, type: 3}
+  TownPrefab: {fileID: 6483647456334889051, guid: 1e1842fb17c5ded4693912835d96a041, type: 3}

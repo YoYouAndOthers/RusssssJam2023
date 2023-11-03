@@ -1,4 +1,3 @@
-using RussSurvivor.Runtime.Gameplay.Battle.Characters;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
 using UnityEngine;
 using Zenject;
@@ -7,11 +6,11 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Cinema
 {
   public class CameraFollower : MonoBehaviour, IInitializable
   {
-    private ICharacterRegistry _characterRegistry;
-    private PlayerBattleBehaviour _playerBattle;
+    private IPlayerRegistry _characterRegistry;
+    private PlayerBehaviourBase _player;
 
     [Inject]
-    private void Construct(ICharacterRegistry characterRegistry)
+    private void Construct(IPlayerRegistry characterRegistry)
     {
       _characterRegistry = characterRegistry;
     }
@@ -19,14 +18,14 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Cinema
     private void Update()
     {
       transform.position = new Vector3(
-        _playerBattle.transform.position.x,
-        _playerBattle.transform.position.y,
+        _player.transform.position.x,
+        _player.transform.position.y,
         transform.position.z);
     }
 
     public void Initialize()
     {
-      _playerBattle = _characterRegistry.GetPlayer();
+      _player = _characterRegistry.GetPlayer();
       enabled = true;
     }
   }

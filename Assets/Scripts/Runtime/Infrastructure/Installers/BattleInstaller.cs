@@ -4,7 +4,7 @@ using RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles;
 using RussSurvivor.Runtime.Gameplay.Battle.Timing;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target;
-using RussSurvivor.Runtime.Gameplay.Common.Cinema;
+using RussSurvivor.Runtime.Gameplay.Common.Player;
 using UnityEngine;
 using Zenject;
 
@@ -12,15 +12,21 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 {
   public class BattleInstaller : MonoInstaller, IInitializable, ITickable
   {
-    [SerializeField] private PlayerBattleSpawnPoint _playerSpawnPoint;
-    [SerializeField] private CameraFollower _cameraFollower;
+    [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
     private ICooldownService _cooldownService;
+    private GameplayInstaller _gameplayInstaller;
 
     private void OnApplicationQuit()
     {
       Container.Resolve<ISaveService>().Save();
     }
 
+    [Inject]
+    private void Construct(GameplayInstaller gameplayInstaller)
+    {
+      _gameplayInstaller = gameplayInstaller;
+    }
+    
     public async void Initialize()
     {
       Debug.Log("Gameplay scene initializing");
@@ -31,9 +37,10 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container.Resolve<ClosestTargetPickerFactory>().Initialize();
 
       await Container.Resolve<ILoadService>().LoadAsync();
-      await _playerSpawnPoint.Initialize();
-      _cameraFollower.Initialize();
+      await Container.Resolve<IPlayerPrefabProvider>().Initialize();
+      _playerSpawnPoint.Initialize();
       Container.Resolve<ObstacleSpawner>().SpawnObstacles();
+      _gameplayInstaller.Initialize();
     }
 
     public void Tick()
@@ -50,11 +57,11 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .AsSingle();
 
       Container
-        .Bind<ICharacterRegistry>()
-        .To<CharacterRegistry>()
+        .Bind(typeof(IPlayerRegistry), typeof(IBattlePlayerRegistry))
+        .To<BattlePlayerRegistry>()
         .FromNew()
         .AsSingle();
-
+      
       Container
         .Bind<ObstacleSpawner>()
         .FromNew()
