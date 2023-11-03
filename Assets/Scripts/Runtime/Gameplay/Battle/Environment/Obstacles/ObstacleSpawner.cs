@@ -13,14 +13,13 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles
     {
       _instantiator = instantiator;
     }
-    
+
     public void SpawnObstacles()
     {
       var obstacleConfig = Resources.Load<ObstaclesConfig>("Configs/Obstacles");
       for (var i = 0; i < obstacleConfig.Number; i++)
-      {
-        _instantiator.InstantiatePrefabForComponent<ObstacleBehaviour>(obstacleConfig.Prefab, Vector3.zero.RandomOnRing(5, obstacleConfig.Radius), Quaternion.identity, null);
-      }
+        _instantiator.InstantiatePrefabForComponent<ObstacleBehaviour>(obstacleConfig.Prefab,
+          Vector3.zero.RandomOnRing(5, obstacleConfig.Radius), Quaternion.identity, null);
     }
   }
 }

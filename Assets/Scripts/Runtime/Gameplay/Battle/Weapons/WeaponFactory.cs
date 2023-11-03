@@ -17,7 +17,8 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
 
     public WeaponBehaviourBase Create(WeaponConfig config, IWeaponOwner owner)
     {
-      var weapon = _instantiator.InstantiatePrefabForComponent<WeaponBehaviourBase>(config.Prefab, owner.WeaponsContainer);
+      var weapon =
+        _instantiator.InstantiatePrefabForComponent<WeaponBehaviourBase>(config.Prefab, owner.WeaponsContainer);
       ITargetDirectionPickStrategy targetDirectionPickStrategy = CreateTargetPickStrategy(config, owner, weapon);
       IDamageMaker damageMaker = CreateDamageMaker(config.Damage);
       weapon.Initialize(config, owner, targetDirectionPickStrategy, damageMaker);

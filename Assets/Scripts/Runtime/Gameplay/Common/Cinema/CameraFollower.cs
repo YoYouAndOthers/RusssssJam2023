@@ -16,18 +16,18 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Cinema
       _characterRegistry = characterRegistry;
     }
 
-    public void Initialize()
-    {
-      _playerBattle = _characterRegistry.GetPlayer();
-      enabled = true;
-    }
-
     private void Update()
     {
       transform.position = new Vector3(
         _playerBattle.transform.position.x,
         _playerBattle.transform.position.y,
         transform.position.z);
+    }
+
+    public void Initialize()
+    {
+      _playerBattle = _characterRegistry.GetPlayer();
+      enabled = true;
     }
   }
 }

@@ -9,6 +9,6 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
     Speed = 4,
     SlowEffect = 5,
     BurnEffect = 6,
-    Bounce = 7,
+    Bounce = 7
   }
 }

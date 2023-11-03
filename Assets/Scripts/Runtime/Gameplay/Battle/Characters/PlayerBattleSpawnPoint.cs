@@ -8,13 +8,14 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Characters
 {
   public class PlayerBattleSpawnPoint : MonoBehaviour
   {
-    private IInstantiator _instantiator;
     private ICharacterRegistry _characterRegistry;
-    private IPlayerWeaponService _weaponService;
+    private IInstantiator _instantiator;
     private WeaponFactory _weaponFactory;
+    private IPlayerWeaponService _weaponService;
 
     [Inject]
-    private void Construct(IInstantiator instantiator, ICharacterRegistry characterRegistry, IPlayerWeaponService weaponService, WeaponFactory weaponFactory)
+    private void Construct(IInstantiator instantiator, ICharacterRegistry characterRegistry,
+      IPlayerWeaponService weaponService, WeaponFactory weaponFactory)
     {
       _instantiator = instantiator;
       _characterRegistry = characterRegistry;
@@ -30,6 +31,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Characters
         Debug.LogError("PlayerConfig not found!");
         return;
       }
+
       var player = _instantiator.InstantiatePrefabForComponent<PlayerBattleBehaviour>(
         config.BattlePrefab,
         transform.position,

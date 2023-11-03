@@ -18,6 +18,11 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     [SerializeField] private CameraFollower _cameraFollower;
     private ICooldownService _cooldownService;
 
+    private void OnApplicationQuit()
+    {
+      Container.Resolve<ISaveService>().Save();
+    }
+
     public async void Initialize()
     {
       Debug.Log("Gameplay scene initializing");
@@ -33,9 +38,10 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container.Resolve<ObstacleSpawner>().SpawnObstacles();
     }
 
-    private void OnApplicationQuit()
+    public void Tick()
     {
-      Container.Resolve<ISaveService>().Save();
+      _cooldownService ??= Container.Resolve<ICooldownService>();
+      _cooldownService.PerformTick(Time.deltaTime);
     }
 
     public override void InstallBindings()
@@ -116,12 +122,6 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     private void InitializeAsSubsequentScene()
     {
       Debug.Log("Gameplay scene initializing as subsequent scene");
-    }
-
-    public void Tick()
-    {
-      _cooldownService ??= Container.Resolve<ICooldownService>();
-      _cooldownService.PerformTick(Time.deltaTime);
     }
   }
 }

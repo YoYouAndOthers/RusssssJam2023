@@ -17,13 +17,25 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target
       }
     }
 
-    private CircleCollider2D _collider;
-    private ITarget _owner;
-
     public float Radius
     {
       get => _collider.radius;
       set => _collider.radius = value;
+    }
+
+    private CircleCollider2D _collider;
+    private ITarget _owner;
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+      if (other.TryGetComponent(out ITarget target) && target != _owner)
+        _targets.Add(target);
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+      if (other.TryGetComponent(out ITarget target) && target != _owner)
+        _targets.Remove(target);
     }
 
     public void Initialize(ITarget owner, float radius, int layerMask)
@@ -33,22 +45,6 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target
       _collider.callbackLayers = new LayerMask { value = layerMask };
       Radius = radius;
       _owner = owner;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-      if (other.TryGetComponent(out ITarget target) && target != _owner)
-      {
-        _targets.Add(target);
-      }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-      if (other.TryGetComponent(out ITarget target) && target != _owner)
-      {
-        _targets.Remove(target);
-      }
     }
   }
 }

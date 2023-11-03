@@ -9,6 +9,6 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
     AoEOnClosest = 4,
     AoEOnRandom = 5,
     AoEByMovement = 6,
-    All = 7,
+    All = 7
   }
 }

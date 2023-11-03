@@ -10,22 +10,19 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
   public class Fist : MonoBehaviour
   {
     [SerializeField] private float _speed;
+    private CancellationTokenSource _cancellationTokenSource;
+    private Collider2D _collider;
 
     private IDamageMaker _damageMaker;
-    private Collider2D _collider;
     private Vector3 _initialPosition;
-    private int _piercingStat;
     private int _piercingCount;
-    private CancellationTokenSource _cancellationTokenSource;
+    private int _piercingStat;
 
-    public void Initialize(int damagableLayers, float piercingCount)
+    private void OnDestroy()
     {
-      _piercingStat = (int)piercingCount;
-      _initialPosition = transform.localPosition;
-      _collider = GetComponent<Collider2D>();
-      _collider.enabled = false;
-      _collider.isTrigger = true;
-      _collider.callbackLayers = new LayerMask { value = damagableLayers };
+      _cancellationTokenSource?.Cancel();
+      _cancellationTokenSource?.Dispose();
+      _cancellationTokenSource = null;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -50,11 +47,14 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
       }
     }
 
-    private void OnDestroy()
+    public void Initialize(int damagableLayers, float piercingCount)
     {
-      _cancellationTokenSource?.Cancel();
-      _cancellationTokenSource?.Dispose();
-      _cancellationTokenSource = null;
+      _piercingStat = (int)piercingCount;
+      _initialPosition = transform.localPosition;
+      _collider = GetComponent<Collider2D>();
+      _collider.enabled = false;
+      _collider.isTrigger = true;
+      _collider.callbackLayers = new LayerMask { value = damagableLayers };
     }
 
     public async UniTask MakeHit(Vector2 direction, float reach, IDamageMaker damageMaker)

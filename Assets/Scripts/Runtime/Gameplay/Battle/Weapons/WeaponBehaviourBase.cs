@@ -17,7 +17,8 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
     private IWeaponOwner _owner;
     private float _timer;
 
-    public virtual void Initialize(WeaponConfig config, IWeaponOwner owner, ITargetDirectionPickStrategy targetDirectionPickStrategy, IDamageMaker damageMaker)
+    public virtual void Initialize(WeaponConfig config, IWeaponOwner owner,
+      ITargetDirectionPickStrategy targetDirectionPickStrategy, IDamageMaker damageMaker)
     {
       _owner = owner;
       TargetDirectionPickStrategy = targetDirectionPickStrategy;

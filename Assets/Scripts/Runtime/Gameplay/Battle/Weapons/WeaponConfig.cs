@@ -7,7 +7,6 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
   [CreateAssetMenu(menuName = "RussSurvivor/Gameplay/Weapons/WeaponConfig", fileName = "Weapon_WeaponName")]
   public class WeaponConfig : ScriptableObject
   {
-    public Guid Id = Guid.NewGuid();
     public string Name;
     public string Description;
     [Tooltip("Cooldown without modifiers in seconds")] public float InitialCooldown;
@@ -18,6 +17,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
     public SerializedDictionary<WeaponStatType, float> WeaponStats = new();
     public int DamagableLayers;
     public float Reach;
+    public Guid Id = Guid.NewGuid();
 
     public bool IsAoE()
     {

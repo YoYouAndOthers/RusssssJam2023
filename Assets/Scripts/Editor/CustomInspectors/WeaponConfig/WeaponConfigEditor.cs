@@ -9,8 +9,8 @@ namespace RussSurvivor.Editor.CustomInspectors
   [CustomEditor(typeof(WeaponConfig))]
   public class WeaponConfigEditor : UnityEditor.Editor
   {
-    private TemplateContainer _root;
     private WeaponConfig _data;
+    private TemplateContainer _root;
 
     public override VisualElement CreateInspectorGUI()
     {
@@ -51,7 +51,7 @@ namespace RussSurvivor.Editor.CustomInspectors
           _data.DamagableLayers = newEvt.newValue;
           AssetDatabase.SaveAssets();
         });
-      
+
       return _root;
     }
 
@@ -61,25 +61,17 @@ namespace RussSurvivor.Editor.CustomInspectors
           DamageDirectionType.AoEByMovement or
           DamageDirectionType.AoEOnClosest or
           DamageDirectionType.AoEOnRandom)
-      {
         _root.Q<PropertyField>("BaseSize").style.display = DisplayStyle.Flex;
-      }
       else
-      {
         _root.Q<PropertyField>("BaseSize").style.display = DisplayStyle.None;
-      }
 
       if (_data.DamageDirectionType is
           DamageDirectionType.ByMovement or
           DamageDirectionType.RandomDirection or
           DamageDirectionType.ClosestToUser)
-      {
         _root.Q<PropertyField>("Reach").style.display = DisplayStyle.Flex;
-      }
       else
-      {
         _root.Q<PropertyField>("Reach").style.display = DisplayStyle.None;
-      }
     }
 
     private void ApplyDamageTypeFields()

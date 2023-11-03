@@ -4,9 +4,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
 {
   public class EnemyWeaponService : IEnemyWeaponService
   {
-    private IEnumerable<WeaponBehaviourBase> _weapons;
-
-    public IEnumerable<WeaponBehaviourBase> Weapons => _weapons;
+    public IEnumerable<WeaponBehaviourBase> Weapons { get; }
 
     public void Add(WeaponBehaviourBase weapon)
     {

@@ -6,27 +6,29 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Timing
   {
     private readonly IEnemyWeaponService _enemyWeaponService;
     private readonly IPlayerWeaponService _playerWeaponService;
-    
-    private float _deltaTime;
     private int _counter;
+
+    private float _deltaTime;
 
     public CooldownService(IPlayerWeaponService playerWeaponService, IEnemyWeaponService enemyWeaponService)
     {
       _playerWeaponService = playerWeaponService;
       _enemyWeaponService = enemyWeaponService;
     }
-    
+
     public void PerformTick(float deltaTime)
     {
       _deltaTime += deltaTime;
-      if(_counter % 3 == 0)
+      if (_counter % 3 == 0)
       {
         _counter = 1;
         UpdateAll(_deltaTime);
         _deltaTime = 0;
       }
       else
+      {
         _counter++;
+      }
     }
 
     private void UpdateAll(float deltaTime)
