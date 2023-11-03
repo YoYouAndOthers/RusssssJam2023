@@ -1,4 +1,8 @@
 using QFSW.QC;
+using RussSurvivor.Runtime.Application;
+using RussSurvivor.Runtime.Application.Progress;
+using RussSurvivor.Runtime.Application.Progress.Watchers;
+using RussSurvivor.Runtime.Application.SaveLoad;
 using RussSurvivor.Runtime.Infrastructure.Inputs;
 using RussSurvivor.Runtime.Infrastructure.Logging;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
@@ -48,6 +52,36 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .Bind<ICurtain>()
         .To<Curtain>()
         .FromComponentInNewPrefabResource("Prefabs/UI/LoadingCurtain")
+        .AsSingle();
+
+      Container
+        .Bind<IPersistentProgress>()
+        .To<PersistentProgress>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<ILoadService>()
+        .To<JsonLoadService>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<ISaveService>()
+        .To<JsonSaveService>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<IProgressWatcherService>()
+        .To<ProgressWatcherService>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<IApplicationService>()
+        .To<ApplicationService>()
+        .FromNew()
         .AsSingle();
     }
   }

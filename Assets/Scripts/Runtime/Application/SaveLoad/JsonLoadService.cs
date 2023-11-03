@@ -20,9 +20,14 @@ namespace RussSurvivor.Runtime.Application.SaveLoad
       _progressWatcherService = progressWatcherService;
     }
 
+    public bool HasSave()
+    {
+      return File.Exists(GetSavePath());
+    }
+
     public void Load()
     {
-      if (File.Exists(GetSavePath()))
+      if (HasSave())
       {
         string json = File.ReadAllText(GetSavePath());
         _persistentProgress.Progress = JsonConvert.DeserializeObject<GameProgress>(json);

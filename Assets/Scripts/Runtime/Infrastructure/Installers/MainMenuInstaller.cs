@@ -1,10 +1,13 @@
 using RussSurvivor.Runtime.Infrastructure.Scenes;
+using RussSurvivor.Runtime.UI.MainMenu;
+using UnityEngine;
 using Zenject;
 
 namespace RussSurvivor.Runtime.Infrastructure.Installers
 {
   public class MainMenuInstaller : MonoInstaller, IInitializable
   {
+    [SerializeField] private MainMenuUi _ui;
     private ICurtain _curtain;
 
     [Inject]
@@ -15,6 +18,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 
     public void Initialize()
     {
+      _ui.Initialize();
       _curtain.Hide();
     }
 
