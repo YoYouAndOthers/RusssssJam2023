@@ -17,6 +17,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Logging
       Debug.Log("Debug service initialized");
       _console = console;
       _inputService.OnConsoleCalled += OnConsoleCalled;
+      _console.Deactivate();
     }
 
     public void Dispose()

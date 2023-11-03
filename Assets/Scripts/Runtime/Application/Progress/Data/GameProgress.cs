@@ -7,6 +7,7 @@ namespace RussSurvivor.Runtime.Application.Progress.Data
   {
     public int Version { get; set; } = 1;
     public Vector2Data PlayerPosition { get; set; } = Vector2Data.Zero;
+    public byte CurrentScene { get; set; } = 0;
   }
 
   [Serializable]

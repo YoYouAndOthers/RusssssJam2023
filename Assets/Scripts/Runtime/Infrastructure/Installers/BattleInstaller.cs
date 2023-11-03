@@ -16,17 +16,17 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     private ICooldownService _cooldownService;
     private GameplayInstaller _gameplayInstaller;
 
-    private void OnApplicationQuit()
-    {
-      Container.Resolve<ISaveService>().Save();
-    }
-
     [Inject]
     private void Construct(GameplayInstaller gameplayInstaller)
     {
       _gameplayInstaller = gameplayInstaller;
     }
-    
+
+    private void OnApplicationQuit()
+    {
+      Container.Resolve<ISaveService>().Save();
+    }
+
     public async void Initialize()
     {
       Debug.Log("Gameplay scene initializing");
@@ -61,7 +61,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .To<BattlePlayerRegistry>()
         .FromNew()
         .AsSingle();
-      
+
       Container
         .Bind<ObstacleSpawner>()
         .FromNew()

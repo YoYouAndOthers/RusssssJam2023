@@ -7,10 +7,10 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Characters
   public class PlayerSpawnPoint : MonoBehaviour
   {
     [SerializeField] private PlayerPrefabType _playerPrefabType;
-    
+    private IPlayerRegistry _characterRegistry;
+
     private IInstantiator _instantiator;
     private IPlayerPrefabProvider _prefabProvider;
-    private IPlayerRegistry _characterRegistry;
 
     [Inject]
     private void Construct(

@@ -43,6 +43,12 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .To<DebugService>()
         .FromNew()
         .AsSingle();
+
+      Container
+        .Bind<ICurtain>()
+        .To<Curtain>()
+        .FromComponentInNewPrefabResource("Prefabs/UI/LoadingCurtain")
+        .AsSingle();
     }
   }
 }

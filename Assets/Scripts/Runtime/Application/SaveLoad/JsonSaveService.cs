@@ -1,3 +1,4 @@
+using QFSW.QC;
 using RussSurvivor.Runtime.Application.Progress;
 using RussSurvivor.Runtime.Application.Progress.Watchers;
 using RussSurvivor.Runtime.Infrastructure.Constants;
@@ -25,6 +26,13 @@ namespace RussSurvivor.Runtime.Application.SaveLoad
       using var file = new System.IO.StreamWriter(path, false);
       string json = JsonConvert.SerializeObject(_persistentProgress.Progress, Formatting.Indented);
       file.Write(json);
+    }
+
+    [Command]
+    public static void DeleteSave()
+    {
+      string path = System.IO.Path.Join(UnityEngine.Application.persistentDataPath, Files.SaveFile);
+      System.IO.File.Delete(path);
     }
   }
 }

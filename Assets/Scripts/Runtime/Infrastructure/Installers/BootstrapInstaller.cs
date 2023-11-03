@@ -1,28 +1,28 @@
 using RussSurvivor.Runtime.Infrastructure.Scenes;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace RussSurvivor.Runtime.Infrastructure.Installers
 {
   public class BootstrapInstaller : MonoInstaller, IInitializable
   {
-    [SerializeField] private Camera _camera;
+    private ICurtain _curtain;
     private ISceneLoader _sceneLoader;
 
     [Inject]
-    private void Construct(ISceneLoader sceneLoader)
+    private void Construct(ISceneLoader sceneLoader, ICurtain curtain)
     {
       _sceneLoader = sceneLoader;
+      _curtain = curtain;
     }
 
-    public async void Initialize()
+    public void Initialize()
     {
+      _curtain.Show();
       UnityEngine.Application.targetFrameRate = 60;
       Debug.Log("Bootstrap scene initializing");
       SceneEntrance.InitializedScene = SceneEntrance.SceneName.Bootstrap;
-      await _sceneLoader.LoadSceneAsync(SceneEntrance.SceneName.Battle, LoadSceneMode.Additive);
-      Destroy(_camera.gameObject);
+      _sceneLoader.LoadSceneAsync(SceneEntrance.SceneName.MainMenu);
     }
 
     public override void InstallBindings()

@@ -12,8 +12,25 @@ namespace RussSurvivor.Runtime.Infrastructure.Scenes
       new()
       {
         { SceneEntrance.SceneName.Bootstrap, "Bootstrap" },
-        { SceneEntrance.SceneName.Battle, "Battle" }
+        { SceneEntrance.SceneName.Battle, "Battle" },
+        { SceneEntrance.SceneName.Gameplay, "Gameplay" },
+        { SceneEntrance.SceneName.Town, "Town" },
+        { SceneEntrance.SceneName.MainMenu, "MainMenu" }
       };
+
+    private ICurtain _curtain;
+
+    public void Initialize(ICurtain curtain)
+    {
+      _curtain = curtain;
+    }
+
+    public void LoadScene(SceneEntrance.SceneName sceneName, LoadSceneMode loadSceneMode = LoadSceneMode.Single)
+    {
+      Debug.Log($"Loading scene {sceneName.ToString()}");
+      SceneManager.LoadScene(SceneNames[sceneName], loadSceneMode);
+      Debug.Log($"Scene {SceneNames[sceneName]} loaded");
+    }
 
     public async UniTask LoadSceneAsync(SceneEntrance.SceneName sceneName,
       LoadSceneMode loadSceneMode = LoadSceneMode.Single)
