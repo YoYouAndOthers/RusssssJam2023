@@ -8,6 +8,7 @@
     <uie:PropertyField binding-path="Damage" name="Damage" />
     <uie:PropertyField name="DamageDirectionType" binding-path="DamageDirectionType" />
     <uie:PropertyField name="BaseSize" binding-path="BaseSize" />
+    <uie:PropertyField name="Reach" binding-path="Reach" />
     <uie:PropertyField binding-path="Prefab" name="Prefab" />
     <uie:PropertyField name="WeaponStats" binding-path="WeaponStats" />
     <uie:LayerMaskField label="DamagableLayers" value="64" name="DamagableLayers" />

@@ -4,16 +4,16 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Characters
 {
   public class CharacterRegistry : ICharacterRegistry
   {
-    private PlayerBehaviour _player;
+    private PlayerBattleBehaviour _playerBattle;
 
-    public PlayerBehaviour GetPlayer()
+    public PlayerBattleBehaviour GetPlayer()
     {
-      return _player;
+      return _playerBattle;
     }
 
-    public void RegisterPlayer(PlayerBehaviour player)
+    public void RegisterPlayer(PlayerBattleBehaviour playerBattle)
     {
-      _player = player;
+      _playerBattle = playerBattle;
     }
   }
 }

@@ -68,6 +68,18 @@ namespace RussSurvivor.Editor.CustomInspectors
       {
         _root.Q<PropertyField>("BaseSize").style.display = DisplayStyle.None;
       }
+
+      if (_data.DamageDirectionType is
+          DamageDirectionType.ByMovement or
+          DamageDirectionType.RandomDirection or
+          DamageDirectionType.ClosestToUser)
+      {
+        _root.Q<PropertyField>("Reach").style.display = DisplayStyle.Flex;
+      }
+      else
+      {
+        _root.Q<PropertyField>("Reach").style.display = DisplayStyle.None;
+      }
     }
 
     private void ApplyDamageTypeFields()

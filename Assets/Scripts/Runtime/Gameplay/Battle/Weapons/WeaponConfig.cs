@@ -17,6 +17,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
     public WeaponBehaviourBase Prefab;
     public SerializedDictionary<WeaponEffectType, float> WeaponStats = new();
     public int DamagableLayers;
+    public float Reach;
 
     public bool IsAoE()
     {

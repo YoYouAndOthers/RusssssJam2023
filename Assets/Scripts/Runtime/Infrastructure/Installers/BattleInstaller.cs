@@ -3,6 +3,8 @@ using RussSurvivor.Runtime.Application.Progress.Watchers;
 using RussSurvivor.Runtime.Application.SaveLoad;
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
 using RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles;
+using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
+using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target;
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using UnityEngine;
 using Zenject;
@@ -21,9 +23,10 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         InitializeAsInitialScene();
       else
         InitializeAsSubsequentScene();
+      Container.Resolve<ClosestTargetPickerFactory>().Initialize();
 
       await Container.Resolve<ILoadService>().LoadAsync();
-      _playerSpawnPoint.Initialize();
+      await _playerSpawnPoint.Initialize();
       _cameraFollower.Initialize();
       Container.Resolve<ObstacleSpawner>().SpawnObstacles();
     }
@@ -72,6 +75,15 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 
       Container
         .Bind<ObstacleSpawner>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .BindFactory<Transform, ClosestTargetPicker, ClosestTargetPickerFactory>()
+        .AsSingle();
+
+      Container
+        .Bind<WeaponFactory>()
         .FromNew()
         .AsSingle();
 
