@@ -10,13 +10,15 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Characters
   {
     private IInstantiator _instantiator;
     private ICharacterRegistry _characterRegistry;
+    private IPlayerWeaponService _weaponService;
     private WeaponFactory _weaponFactory;
 
     [Inject]
-    private void Construct(IInstantiator instantiator, ICharacterRegistry characterRegistry, WeaponFactory weaponFactory)
+    private void Construct(IInstantiator instantiator, ICharacterRegistry characterRegistry, IPlayerWeaponService weaponService, WeaponFactory weaponFactory)
     {
       _instantiator = instantiator;
       _characterRegistry = characterRegistry;
+      _weaponService = weaponService;
       _weaponFactory = weaponFactory;
     }
 
@@ -35,7 +37,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Characters
         null);
 
       _characterRegistry.RegisterPlayer(player);
-      _weaponFactory.Create(Resources.Load<WeaponConfig>("Configs/Weapons/Weapon_Fists"), player);
+      _weaponService.Add(_weaponFactory.Create(Resources.Load<WeaponConfig>("Configs/Weapons/Weapon_Fists"), player));
     }
   }
 }

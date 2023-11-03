@@ -3,6 +3,7 @@ using RussSurvivor.Runtime.Application.Progress.Watchers;
 using RussSurvivor.Runtime.Application.SaveLoad;
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
 using RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles;
+using RussSurvivor.Runtime.Gameplay.Battle.Timing;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target;
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
@@ -11,11 +12,12 @@ using Zenject;
 
 namespace RussSurvivor.Runtime.Infrastructure.Installers
 {
-  public class BattleInstaller : MonoInstaller, IInitializable
+  public class BattleInstaller : MonoInstaller, IInitializable, ITickable
   {
     [SerializeField] private PlayerBattleSpawnPoint _playerSpawnPoint;
     [SerializeField] private CameraFollower _cameraFollower;
-    
+    private ICooldownService _cooldownService;
+
     public async void Initialize()
     {
       Debug.Log("Gameplay scene initializing");
@@ -87,8 +89,23 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .FromNew()
         .AsSingle();
 
-      if (SceneEntrance.InitializedScene == SceneEntrance.SceneName.NotInitialized)
-        InstallBindingsFromPassedScenes();
+      Container
+        .Bind<ICooldownService>()
+        .To<CooldownService>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<IPlayerWeaponService>()
+        .To<PlayerWeaponService>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<IEnemyWeaponService>()
+        .To<EnemyWeaponService>()
+        .FromNew()
+        .AsSingle();
     }
 
     private void InitializeAsInitialScene()
@@ -101,8 +118,10 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Debug.Log("Gameplay scene initializing as subsequent scene");
     }
 
-    private void InstallBindingsFromPassedScenes()
+    public void Tick()
     {
+      _cooldownService ??= Container.Resolve<ICooldownService>();
+      _cooldownService.PerformTick(Time.deltaTime);
     }
   }
 }

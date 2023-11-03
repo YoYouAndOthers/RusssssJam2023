@@ -8,7 +8,14 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target
   {
     private readonly List<ITarget> _targets = new();
 
-    public IEnumerable<ITarget> Targets => _targets;
+    public IEnumerable<ITarget> Targets
+    {
+      get
+      {
+        _targets.RemoveAll(k => k == null);
+        return _targets;
+      }
+    }
 
     private CircleCollider2D _collider;
     private ITarget _owner;
@@ -32,7 +39,6 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target
     {
       if (other.TryGetComponent(out ITarget target) && target != _owner)
       {
-        Debug.Log($"Add target {target}");
         _targets.Add(target);
       }
     }

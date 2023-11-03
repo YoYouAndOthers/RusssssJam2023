@@ -91,6 +91,8 @@ namespace RussSurvivor.Editor.CustomInspectors
       }
       else
       {
+        if (_root.Q<PropertyField>("DamageOverTimeRate") == null)
+          return;
         _root.Q<PropertyField>("DamageOverTimeRate").style.display = DisplayStyle.None;
         _root.Q<PropertyField>("DamageOverTimeDuration").style.display = DisplayStyle.None;
       }

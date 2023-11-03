@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: 'Fists
 
     Can crush not only enemies, but also trees and rocks'
-  InitialCooldown: 0
+  InitialCooldown: 1
   Damage:
     DamageApplyType: 1
     Value: 1

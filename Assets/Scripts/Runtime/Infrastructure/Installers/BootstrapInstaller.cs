@@ -18,6 +18,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 
     public async void Initialize()
     {
+      UnityEngine.Application.targetFrameRate = 60;
       Debug.Log("Bootstrap scene initializing");
       SceneEntrance.InitializedScene = SceneEntrance.SceneName.Bootstrap;
       await _sceneLoader.LoadSceneAsync(SceneEntrance.SceneName.Battle, LoadSceneMode.Additive);
