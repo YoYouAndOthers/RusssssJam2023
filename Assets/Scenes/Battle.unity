@@ -184,9 +184,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _parentNewObjectsUnderSceneContext: 0
-  _contractNames:
+  _contractNames: []
+  _parentContractNames:
   - Gameplay
-  _parentContractNames: []
 --- !u!4 &291882003
 Transform:
   m_ObjectHideFlags: 0
