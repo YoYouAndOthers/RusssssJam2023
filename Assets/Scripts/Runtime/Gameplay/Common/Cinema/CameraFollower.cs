@@ -1,18 +1,16 @@
 using RussSurvivor.Runtime.Gameplay.Common.Player;
 using UnityEngine;
-using Zenject;
 
 namespace RussSurvivor.Runtime.Gameplay.Common.Cinema
 {
-  public class CameraFollower : MonoBehaviour, IInitializable
+  public class CameraFollower : MonoBehaviour
   {
-    private IPlayerRegistry _characterRegistry;
     private PlayerBehaviourBase _player;
 
-    [Inject]
-    private void Construct(IPlayerRegistry characterRegistry)
+    public void Initialize(PlayerBehaviourBase player)
     {
-      _characterRegistry = characterRegistry;
+      _player = player;
+      enabled = true;
     }
 
     private void Update()
@@ -23,10 +21,9 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Cinema
         transform.position.z);
     }
 
-    public void Initialize()
+    public void Disable()
     {
-      _player = _characterRegistry.GetPlayer();
-      enabled = true;
+      enabled = false;
     }
   }
 }

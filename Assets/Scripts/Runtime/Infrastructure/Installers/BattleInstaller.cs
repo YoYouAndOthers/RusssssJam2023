@@ -4,7 +4,9 @@ using RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles;
 using RussSurvivor.Runtime.Gameplay.Battle.Timing;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target;
+using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
+using RussSurvivor.Runtime.Infrastructure.Scenes;
 using UnityEngine;
 using Zenject;
 
@@ -14,12 +16,14 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
   {
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
     private ICooldownService _cooldownService;
-    private GameplayInstaller _gameplayInstaller;
+    private ICurtain _curtain;
+    private CameraFollower _cameraFollower;
 
     [Inject]
-    private void Construct(GameplayInstaller gameplayInstaller)
+    private void Construct(ICurtain curtain, CameraFollower cameraFollower)
     {
-      _gameplayInstaller = gameplayInstaller;
+      _curtain = curtain;
+      _cameraFollower = cameraFollower;
     }
 
     private void OnApplicationQuit()
@@ -40,7 +44,8 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       await Container.Resolve<IPlayerPrefabProvider>().Initialize();
       _playerSpawnPoint.Initialize();
       Container.Resolve<ObstacleSpawner>().SpawnObstacles();
-      _gameplayInstaller.Initialize();
+      _cameraFollower.Initialize(Container.Resolve<IPlayerRegistry>().GetPlayer());
+      _curtain.Hide();
     }
 
     public void Tick()

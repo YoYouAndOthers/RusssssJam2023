@@ -1,4 +1,5 @@
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
+using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
 using UnityEngine;
@@ -10,21 +11,21 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
   {
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
 
-    private GameplayInstaller _gameplayInstaller;
     private ICurtain _curtain;
+    private CameraFollower _cameraFollower;
 
     [Inject]
-    private void Construct(GameplayInstaller gameplayInstaller, ICurtain curtain)
+    private void Construct(ICurtain curtain, CameraFollower cameraFollower)
     {
-      _gameplayInstaller = gameplayInstaller;
       _curtain = curtain;
+      _cameraFollower = cameraFollower;
     }
 
     public async void Initialize()
     {
       await Container.Resolve<IPlayerPrefabProvider>().Initialize();
       _playerSpawnPoint.Initialize();
-      _gameplayInstaller.Initialize();
+      _cameraFollower.Initialize(Container.Resolve<IPlayerRegistry>().GetPlayer());
       _curtain.Hide();
     }
 

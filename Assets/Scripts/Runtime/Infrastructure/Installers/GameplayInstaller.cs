@@ -1,19 +1,14 @@
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
+using RussSurvivor.Runtime.Gameplay.Common.Transitions;
 using UnityEngine;
 using Zenject;
 
 namespace RussSurvivor.Runtime.Infrastructure.Installers
 {
-  public class GameplayInstaller : MonoInstaller, IInitializable
+  public class GameplayInstaller : MonoInstaller
   {
     [SerializeField] private CameraFollower _cameraFollower;
-
-    public void Initialize()
-    {
-      Debug.Log("Gameplay scene initializing");
-      _cameraFollower.Initialize();
-    }
 
     public override void InstallBindings()
     {
@@ -26,6 +21,17 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<GameplayInstaller>()
         .FromInstance(this)
+        .AsSingle();
+
+      Container
+        .Bind<IGameplayTransitionService>()
+        .To<GameplayTransitionService>()
+        .FromNew()
+        .AsSingle();
+      
+      Container
+        .Bind<CameraFollower>()
+        .FromInstance(_cameraFollower)
         .AsSingle();
     }
   }

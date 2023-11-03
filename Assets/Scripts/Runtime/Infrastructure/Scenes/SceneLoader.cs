@@ -39,5 +39,12 @@ namespace RussSurvivor.Runtime.Infrastructure.Scenes
       await SceneManager.LoadSceneAsync(SceneNames[sceneName], loadSceneMode);
       Debug.Log($"Scene {SceneNames[sceneName]} loaded");
     }
+
+    public async UniTask UnloadSceneAsync(SceneEntrance.SceneName sceneName)
+    {
+      Debug.Log($"Unloading scene {sceneName.ToString()}");
+      await SceneManager.UnloadSceneAsync(SceneNames[sceneName]);
+      Debug.Log($"Scene {SceneNames[sceneName]} unloaded");
+    }
   }
 }
