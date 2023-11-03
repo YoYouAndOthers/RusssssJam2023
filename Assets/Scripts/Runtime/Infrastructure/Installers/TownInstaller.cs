@@ -1,5 +1,6 @@
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
+using RussSurvivor.Runtime.Infrastructure.Scenes;
 using UnityEngine;
 using Zenject;
 
@@ -10,11 +11,13 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
 
     private GameplayInstaller _gameplayInstaller;
+    private ICurtain _curtain;
 
     [Inject]
-    private void Construct(GameplayInstaller gameplayInstaller)
+    private void Construct(GameplayInstaller gameplayInstaller, ICurtain curtain)
     {
       _gameplayInstaller = gameplayInstaller;
+      _curtain = curtain;
     }
 
     public async void Initialize()
@@ -22,6 +25,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       await Container.Resolve<IPlayerPrefabProvider>().Initialize();
       _playerSpawnPoint.Initialize();
       _gameplayInstaller.Initialize();
+      _curtain.Hide();
     }
 
     public override void InstallBindings()
