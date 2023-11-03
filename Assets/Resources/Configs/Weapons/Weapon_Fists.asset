@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c1970d0a8924f978e333e26555ef04d, type: 3}
+  m_Name: Weapon_Fists
+  m_EditorClassIdentifier: 
+  Name: Fistis
+  Description: 'Fists
+
+    Can crush not only enemies, but also trees and rocks'
+  InitialCooldown: 0
+  Damage:
+    DamageApplyType: 1
+    Value: 1
+    DamageOverTimeRate: 0
+    DamageOverTimeDuration: 0
+  DamageDirectionType: 1
+  BaseSize: 0
+  Prefab: {fileID: 0}
+  WeaponStats:
+    _serializedList:
+    - Key: 2
+      Value: -1
+  DamagableLayers: 192

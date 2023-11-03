@@ -1,0 +1,18 @@
+{
+    "name": "RussSurvivor.Editor",
+    "rootNamespace": "RussSurvivor.Editor",
+    "references": [
+        "GUID:c32c84851284eb54690f0bd1760f1328"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
