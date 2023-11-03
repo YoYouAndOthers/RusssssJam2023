@@ -3,7 +3,7 @@ using RussSurvivor.Runtime.Gameplay.Common.Player;
 using UnityEngine;
 using Zenject;
 
-namespace RussSurvivor.Runtime.Gameplay.Cinema
+namespace RussSurvivor.Runtime.Gameplay.Common.Cinema
 {
   public class CameraFollower : MonoBehaviour, IInitializable
   {

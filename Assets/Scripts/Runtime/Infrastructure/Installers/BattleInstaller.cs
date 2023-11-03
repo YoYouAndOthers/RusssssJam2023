@@ -3,7 +3,7 @@ using RussSurvivor.Runtime.Application.Progress.Watchers;
 using RussSurvivor.Runtime.Application.SaveLoad;
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
 using RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles;
-using RussSurvivor.Runtime.Gameplay.Cinema;
+using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using UnityEngine;
 using Zenject;
 
