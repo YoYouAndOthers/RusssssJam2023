@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b708d82aea384b0890c5584cb697a53f, type: 3}
   m_Name: Actor_NPC_0
   m_EditorClassIdentifier: 
-  Name: Drocheslav
-  IsPlayer: 1
+  Name: Semen
+  IsPlayer: 0
   Icon: {fileID: 0}
   Description: 

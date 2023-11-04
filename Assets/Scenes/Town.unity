@@ -619,6 +619,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TalkableNPS_Base
       objectReference: {fileID: 0}
+    - target: {fileID: 6269677566038446153, guid: be0fced037ec77f429a925090cb5d6f5, type: 3}
+      propertyPath: _actor
+      value: 
+      objectReference: {fileID: 11400000, guid: 784b36f9c5a9eb14cbb61e6d9e9c5417, type: 2}
+    - target: {fileID: 6269677566038446153, guid: be0fced037ec77f429a925090cb5d6f5, type: 3}
+      propertyPath: _conversation
+      value: 
+      objectReference: {fileID: 11400000, guid: c01681e4920d49941b9772bbf153f668, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

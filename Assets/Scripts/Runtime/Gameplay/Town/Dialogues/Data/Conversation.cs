@@ -8,6 +8,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
   {
     public Guid Id = Guid.NewGuid();
     public Actor[] Actors;
+    [SerializeReference, SubclassSelector] public ConditionToStartBase[] ConditionsToStart;
     public DialogueEntry[] Entries;
   }
 }
