@@ -616,6 +616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerSpawnPoint: {fileID: 647598366}
+  _initialQuestGiver: {fileID: 11400000, guid: 784b36f9c5a9eb14cbb61e6d9e9c5417, type: 2}
   _dialogueEntryPresenter: {fileID: 159360773}
 --- !u!1 &536682026
 GameObject:

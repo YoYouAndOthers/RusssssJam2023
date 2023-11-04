@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
+using RussSurvivor.Runtime.Gameplay.Town.Characters;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
 using UniRx;
@@ -20,18 +21,19 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
 
     private IConversationDataBase _conversationDataBase;
     private IDialogueSystem _dialogueSystem;
+    private IActorRegistry _actorRegistry;
 
     [Inject]
-    private void Construct(IConversationDataBase conversationDataBase, IDialogueSystem dialogueSystem)
+    private void Construct(IConversationDataBase conversationDataBase, IDialogueSystem dialogueSystem, IActorRegistry actorRegistry)
     {
       _conversationDataBase = conversationDataBase;
       _dialogueSystem = dialogueSystem;
+      _actorRegistry = actorRegistry;
     }
 
     private void Awake()
     {
-      _dialogueSystem.CurrentDialogueEntry.ObserveEveryValueChanged(k => k.Value)
-        .Subscribe(k => Debug.Log($"{k.ActorName}: {k.Text}"));
+      _actorRegistry.RegisterActor(this, _actor.Id);
     }
 
     protected override void PerformInteraction(PlayerTownBehaviour player)

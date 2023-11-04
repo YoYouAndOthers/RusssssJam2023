@@ -1,6 +1,8 @@
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
+using RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine;
 using RussSurvivor.Runtime.Gameplay.Common.Transitions;
+using RussSurvivor.Runtime.Gameplay.Town.Characters;
 using UnityEngine;
 using Zenject;
 
@@ -32,6 +34,18 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<CameraFollower>()
         .FromInstance(_cameraFollower)
+        .AsSingle();
+      
+      Container
+        .Bind<IActorRegistry>()
+        .To<ActorRegistry>()
+        .FromNew()
+        .AsSingle();
+      
+      Container
+        .Bind<IQuestStateMachine>()
+        .To<QuestStateMachine>()
+        .FromNew()
         .AsSingle();
     }
   }
