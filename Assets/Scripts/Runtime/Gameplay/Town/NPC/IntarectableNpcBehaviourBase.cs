@@ -8,8 +8,6 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
   [RequireComponent(typeof(Collider2D))]
   public abstract class IntarectableNpcBehaviourBase : MonoBehaviour
   {
-    protected abstract void PerformInteraction(PlayerTownBehaviour player);
-
     private async void OnTriggerEnter2D(Collider2D other)
     {
       if (other.attachedRigidbody.TryGetComponent(out PlayerTownBehaviour player))
@@ -19,5 +17,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
         PerformInteraction(player);
       }
     }
+
+    protected abstract void PerformInteraction(PlayerTownBehaviour player);
   }
 }

@@ -14,10 +14,10 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Transitions
     {
       _transitionService = transitionService;
     }
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-      if(other.TryGetComponent(out PlayerTownBehaviour _))
+      if (other.TryGetComponent(out PlayerTownBehaviour _))
         _transitionService.GoToBattle();
     }
   }

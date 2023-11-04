@@ -7,9 +7,9 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
   public struct DialogueEntry
   {
     public string name;
-    public Guid Id;
     public Actor Speaker;
     public string Text;
     [SerializeReference, SubclassSelector] public DialogueActionBase[] Actions;
+    public Guid Id;
   }
 }

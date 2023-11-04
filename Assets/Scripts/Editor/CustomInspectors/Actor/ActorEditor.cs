@@ -10,9 +10,9 @@ namespace RussSurvivor.Editor.CustomInspectors
   [CustomEditor(typeof(Actor))]
   public class ActorEditor : UnityEditor.Editor
   {
-    private TemplateContainer _root;
-    private Actor _data;
     private bool _callbackRegistered;
+    private Actor _data;
+    private TemplateContainer _root;
 
     public override VisualElement CreateInspectorGUI()
     {
@@ -40,8 +40,8 @@ namespace RussSurvivor.Editor.CustomInspectors
         Rect rect = GUILayoutUtility.GetRect(80, 80, 80, 80);
         GUI.DrawTexture(rect, icon.texture);
       };
-      
-      if(!_callbackRegistered)
+
+      if (!_callbackRegistered)
         _root.Q<PropertyField>("Icon").RegisterValueChangeCallback(
           newEvt =>
           {

@@ -9,8 +9,8 @@ namespace RussSurvivor.Runtime.Application
 {
   public class ApplicationService : IApplicationService
   {
-    private ISceneLoader _sceneLoader;
-    private ICurtain _curtain;
+    private readonly ICurtain _curtain;
+    private readonly ISceneLoader _sceneLoader;
 
     public ApplicationService(ISceneLoader sceneLoader, ICurtain curtain)
     {

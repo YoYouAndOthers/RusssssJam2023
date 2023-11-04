@@ -28,7 +28,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .To<GameplayTransitionService>()
         .FromNew()
         .AsSingle();
-      
+
       Container
         .Bind<CameraFollower>()
         .FromInstance(_cameraFollower)

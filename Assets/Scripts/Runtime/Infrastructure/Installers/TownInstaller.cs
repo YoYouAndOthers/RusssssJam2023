@@ -1,6 +1,8 @@
+using Cysharp.Threading.Tasks;
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
+using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
 using UnityEngine;
 using Zenject;
@@ -10,9 +12,9 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
   public class TownInstaller : MonoInstaller, IInitializable
   {
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
+    private CameraFollower _cameraFollower;
 
     private ICurtain _curtain;
-    private CameraFollower _cameraFollower;
 
     [Inject]
     private void Construct(ICurtain curtain, CameraFollower cameraFollower)
@@ -23,7 +25,9 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 
     public async void Initialize()
     {
-      await Container.Resolve<IPlayerPrefabProvider>().Initialize();
+      await UniTask.WhenAll(
+        Container.Resolve<IConversationDataBase>().Initialize(),
+        Container.Resolve<IPlayerPrefabProvider>().Initialize());
       _playerSpawnPoint.Initialize();
       _cameraFollower.Initialize(Container.Resolve<IPlayerRegistry>().GetPlayer());
       _curtain.Hide();
@@ -39,6 +43,12 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind(typeof(IPlayerRegistry), typeof(ITownPlayerRegistry))
         .To<TownPlayerRegistry>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<IConversationDataBase>()
+        .To<ConversationDataBase>()
         .FromNew()
         .AsSingle();
     }

@@ -7,18 +7,18 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Cinema
   {
     private PlayerBehaviourBase _player;
 
-    public void Initialize(PlayerBehaviourBase player)
-    {
-      _player = player;
-      enabled = true;
-    }
-
     private void Update()
     {
       transform.position = new Vector3(
         _player.transform.position.x,
         _player.transform.position.y,
         transform.position.z);
+    }
+
+    public void Initialize(PlayerBehaviourBase player)
+    {
+      _player = player;
+      enabled = true;
     }
 
     public void Disable()

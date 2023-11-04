@@ -15,9 +15,9 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
   public class BattleInstaller : MonoInstaller, IInitializable, ITickable
   {
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
+    private CameraFollower _cameraFollower;
     private ICooldownService _cooldownService;
     private ICurtain _curtain;
-    private CameraFollower _cameraFollower;
 
     [Inject]
     private void Construct(ICurtain curtain, CameraFollower cameraFollower)
