@@ -3,11 +3,13 @@ using UnityEngine;
 
 namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
 {
-  public class DialogueEntry : ScriptableObject
+  [Serializable]
+  public struct DialogueEntry
   {
-    public Guid Id = Guid.NewGuid();
-    public Conversation Conversation;
-    public Actor Actor;
+    public string name;
+    public Guid Id;
+    public Actor Speaker;
     public string Text;
+    [SerializeReference, SubclassSelector] public DialogueActionBase[] Actions;
   }
 }
