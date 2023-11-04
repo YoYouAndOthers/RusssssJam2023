@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Id" />
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+        <ui:IMGUIContainer name="IconContainer" />
+        <ui:VisualElement style="flex-grow: 1;">
+            <uie:PropertyField binding-path="Name" name="Name" />
+            <uie:PropertyField name="IsPlayer" binding-path="IsPlayer" />
+            <uie:PropertyField binding-path="Icon" name="Icon" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <uie:PropertyField name="Description" binding-path="Description" />
+</ui:UXML>

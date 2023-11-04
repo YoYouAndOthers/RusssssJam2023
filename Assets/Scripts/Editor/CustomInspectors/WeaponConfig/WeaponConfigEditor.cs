@@ -29,7 +29,6 @@ namespace RussSurvivor.Editor.CustomInspectors
       }
 
       _root.Q<Label>("Id").text = _data.Id.ToString();
-
       _root.Q<PropertyField>("Damage").RegisterValueChangeCallback(
         newEvt =>
         {
