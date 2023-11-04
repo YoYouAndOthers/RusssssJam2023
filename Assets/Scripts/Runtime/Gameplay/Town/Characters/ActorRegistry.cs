@@ -18,5 +18,10 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Characters
       if (!_actors.TryAdd(id, actor))
         _actors[id] = actor;
     }
+
+    public void CleanActor(Guid actorId)
+    {
+      _actors[actorId] = null;
+    }
   }
 }

@@ -19,10 +19,10 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
   {
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
     [SerializeField] private CollectingQuestResolver _collectingQuestResolver;
-    private ICooldownService _cooldownService;
-    private ICurtain _curtain;
     private CameraFollower _cameraFollower;
     private CollectionQuestUi _collectionQuestUi;
+    private ICooldownService _cooldownService;
+    private ICurtain _curtain;
 
     [Inject]
     private void Construct(ICurtain curtain, CameraFollower cameraFollower, CollectionQuestUi collectionQuestUi)

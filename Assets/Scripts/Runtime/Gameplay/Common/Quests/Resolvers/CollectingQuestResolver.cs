@@ -20,7 +20,11 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
     [SerializeField] private CollectableItemSpawnPoint[] _vedasSpawnPoints;
 
     public IntReactiveProperty CollectedAmount { get; } = new();
-    public int RequiredAmount { get; private set; }
+
+    public int RequiredAmount => _collecting?.CollectablesCount ?? 0;
+
+    private CollectingQuestState _collecting;
+
     private ICollectableItemPrefabProvider _prefabProvider;
     private IQuestStateMachine _questStateMachine;
 
@@ -48,20 +52,10 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
         .Where(k => k is CollectingQuestState)
         .Subscribe(_ =>
         {
-          var collecting = (CollectingQuestState)_questStateMachine.CurrentState.Value;
-          foreach (CollectableItemSpawnPoint spawnPoint in _spawnPointsByType[collecting.CollectableType])
-          {
-            CollectableItem collectableItem = Instantiate(
-              _prefabProvider.GetPrefab(collecting.CollectableType),
-              spawnPoint.transform.position,
-              Quaternion.identity,
-              spawnPoint.transform);
-            _collectables.Add(collectableItem);
-            collectableItem.Initialize(this);
-          }
+          _collecting = (CollectingQuestState)_questStateMachine.CurrentState.Value;
+          InstantiateCollectables(_collecting);
 
-          RequiredAmount = collecting.CollectablesCount;
-          CollectedAmount.Value = 0;
+          CollectedAmount.Value = _collecting.CollectedAmount;
         })
         .AddTo(_disposables);
     }
@@ -69,7 +63,8 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
     public void RemoveCollectable(CollectableItem collectableItem)
     {
       CollectedAmount.Value++;
-      if (CollectedAmount.Value == RequiredAmount)
+      _collecting.CollectedAmount++;
+      if (CollectedAmount.Value == _collecting.CollectablesCount)
       {
         _questStateMachine.NextState();
         for (var i = 0; i < _collectables.Count; i++)
@@ -88,6 +83,20 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
       foreach (IDisposable disposable in _disposables)
         disposable.Dispose();
       _disposables.Clear();
+    }
+
+    private void InstantiateCollectables(CollectingQuestState collecting)
+    {
+      foreach (CollectableItemSpawnPoint spawnPoint in _spawnPointsByType[collecting.CollectableType])
+      {
+        CollectableItem collectableItem = Instantiate(
+          _prefabProvider.GetPrefab(collecting.CollectableType),
+          spawnPoint.transform.position,
+          Quaternion.identity,
+          spawnPoint.transform);
+        _collectables.Add(collectableItem);
+        collectableItem.Initialize(this);
+      }
     }
   }
 }

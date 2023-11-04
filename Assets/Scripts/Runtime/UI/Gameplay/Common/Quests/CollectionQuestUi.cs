@@ -55,32 +55,34 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Common.Quests
           _returnToText.gameObject.SetActive(false);
           _returnToText.text = _returnTextByType[collecting.CollectableType];
         })
-        .AddTo(_disposables, this);
+        .AddTo(_disposables);
 
       _questStateMachine.CurrentState
         .Where(k => (
-          (
-            k is not CollectingQuestState &&
-            k != null &&
-            k.QuestId == _currentQuestId
-          ) ||
-          k == null))
+                      k is not CollectingQuestState &&
+                      k != null &&
+                      k.QuestId == _currentQuestId
+                    ) ||
+                    k == null)
         .Subscribe(_ =>
         {
           _counterContainer.SetActive(false);
           _returnToText.gameObject.SetActive(true);
         })
-        .AddTo(_disposables, this);
+        .AddTo(_disposables);
 
       _questStateMachine.CurrentState
         .Where(k => k == null || k.QuestId != _currentQuestId)
         .Subscribe(_ => gameObject.SetActive(false))
-        .AddTo(_disposables, this);
+        .AddTo(_disposables);
 
       resolver.CollectedAmount
         .ObserveEveryValueChanged(k => k.Value)
-        .Subscribe(newValue => _counterText.text = $"{newValue.ToString()}/{resolver.RequiredAmount.ToString()}")
-        .AddTo(_disposables, this);
+        .Subscribe(newValue =>
+        {
+          _counterText.text = $"{newValue.ToString()}/{resolver.RequiredAmount.ToString()}";
+        })
+        .AddTo(_disposables);
     }
   }
 }

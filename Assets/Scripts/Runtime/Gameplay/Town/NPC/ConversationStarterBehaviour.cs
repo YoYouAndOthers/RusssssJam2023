@@ -22,7 +22,6 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
 
     private IActorRegistry _actorRegistry;
     private IConversationConditionSolver _conversationConditionSolver;
-
     private IConversationDataBase _conversationDataBase;
     private IDialogueSystem _dialogueSystem;
 
@@ -42,6 +41,11 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
     private void Awake()
     {
       _actorRegistry.RegisterActor(this, _actor.Id);
+    }
+
+    private void OnDestroy()
+    {
+      _actorRegistry.CleanActor(_actor.Id);
     }
 
     protected override void PerformInteraction(PlayerTownBehaviour player)
