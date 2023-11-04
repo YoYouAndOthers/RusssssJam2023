@@ -56,7 +56,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
               Quaternion.identity,
               spawnPoint.transform);
             _collectables.Add(collectableItem);
-            collectableItem.OnCollected += OnCollected;
+            collectableItem.Initialize(this);
           }
 
           _requiredAmount = collecting.CollectablesCount;
@@ -64,18 +64,21 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
         .AddTo(_disposables);
     }
 
-    private void OnCollected()
+    public void RemoveCollectable(CollectableItem collectableItem)
     {
       if (--_requiredAmount == 0)
       {
         _questStateMachine.NextState();
         for (var i = 0; i < _collectables.Count; i++)
         {
-          _collectables[i].OnCollected -= OnCollected;
           Destroy(_collectables[i].gameObject);
         }
 
         _collectables.Clear();
+      }
+      else
+      {
+        _collectables.Remove(collectableItem);
       }
     }
 
