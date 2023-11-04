@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 7688947196961039158}
+  _minDistanceToShowArrow: 5
 --- !u!1 &5331570107957208152
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +203,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 0.51265883, g: 0.8679245, b: 0, a: 1}
   m_FlipX: 0
@@ -226,7 +227,7 @@ GameObject:
   - component: {fileID: 8562290414638849205}
   - component: {fileID: 4848074895199609110}
   - component: {fileID: 5128111242346614437}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
