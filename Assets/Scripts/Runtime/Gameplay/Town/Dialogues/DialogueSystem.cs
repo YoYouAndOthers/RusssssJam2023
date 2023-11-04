@@ -62,10 +62,17 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
       _currentDialogueEntry.Value = new DialogueEntryModel(_currentConversation.Entries[++CurrentDialogueEntryIndex]);
     }
 
+    public void CancelConversation()
+    {
+      IsConversationActive.Value = false;
+      Debug.Log($"Conversation {_currentConversation.Id.ToString()} canceled");
+    }
+
     public void FinishConversation()
     {
       IsConversationActive.Value = false;
       _conversationDataBase.SetFinishedConversation(_currentConversation.Id);
+      Debug.Log($"Conversation {_currentConversation.Id.ToString()} finished");
     }
   }
 }

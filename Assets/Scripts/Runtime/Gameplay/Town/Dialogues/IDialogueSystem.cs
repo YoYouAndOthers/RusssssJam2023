@@ -13,6 +13,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
     Conversation CurrentConversation { get; }
     void StartConversation(Guid conversationId);
     void NextPhrase();
+    void CancelConversation();
     void FinishConversation();
   }
 }

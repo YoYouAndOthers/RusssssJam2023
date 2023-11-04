@@ -50,7 +50,7 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Dialogues
           if (!_dialogueSystem.HasNextDialogueEntry.Value)
             _dialogueSystem.FinishConversation();
           else
-            Debug.Log("Cancel conversation");
+            _dialogueSystem.CancelConversation();
         })
         .AddTo(_disposables);
 
