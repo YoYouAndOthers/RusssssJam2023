@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Semen
   IsPlayer: 0
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: b89b8fd807df61e4a90badb30ee29323, type: 3}
   Description: 

@@ -5,6 +5,7 @@ using RussSurvivor.Runtime.Gameplay.Common.Player;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
+using RussSurvivor.Runtime.UI.Gameplay.Town.Dialogues;
 using UnityEngine;
 using Zenject;
 
@@ -13,6 +14,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
   public class TownInstaller : MonoInstaller, IInitializable
   {
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
+    [SerializeField] private DialogueEntryPresenter _dialogueEntryPresenter;
     private CameraFollower _cameraFollower;
 
     private ICurtain _curtain;
@@ -31,6 +33,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         Container.Resolve<IPlayerPrefabProvider>().Initialize());
       _playerSpawnPoint.Initialize();
       _cameraFollower.Initialize(Container.Resolve<IPlayerRegistry>().GetPlayer());
+      _dialogueEntryPresenter.Initialize();
       _curtain.Hide();
     }
 

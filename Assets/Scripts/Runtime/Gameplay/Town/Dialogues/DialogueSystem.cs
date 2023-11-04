@@ -18,6 +18,8 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
     public BoolReactiveProperty IsConversationActive { get; } = new(false);
     public BoolReactiveProperty HasNextDialogueEntry { get; } = new(false);
 
+    public Conversation CurrentConversation => _currentConversation;
+
     private int CurrentDialogueEntryIndex
     {
       get => _currentDialogueEntryIndex;
@@ -29,6 +31,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
     }
 
     private Conversation _currentConversation;
+    private Conversation _currentConversation1;
     private int _currentDialogueEntryIndex;
 
     public DialogueSystem(IConversationDataBase conversationDataBase) =>

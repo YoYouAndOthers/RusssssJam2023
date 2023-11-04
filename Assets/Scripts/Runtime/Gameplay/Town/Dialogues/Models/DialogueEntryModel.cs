@@ -8,12 +8,14 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Models
     public string Text { get; }
     public string ActorName { get; }
 
+    public bool IsPlayer { get; set; }
     public static DialogueEntryModel Empty => new();
 
     public DialogueEntryModel(DialogueEntry data)
     {
       ActorName = data.Speaker.Name;
       Text = data.Text;
+      IsPlayer = data.Speaker.IsPlayer;
     }
 
     private DialogueEntryModel()

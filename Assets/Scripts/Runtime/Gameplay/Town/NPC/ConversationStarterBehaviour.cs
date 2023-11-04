@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cysharp.Threading.Tasks;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
@@ -36,7 +34,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
         .Subscribe(k => Debug.Log($"{k.ActorName}: {k.Text}"));
     }
 
-    protected override async void PerformInteraction(PlayerTownBehaviour player)
+    protected override void PerformInteraction(PlayerTownBehaviour player)
     {
       Debug.Log("Starting conversation");
       Debug.Assert(Conversations != null, "Conversations != null");
@@ -44,15 +42,6 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
       {
         Conversation conversation = Conversations.First(k => k.ConditionsToStart.All(l => l.IsMet()));
         _dialogueSystem.StartConversation(conversation.Id);
-        while (_dialogueSystem.HasNextDialogueEntry.Value)
-        {
-          await UniTask.Delay(TimeSpan.FromSeconds(1));
-          _dialogueSystem.NextPhrase();
-        }
-
-        await UniTask.Delay(TimeSpan.FromSeconds(1));
-        _dialogueSystem.FinishConversation();
-        Debug.Log($"Conversation {conversation.Id.ToString()} finished");
       }
       else
       {
