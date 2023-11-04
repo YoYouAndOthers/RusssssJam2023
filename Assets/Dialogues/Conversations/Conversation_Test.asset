@@ -15,6 +15,7 @@ MonoBehaviour:
   Actors:
   - {fileID: 11400000, guid: 784b36f9c5a9eb14cbb61e6d9e9c5417, type: 2}
   - {fileID: 11400000, guid: 783c676b8838ee142a717f3489474e76, type: 2}
+  IsRepeatable: 0
   ConditionsToStart: []
   Entries:
   - name: 'Player: Hello'
@@ -25,9 +26,9 @@ MonoBehaviour:
     Speaker: {fileID: 11400000, guid: 784b36f9c5a9eb14cbb61e6d9e9c5417, type: 2}
     Text: Hello
     Actions: []
-  - name: 'Player: How do you do?'
+  - name: 'Player: How do <color="green">you</color> do?'
     Speaker: {fileID: 11400000, guid: 783c676b8838ee142a717f3489474e76, type: 2}
-    Text: How do you do?
+    Text: How do <color="green">you</color> do?
     Actions: []
   - name: 'NPC 0: Not bad, thanks, bye!'
     Speaker: {fileID: 11400000, guid: 784b36f9c5a9eb14cbb61e6d9e9c5417, type: 2}

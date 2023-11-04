@@ -1,8 +1,8 @@
+using Newtonsoft.Json;
 using QFSW.QC;
 using RussSurvivor.Runtime.Application.Progress;
 using RussSurvivor.Runtime.Application.Progress.Watchers;
 using RussSurvivor.Runtime.Infrastructure.Constants;
-using Unity.Plastic.Newtonsoft.Json;
 
 namespace RussSurvivor.Runtime.Application.SaveLoad
 {

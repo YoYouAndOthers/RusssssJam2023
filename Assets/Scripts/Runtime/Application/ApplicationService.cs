@@ -34,7 +34,7 @@ namespace RussSurvivor.Runtime.Application
 #if UNITY_EDITOR
       EditorApplication.isPlaying = false;
 #else
-      Application.Quit();
+      UnityEngine.Application.Quit();
 #endif
     }
   }

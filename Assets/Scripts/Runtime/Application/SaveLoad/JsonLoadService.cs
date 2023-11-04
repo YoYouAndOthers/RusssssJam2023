@@ -1,10 +1,10 @@
 using System.IO;
 using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
 using RussSurvivor.Runtime.Application.Progress;
 using RussSurvivor.Runtime.Application.Progress.Data;
 using RussSurvivor.Runtime.Application.Progress.Watchers;
 using RussSurvivor.Runtime.Infrastructure.Constants;
-using Unity.Plastic.Newtonsoft.Json;
 using UnityEngine;
 
 namespace RussSurvivor.Runtime.Application.SaveLoad

@@ -15,25 +15,25 @@ MonoBehaviour:
   m_GroupName: Actors
   m_Data:
     m_SerializedData: []
-  m_GUID: afb17e7cb3dde7a43814cace41cea441
+  m_GUID: 808dcb5f41b6e1849b8a3ecf310350e3
   m_SerializeEntries:
   - m_GUID: 784b36f9c5a9eb14cbb61e6d9e9c5417
     m_Address: Actor_NPC_0
     m_ReadOnly: 0
     m_SerializedLabels:
-    - Dialogues
     - Actor
+    - Dialogues
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 783c676b8838ee142a717f3489474e76
     m_Address: Actor_Player
     m_ReadOnly: 0
     m_SerializedLabels:
-    - Dialogues
     - Actor
+    - Dialogues
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 60d5ef9f1bdf56a4f9658dd75e1cb0ca, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: a91b64b0ab2093d45a87956271f2ca46, type: 2}
-    - {fileID: 11400000, guid: ad680830d95443c4eae5e18235f10e80, type: 2}
+    - {fileID: 11400000, guid: cb81360c1e6d1d6409ab89eb49d59abf, type: 2}
+    - {fileID: 11400000, guid: 73e5f23d92e1f804b86c90629ea368b8, type: 2}
