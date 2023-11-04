@@ -5,8 +5,13 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
 {
   public class CollectingQuestState : QuestState
   {
+    public readonly CollectItemsQuestDescription.CollectableType CollectableType;
+    public readonly int CollectablesCount;
+    
     public CollectingQuestState(Guid questId, CollectItemsQuestDescription collectionDescription) : base(questId)
     {
+      CollectableType = collectionDescription.CollectablesType;
+      CollectablesCount = collectionDescription.CollectablesCount;
     }
   }
 }

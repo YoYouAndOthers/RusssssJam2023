@@ -4,11 +4,13 @@ using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
 using RussSurvivor.Runtime.Gameplay.Common.Quests;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.Data;
+using RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Conditions;
+using RussSurvivor.Runtime.Infrastructure.Content;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
 using RussSurvivor.Runtime.UI.Gameplay.Town.Dialogues;
 using UniRx;
@@ -23,6 +25,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     [SerializeField] private Actor _initialQuestGiver;
     [SerializeField] private QuestConfig _initialQuestConfig;
     [SerializeField] private DialogueEntryPresenter _dialogueEntryPresenter;
+    [SerializeField] private CollectingQuestResolver _collectingQuestResolver;
     private CameraFollower _cameraFollower;
 
     private ICurtain _curtain;
@@ -41,18 +44,13 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       await UniTask.WhenAll(
         Container.Resolve<IConversationDataBase>().InitializeAsync(),
         Container.Resolve<IPlayerPrefabProvider>().InitializeAsync(),
-        Container.Resolve<IQuestRegistry>().InitializeAsync());
+        Container.Resolve<IQuestRegistry>().InitializeAsync(),
+        Container.Resolve<ICollectableItemPrefabProvider>().InitializeAsync());
       _questStateMachine.InitializeAsNew(_initialQuestConfig.Id, _initialQuestGiver.Id);
       _playerSpawnPoint.Initialize();
       _cameraFollower.Initialize(Container.Resolve<IPlayerRegistry>().GetPlayer());
       _dialogueEntryPresenter.Initialize();
-      
-      _questStateMachine.CurrentState.ObserveEveryValueChanged(state => state.Value)
-        .Subscribe(id =>
-        {
-          Debug.Log($"Current quest state: {id}");
-        })
-        .AddTo(this);
+      _collectingQuestResolver.Initialize();
       _curtain.Hide();
     }
 

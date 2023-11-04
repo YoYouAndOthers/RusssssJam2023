@@ -4,6 +4,7 @@ using RussSurvivor.Runtime.Gameplay.Common.Quests;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine;
 using RussSurvivor.Runtime.Gameplay.Common.Transitions;
 using RussSurvivor.Runtime.Gameplay.Town.Characters;
+using RussSurvivor.Runtime.Infrastructure.Content;
 using UnityEngine;
 using Zenject;
 
@@ -58,6 +59,12 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<IQuestStateListFactory>()
         .To<QuestStateListFactory>()
+        .FromNew()
+        .AsSingle();
+      
+      Container
+        .Bind<ICollectableItemPrefabProvider>()
+        .To<CollectableItemPrefabProvider>()
         .FromNew()
         .AsSingle();
     }

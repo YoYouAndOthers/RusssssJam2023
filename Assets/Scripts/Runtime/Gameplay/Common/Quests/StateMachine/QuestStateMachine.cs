@@ -26,6 +26,11 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
       CurrentState.Value = new TalkToNpcQuestState(questId, initialNpcId, _actorRegistry);
     }
 
+    public void NextState()
+    {
+      CurrentState.Value = States[States.IndexOf(CurrentState.Value) + 1];
+    }
+
     public void StartNewQuest(Guid questId)
     {
       Debug.Log($"Starting new quest {questId}");
