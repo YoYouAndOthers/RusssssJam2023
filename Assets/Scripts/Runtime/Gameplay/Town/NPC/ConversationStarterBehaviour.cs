@@ -5,6 +5,7 @@ using RussSurvivor.Runtime.Gameplay.Common.Player;
 using RussSurvivor.Runtime.Gameplay.Town.Characters;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
+using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Conditions;
 using UnityEngine;
 using Zenject;
 

@@ -1,4 +1,5 @@
 using System;
+using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions;
 using UnityEngine;
 
 namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data

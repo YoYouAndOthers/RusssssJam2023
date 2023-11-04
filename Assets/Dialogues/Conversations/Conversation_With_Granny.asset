@@ -17,13 +17,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 783c676b8838ee142a717f3489474e76, type: 2}
   IsRepeatable: 0
   ConditionsToStart:
-  - rid: 7267942391778902016
+  - rid: 7267942391778902023
   Entries:
   - name: "\u0411\u0430\u0431\u043A\u0430: \u0422\u0435\u043A\u0441\u0442 \u0431\u0430\u0431\u043A\u0438
       1"
     Speaker: {fileID: 11400000, guid: 784b36f9c5a9eb14cbb61e6d9e9c5417, type: 2}
     Text: "\u0422\u0435\u043A\u0441\u0442 \u0431\u0430\u0431\u043A\u0438 1"
-    Actions: []
+    Actions:
+    - rid: 7267942391778902021
   - name: "\u0411\u0430\u0431\u043A\u0430: \u0422\u0435\u043A\u0441\u0442 \u0431\u0430\u0431\u043A\u0438
       2"
     Speaker: {fileID: 11400000, guid: 784b36f9c5a9eb14cbb61e6d9e9c5417, type: 2}
@@ -33,12 +34,25 @@ MonoBehaviour:
       1"
     Speaker: {fileID: 11400000, guid: 783c676b8838ee142a717f3489474e76, type: 2}
     Text: "\u0422\u0435\u043A\u0441\u0442 \u0433\u0435\u0440\u043E\u044F 1"
-    Actions: []
+    Actions:
+    - rid: 7267942391778902022
   references:
     version: 2
     RefIds:
-    - rid: 7267942391778902016
-      type: {class: CurrentQuestIs, ns: RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data, asm: RussSurvivor.Runtime}
+    - rid: 7267942391778902021
+      type: {class: CompleteQuestAction, ns: RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions, asm: RussSurvivor.Runtime}
       data:
-        name: Current Quest Is
-        QuestConfig: {fileID: 11400000, guid: 0eb6f98517d04e44299ba605dd4eed52, type: 2}
+        name: "\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u044C \u043F\u0435\u0440\u0432\u044B\u0439
+          \u043A\u0432\u0435\u0441\u0442"
+        Quest: {fileID: 11400000, guid: f63c3b82bd8c377448cbcb8abef341fc, type: 2}
+    - rid: 7267942391778902022
+      type: {class: GetNewQuestAction, ns: RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions, asm: RussSurvivor.Runtime}
+      data:
+        name: "\u041D\u0430\u0447\u0430\u0442\u044C \u043A\u0432\u0435\u0441\u0442
+          \u043F\u043E \u0441\u0431\u043E\u0440\u0443"
+        Quest: {fileID: 11400000, guid: 0eb6f98517d04e44299ba605dd4eed52, type: 2}
+    - rid: 7267942391778902023
+      type: {class: CurrentQuestIs, ns: RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Conditions, asm: RussSurvivor.Runtime}
+      data:
+        name: On initial quest
+        QuestConfig: {fileID: 11400000, guid: f63c3b82bd8c377448cbcb8abef341fc, type: 2}

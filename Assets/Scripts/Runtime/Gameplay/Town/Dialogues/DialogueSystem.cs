@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
+using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Models;
 using UniRx;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
       new() { Value = DialogueEntryModel.Empty };
 
     private readonly IConversationDataBase _conversationDataBase;
+    private readonly IConversationActionInvoker _actionInvoker;
 
     public IReactiveProperty<DialogueEntryModel> CurrentDialogueEntry => _currentDialogueEntry;
     public BoolReactiveProperty IsConversationActive { get; } = new(false);
@@ -25,7 +27,14 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
       get => _currentDialogueEntryIndex;
       set
       {
+        DialogueEntry currentConversationEntry = _currentConversation.Entries[value];
         _currentDialogueEntryIndex = value;
+        foreach (DialogueActionBase action in currentConversationEntry.Actions)
+        {
+          if (!_actionInvoker.TryInvokeAction(action))
+            Debug.LogError($"Action {action.GetType().Name} not invoked!");
+        }
+        _currentDialogueEntry.Value = new DialogueEntryModel(currentConversationEntry);
         HasNextDialogueEntry.Value = _currentDialogueEntryIndex < _currentConversation.Entries.Length - 1;
       }
     }
@@ -34,8 +43,11 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
     private Conversation _currentConversation1;
     private int _currentDialogueEntryIndex;
 
-    public DialogueSystem(IConversationDataBase conversationDataBase) =>
+    public DialogueSystem(IConversationDataBase conversationDataBase, IConversationActionInvoker actionInvoker)
+    {
       _conversationDataBase = conversationDataBase;
+      _actionInvoker = actionInvoker;
+    }
 
     public void StartConversation(Guid conversationId)
     {
@@ -45,7 +57,6 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
         IsConversationActive.Value = true;
         Debug.Assert(_currentConversation.Entries.Any(), "Conversation has no entries");
         CurrentDialogueEntryIndex = 0;
-        _currentDialogueEntry.Value = new DialogueEntryModel(_currentConversation.Entries[CurrentDialogueEntryIndex]);
       }
       else
       {
@@ -59,7 +70,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
       Debug.Assert(_currentConversation != null, "No conversation is active");
       Debug.Assert(_currentDialogueEntryIndex < _currentConversation.Entries.Length - 1,
         "No more entries in conversation");
-      _currentDialogueEntry.Value = new DialogueEntryModel(_currentConversation.Entries[++CurrentDialogueEntryIndex]);
+      CurrentDialogueEntryIndex++;
     }
 
     public void CancelConversation()

@@ -6,6 +6,7 @@ using RussSurvivor.Runtime.Gameplay.Common.Quests.Data;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
+using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
 using RussSurvivor.Runtime.UI.Gameplay.Town.Dialogues;
 using UnityEngine;
@@ -72,6 +73,12 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<IConversationConditionSolver>()
         .To<ConversationConditionSolver>()
+        .FromNew()
+        .AsSingle();
+      
+      Container
+        .Bind<IConversationActionInvoker>()
+        .To<ConversationActionInvoker>()
         .FromNew()
         .AsSingle();
     }

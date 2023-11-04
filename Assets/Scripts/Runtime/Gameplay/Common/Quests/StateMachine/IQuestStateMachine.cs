@@ -6,5 +6,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
   {
     QuestState CurrentState { get; }
     void InitializeAsNew(Guid questId, Guid initialNpcId);
+    void StartNewQuest(Guid questId);
+    void CompleteCurrentQuest();
   }
 }

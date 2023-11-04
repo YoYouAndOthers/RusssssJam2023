@@ -1,5 +1,6 @@
 using RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
+using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Conditions;
 
 namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
 {

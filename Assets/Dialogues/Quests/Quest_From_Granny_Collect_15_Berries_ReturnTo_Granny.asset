@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 121caac703b349569a2ac993d97eebe7, type: 3}
-  m_Name: Quest_From_Granny_Collect_20_Berries_ReturnTo_Granny
+  m_Name: Quest_From_Granny_Collect_15_Berries_ReturnTo_Granny
   m_EditorClassIdentifier: 
   Name: Collect berries
   Description:
