@@ -16,6 +16,11 @@ namespace RussSurvivor.Runtime.Infrastructure.Content
           CollectablePrefabsConfig;
     }
 
+    public Sprite GetIcon(CollectItemsQuestDescription.CollectableType collectingCollectableType)
+    {
+      return _collectablePrefabContainer.CollectableIcons[collectingCollectableType];
+    }
+
     public CollectableItem GetPrefab(CollectItemsQuestDescription.CollectableType collectingCollectableType)
     {
       return _collectablePrefabContainer.CollectablePrefabs[collectingCollectableType];

@@ -14,7 +14,8 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
     public IReactiveProperty<QuestState> CurrentState { get; } = new ReactiveProperty<QuestState>();
     private List<QuestState> States { get; set; } = new();
 
-    public QuestStateMachine(IQuestRegistry questRegistry, IActorRegistry actorRegistry, IQuestStateListFactory questStateListFactory)
+    public QuestStateMachine(IQuestRegistry questRegistry, IActorRegistry actorRegistry,
+      IQuestStateListFactory questStateListFactory)
     {
       _questRegistry = questRegistry;
       _actorRegistry = actorRegistry;
@@ -41,7 +42,6 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
     public void CompleteCurrentQuest()
     {
       Debug.Log($"Completing quest {CurrentState.Value.QuestId}");
-      CurrentState.Value = null;
       States.Clear();
     }
   }

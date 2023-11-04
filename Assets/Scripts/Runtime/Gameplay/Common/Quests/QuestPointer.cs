@@ -9,8 +9,8 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests
   {
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private float _minDistanceToShowArrow = 5f;
-    private IQuestStateMachine _questStateMachine;
     private Vector3 _destination;
+    private IQuestStateMachine _questStateMachine;
 
     [Inject]
     private void Construct(IQuestStateMachine questStateMachine)
@@ -20,7 +20,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests
 
     private void Awake()
     {
-      _questStateMachine.CurrentState.Where( k => k is QuestWithDirectionState questWithDirectionState)
+      _questStateMachine.CurrentState.Where(k => k is QuestWithDirectionState questWithDirectionState)
         .Subscribe(_ =>
         {
           _destination = ((QuestWithDirectionState)_questStateMachine.CurrentState.Value).GetPosition();

@@ -30,10 +30,8 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
         DialogueEntry currentConversationEntry = _currentConversation.Entries[value];
         _currentDialogueEntryIndex = value;
         foreach (DialogueActionBase action in currentConversationEntry.Actions)
-        {
           if (!_actionInvoker.TryInvokeAction(action))
             Debug.LogError($"Action {action.GetType().Name} not invoked!");
-        }
         _currentDialogueEntry.Value = new DialogueEntryModel(currentConversationEntry);
         HasNextDialogueEntry.Value = _currentDialogueEntryIndex < _currentConversation.Entries.Length - 1;
       }

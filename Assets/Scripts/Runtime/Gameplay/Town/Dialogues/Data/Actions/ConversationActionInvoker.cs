@@ -11,7 +11,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions
 
     public bool TryInvokeAction(DialogueActionBase action)
     {
-      if(action is CompleteQuestAction completeQuest)
+      if (action is CompleteQuestAction completeQuest)
       {
         _questStateMachine.CompleteCurrentQuest();
         return true;

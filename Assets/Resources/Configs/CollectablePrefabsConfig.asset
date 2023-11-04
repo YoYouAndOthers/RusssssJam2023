@@ -20,3 +20,11 @@ MonoBehaviour:
       Value: {fileID: 3369959427909662932, guid: f343328fb57e9a34c8929078720a45cd, type: 3}
     - Key: 3
       Value: {fileID: 6055398551799454437, guid: 9b6b462a57e41e94a942b42e1876f993, type: 3}
+  CollectableIcons:
+    _serializedList:
+    - Key: 1
+      Value: {fileID: 21300000, guid: 30daf40b2b8457540bfebf319843c3d2, type: 3}
+    - Key: 2
+      Value: {fileID: 21300000, guid: 795ca88629352fa47bd9b92e12fd6656, type: 3}
+    - Key: 3
+      Value: {fileID: 21300000, guid: cc4dbe425f2771542b51cceba16751ba, type: 3}

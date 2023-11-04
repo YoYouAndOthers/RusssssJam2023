@@ -12,8 +12,8 @@ using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Conditions;
 using RussSurvivor.Runtime.Infrastructure.Content;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
+using RussSurvivor.Runtime.UI.Gameplay.Common.Quests;
 using RussSurvivor.Runtime.UI.Gameplay.Town.Dialogues;
-using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -27,16 +27,22 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     [SerializeField] private DialogueEntryPresenter _dialogueEntryPresenter;
     [SerializeField] private CollectingQuestResolver _collectingQuestResolver;
     private CameraFollower _cameraFollower;
+    private CollectionQuestUi _collectionQuestUi;
 
     private ICurtain _curtain;
     private IQuestStateMachine _questStateMachine;
 
     [Inject]
-    private void Construct(ICurtain curtain, CameraFollower cameraFollower, IQuestStateMachine questStateMachine)
+    private void Construct(
+      ICurtain curtain,
+      CameraFollower cameraFollower,
+      IQuestStateMachine questStateMachine,
+      CollectionQuestUi collectionQuestUi)
     {
       _curtain = curtain;
       _cameraFollower = cameraFollower;
       _questStateMachine = questStateMachine;
+      _collectionQuestUi = collectionQuestUi;
     }
 
     public async void Initialize()
@@ -51,6 +57,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       _cameraFollower.Initialize(Container.Resolve<IPlayerRegistry>().GetPlayer());
       _dialogueEntryPresenter.Initialize();
       _collectingQuestResolver.Initialize();
+      _collectionQuestUi.Initialize(_collectingQuestResolver);
       _curtain.Hide();
     }
 
@@ -78,13 +85,13 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .To<DialogueSystem>()
         .FromNew()
         .AsSingle();
-      
+
       Container
         .Bind<IConversationConditionSolver>()
         .To<ConversationConditionSolver>()
         .FromNew()
         .AsSingle();
-      
+
       Container
         .Bind<IConversationActionInvoker>()
         .To<ConversationActionInvoker>()

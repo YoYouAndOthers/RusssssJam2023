@@ -5,6 +5,7 @@ using RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine;
 using RussSurvivor.Runtime.Gameplay.Common.Transitions;
 using RussSurvivor.Runtime.Gameplay.Town.Characters;
 using RussSurvivor.Runtime.Infrastructure.Content;
+using RussSurvivor.Runtime.UI.Gameplay.Common.Quests;
 using UnityEngine;
 using Zenject;
 
@@ -13,6 +14,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
   public class GameplayInstaller : MonoInstaller
   {
     [SerializeField] private CameraFollower _cameraFollower;
+    [SerializeField] private CollectionQuestUi _collectionQuestUi;
 
     public override void InstallBindings()
     {
@@ -49,23 +51,28 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .To<QuestStateMachine>()
         .FromNew()
         .AsSingle();
-      
+
       Container
         .Bind<IQuestRegistry>()
         .To<QuestRegistry>()
         .FromNew()
         .AsSingle();
-      
+
       Container
         .Bind<IQuestStateListFactory>()
         .To<QuestStateListFactory>()
         .FromNew()
         .AsSingle();
-      
+
       Container
         .Bind<ICollectableItemPrefabProvider>()
         .To<CollectableItemPrefabProvider>()
         .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<CollectionQuestUi>()
+        .FromInstance(_collectionQuestUi)
         .AsSingle();
     }
   }

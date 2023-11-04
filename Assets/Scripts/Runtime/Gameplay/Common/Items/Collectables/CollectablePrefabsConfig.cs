@@ -8,5 +8,6 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Items.Collectables
   public class CollectablePrefabsConfig : ScriptableObject
   {
     public SerializedDictionary<CollectItemsQuestDescription.CollectableType, CollectableItem> CollectablePrefabs;
+    public SerializedDictionary<CollectItemsQuestDescription.CollectableType, Sprite> CollectableIcons;
   }
 }

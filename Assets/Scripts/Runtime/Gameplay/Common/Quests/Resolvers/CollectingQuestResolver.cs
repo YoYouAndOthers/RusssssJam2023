@@ -13,18 +13,19 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
   public class CollectingQuestResolver : MonoBehaviour
   {
     private readonly List<IDisposable> _disposables = new();
-    private IQuestStateMachine _questStateMachine;
-    private ICollectableItemPrefabProvider _prefabProvider;
+    private readonly List<CollectableItem> _collectables = new();
 
     [SerializeField] private CollectableItemSpawnPoint[] _berrySpawnPoints;
     [SerializeField] private CollectableItemSpawnPoint[] _mushroomSpawnPoints;
     [SerializeField] private CollectableItemSpawnPoint[] _vedasSpawnPoints;
 
+    public IntReactiveProperty CollectedAmount { get; } = new();
+    public int RequiredAmount { get; private set; }
+    private ICollectableItemPrefabProvider _prefabProvider;
+    private IQuestStateMachine _questStateMachine;
+
     private Dictionary<CollectItemsQuestDescription.CollectableType, IEnumerable<CollectableItemSpawnPoint>>
       _spawnPointsByType;
-
-    private int _requiredAmount;
-    private readonly List<CollectableItem> _collectables = new();
 
     [Inject]
     private void Construct(IQuestStateMachine questStateMachine, ICollectableItemPrefabProvider prefabProvider)
@@ -36,7 +37,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
     public void Initialize()
     {
       _spawnPointsByType =
-        new Dictionary<CollectItemsQuestDescription.CollectableType, IEnumerable<CollectableItemSpawnPoint>>()
+        new Dictionary<CollectItemsQuestDescription.CollectableType, IEnumerable<CollectableItemSpawnPoint>>
         {
           [CollectItemsQuestDescription.CollectableType.Berries] = _berrySpawnPoints,
           [CollectItemsQuestDescription.CollectableType.Mushrooms] = _mushroomSpawnPoints,
@@ -59,20 +60,20 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
             collectableItem.Initialize(this);
           }
 
-          _requiredAmount = collecting.CollectablesCount;
+          RequiredAmount = collecting.CollectablesCount;
+          CollectedAmount.Value = 0;
         })
         .AddTo(_disposables);
     }
 
     public void RemoveCollectable(CollectableItem collectableItem)
     {
-      if (--_requiredAmount == 0)
+      CollectedAmount.Value++;
+      if (CollectedAmount.Value == RequiredAmount)
       {
         _questStateMachine.NextState();
         for (var i = 0; i < _collectables.Count; i++)
-        {
           Destroy(_collectables[i].gameObject);
-        }
 
         _collectables.Clear();
       }

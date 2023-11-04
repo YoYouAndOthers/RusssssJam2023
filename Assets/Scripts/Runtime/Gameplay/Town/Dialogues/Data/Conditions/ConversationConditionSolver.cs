@@ -13,7 +13,9 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Conditions
     {
       if (condition is CurrentQuestIs hasQuest)
       {
-        return _questStateMachine.CurrentState.Value.QuestId == hasQuest.QuestConfig.Id;
+        return _questStateMachine.CurrentState.Value != null &&
+               hasQuest.QuestConfig != null &&
+               _questStateMachine.CurrentState.Value.QuestId == hasQuest.QuestConfig.Id;
       }
       return false;
     }
