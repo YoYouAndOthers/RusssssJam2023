@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
+using RussSurvivor.Runtime.Gameplay.Town.Dialogues;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -19,11 +21,19 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
         : null;
 
     private IConversationDataBase _conversationDataBase;
+    private IDialogueSystem _dialogueSystem;
 
     [Inject]
-    private void Construct(IConversationDataBase conversationDataBase)
+    private void Construct(IConversationDataBase conversationDataBase, IDialogueSystem dialogueSystem)
     {
       _conversationDataBase = conversationDataBase;
+      _dialogueSystem = dialogueSystem;
+    }
+
+    private void Awake()
+    {
+      _dialogueSystem.CurrentDialogueEntry.ObserveEveryValueChanged(k => k.Value)
+        .Subscribe(k => Debug.Log($"{k.ActorName}: {k.Text}"));
     }
 
     protected override async void PerformInteraction(PlayerTownBehaviour player)
@@ -33,15 +43,16 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
       if (Conversations.Any(k => k.ConditionsToStart.All(l => l.IsMet())))
       {
         Conversation conversation = Conversations.First(k => k.ConditionsToStart.All(l => l.IsMet()));
-        Debug.Log($"Conversation {conversation.Id} started");
-        foreach (DialogueEntry dialogueEntry in conversation.Entries)
+        _dialogueSystem.StartConversation(conversation.Id);
+        while (_dialogueSystem.HasNextDialogueEntry.Value)
         {
-          await UniTask.Delay(TimeSpan.FromSeconds(2));
-          Debug.Log(dialogueEntry.Speaker.Name + ": " + dialogueEntry.Text);
+          await UniTask.Delay(TimeSpan.FromSeconds(1));
+          _dialogueSystem.NextPhrase();
         }
 
-        _conversationDataBase.SetFinishedConversation(conversation.Id);
-        Debug.Log($"Conversation {conversation.Id} finished");
+        await UniTask.Delay(TimeSpan.FromSeconds(1));
+        _dialogueSystem.FinishConversation();
+        Debug.Log($"Conversation {conversation.Id.ToString()} finished");
       }
       else
       {

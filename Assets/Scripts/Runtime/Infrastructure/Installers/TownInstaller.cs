@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
+using RussSurvivor.Runtime.Gameplay.Town.Dialogues;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
 using UnityEngine;
@@ -49,6 +50,12 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<IConversationDataBase>()
         .To<ConversationDataBase>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<IDialogueSystem>()
+        .To<DialogueSystem>()
         .FromNew()
         .AsSingle();
     }

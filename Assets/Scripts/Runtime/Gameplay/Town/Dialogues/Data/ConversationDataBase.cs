@@ -11,11 +11,11 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
   {
     private readonly List<string> _conversationKeys = new() { "Dialogues", "Conversation" };
     private readonly List<string> _actorKeys = new() { "Dialogues", "Actor" };
+    private readonly Dictionary<Guid, Conversation> _finishedConversationsById = new();
     private Dictionary<Guid, Actor> _actorsById = new();
     private Dictionary<Guid, IEnumerable<Conversation>> _actorsConversationsById = new();
 
     private Dictionary<Guid, Conversation> _conversationsById = new();
-    private readonly Dictionary<Guid, Conversation> _finishedConversationsById = new();
 
     public async UniTask Initialize()
     {
@@ -37,7 +37,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
       Debug.Log("Dialogue database initialization finished");
     }
 
-    public bool GetConversationById(Guid id, out Conversation conversation)
+    public bool TryGetConversationById(Guid id, out Conversation conversation)
     {
       return _conversationsById.TryGetValue(id, out conversation);
     }
