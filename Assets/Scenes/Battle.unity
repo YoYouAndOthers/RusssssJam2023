@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerSpawnPoint: {fileID: 2083754000}
+  _collectingQuestResolver: {fileID: 1990090397}
 --- !u!114 &291882002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,6 +327,131 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1868536098
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1816610638110216840, guid: dd4d6fc7dd43eca4ba1dfba969322f56, type: 3}
+      propertyPath: m_Name
+      value: SpawnPoints
+      objectReference: {fileID: 0}
+    - target: {fileID: 7177100663535877057, guid: dd4d6fc7dd43eca4ba1dfba969322f56, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7177100663535877057, guid: dd4d6fc7dd43eca4ba1dfba969322f56, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7177100663535877057, guid: dd4d6fc7dd43eca4ba1dfba969322f56, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7177100663535877057, guid: dd4d6fc7dd43eca4ba1dfba969322f56, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7177100663535877057, guid: dd4d6fc7dd43eca4ba1dfba969322f56, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7177100663535877057, guid: dd4d6fc7dd43eca4ba1dfba969322f56, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7177100663535877057, guid: dd4d6fc7dd43eca4ba1dfba969322f56, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7177100663535877057, guid: dd4d6fc7dd43eca4ba1dfba969322f56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7177100663535877057, guid: dd4d6fc7dd43eca4ba1dfba969322f56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7177100663535877057, guid: dd4d6fc7dd43eca4ba1dfba969322f56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dd4d6fc7dd43eca4ba1dfba969322f56, type: 3}
+--- !u!1001 &1990090396
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5287426844679977001, guid: aa53b4c0be32e10449b3a209706635c2, type: 3}
+      propertyPath: m_Name
+      value: CollectingQuestResolver
+      objectReference: {fileID: 0}
+    - target: {fileID: 7310022484627626563, guid: aa53b4c0be32e10449b3a209706635c2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7310022484627626563, guid: aa53b4c0be32e10449b3a209706635c2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7310022484627626563, guid: aa53b4c0be32e10449b3a209706635c2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7310022484627626563, guid: aa53b4c0be32e10449b3a209706635c2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7310022484627626563, guid: aa53b4c0be32e10449b3a209706635c2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7310022484627626563, guid: aa53b4c0be32e10449b3a209706635c2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7310022484627626563, guid: aa53b4c0be32e10449b3a209706635c2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7310022484627626563, guid: aa53b4c0be32e10449b3a209706635c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7310022484627626563, guid: aa53b4c0be32e10449b3a209706635c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7310022484627626563, guid: aa53b4c0be32e10449b3a209706635c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aa53b4c0be32e10449b3a209706635c2, type: 3}
+--- !u!114 &1990090397 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8376949111225240196, guid: aa53b4c0be32e10449b3a209706635c2, type: 3}
+  m_PrefabInstance: {fileID: 1990090396}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4441bdd461c440f0a717f9a5c9ae8605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2083754000 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4585683866682047355, guid: 91524794608d85f41b33c2d92c16bce7, type: 3}
@@ -460,9 +586,11 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 712505198}
+  - {fileID: 1990090396}
   - {fileID: 291882003}
   - {fileID: 1699648373}
   - {fileID: 466122805}
   - {fileID: 4102837811474843088}
   - {fileID: 1159181791}
+  - {fileID: 1868536098}
   - {fileID: 2174516933120963983}

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using RussSurvivor.Runtime.Application.SaveLoad;
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
 using RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles;
@@ -6,7 +7,9 @@ using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target;
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
+using RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
+using RussSurvivor.Runtime.UI.Gameplay.Common.Quests;
 using UnityEngine;
 using Zenject;
 
@@ -15,15 +18,18 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
   public class BattleInstaller : MonoInstaller, IInitializable, ITickable
   {
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
-    private CameraFollower _cameraFollower;
+    [SerializeField] private CollectingQuestResolver _collectingQuestResolver;
     private ICooldownService _cooldownService;
     private ICurtain _curtain;
+    private CameraFollower _cameraFollower;
+    private CollectionQuestUi _collectionQuestUi;
 
     [Inject]
-    private void Construct(ICurtain curtain, CameraFollower cameraFollower)
+    private void Construct(ICurtain curtain, CameraFollower cameraFollower, CollectionQuestUi collectionQuestUi)
     {
       _curtain = curtain;
       _cameraFollower = cameraFollower;
+      _collectionQuestUi = collectionQuestUi;
     }
 
     private void OnApplicationQuit()
@@ -40,11 +46,16 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         InitializeAsSubsequentScene();
       Container.Resolve<ClosestTargetPickerFactory>().Initialize();
 
-      await Container.Resolve<ILoadService>().LoadAsync();
-      await Container.Resolve<IPlayerPrefabProvider>().InitializeAsync();
+      await UniTask.WhenAll(
+        Container.Resolve<ILoadService>().LoadAsync(),
+        Container.Resolve<IPlayerPrefabProvider>().InitializeAsync()
+      );
+
+      _collectingQuestResolver.Initialize();
       _playerSpawnPoint.Initialize();
       Container.Resolve<ObstacleSpawner>().SpawnObstacles();
       _cameraFollower.Initialize(Container.Resolve<IPlayerRegistry>().GetPlayer());
+      _collectionQuestUi.Initialize(_collectingQuestResolver);
       _curtain.Hide();
     }
 

@@ -18,7 +18,14 @@ MonoBehaviour:
   m_GUID: bf3555194a93aef42bc1fbc0f8054852
   m_SerializeEntries:
   - m_GUID: 9814b0de4c427254581d1283e24b230c
-    m_Address: Assets/Dialogues/Conversations/Conversation_With_Granny.asset
+    m_Address: Conversation_With_Granny_0
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Dialogues
+    - Conversation
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a90db17140eb8204783a4f23d3857751
+    m_Address: Conversation_With_Granny_1
     m_ReadOnly: 0
     m_SerializedLabels:
     - Dialogues

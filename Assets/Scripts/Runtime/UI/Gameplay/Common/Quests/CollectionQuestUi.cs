@@ -21,8 +21,10 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Common.Quests
     [SerializeField] private TextMeshProUGUI _counterText;
     [SerializeField] private TextMeshProUGUI _returnToText;
     [SerializeField] private GameObject _counterContainer;
-    [FormerlySerializedAs("_returnText"),SerializeField] private SerializedDictionary<CollectItemsQuestDescription.CollectableType, string> _returnTextByType = new();
-    
+
+    [FormerlySerializedAs("_returnText"), SerializeField]
+    private SerializedDictionary<CollectItemsQuestDescription.CollectableType, string> _returnTextByType = new();
+
     private Guid _currentQuestId;
     private ICollectableItemPrefabProvider _prefabProvider;
 
@@ -56,14 +58,20 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Common.Quests
         .AddTo(_disposables, this);
 
       _questStateMachine.CurrentState
-        .Where(k => k is not CollectingQuestState &&  k.QuestId == _currentQuestId)
+        .Where(k => (
+          (
+            k is not CollectingQuestState &&
+            k != null &&
+            k.QuestId == _currentQuestId
+          ) ||
+          k == null))
         .Subscribe(_ =>
-        { 
+        {
           _counterContainer.SetActive(false);
           _returnToText.gameObject.SetActive(true);
         })
         .AddTo(_disposables, this);
-      
+
       _questStateMachine.CurrentState
         .Where(k => k == null || k.QuestId != _currentQuestId)
         .Subscribe(_ => gameObject.SetActive(false))

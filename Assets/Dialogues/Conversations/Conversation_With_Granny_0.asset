@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3c66b5e57444094afd37602113605dc, type: 3}
-  m_Name: Conversation_With_Granny
+  m_Name: Conversation_With_Granny_0
   m_EditorClassIdentifier: 
   Actors:
   - {fileID: 11400000, guid: 784b36f9c5a9eb14cbb61e6d9e9c5417, type: 2}
@@ -54,5 +54,6 @@ MonoBehaviour:
     - rid: 7267942391778902023
       type: {class: CurrentQuestIs, ns: RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Conditions, asm: RussSurvivor.Runtime}
       data:
-        name: On initial quest
+        name: "\u0421\u0430\u043C\u043E\u0435 \u043D\u0430\u0447\u0430\u043B\u043E
+          \u0438\u0433\u0440\u044B"
         QuestConfig: {fileID: 11400000, guid: f63c3b82bd8c377448cbcb8abef341fc, type: 2}

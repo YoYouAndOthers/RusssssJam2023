@@ -42,6 +42,11 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
       return _conversationsById.TryGetValue(id, out conversation);
     }
 
+    public bool IsConversationFinished(Guid conversationId)
+    {
+      return _finishedConversationsById.ContainsKey(conversationId);
+    }
+
     public bool GetActorById(Guid id, out Actor actor)
     {
       return _actorsById.TryGetValue(id, out actor);
