@@ -12,7 +12,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Data
       GoldenJug = 1,
       FamilyPortrait = 2,
       AncestralIdol = 3,
-      Necklace = 4,
+      Necklace = 4
     }
 
     public ItemToReturnType ItemToReturn;

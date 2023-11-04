@@ -2182,7 +2182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3456607990875269477, guid: be0fced037ec77f429a925090cb5d6f5, type: 3}
       propertyPath: m_Name
-      value: TalkableNPS_Base
+      value: NPC0
       objectReference: {fileID: 0}
     - target: {fileID: 6269677566038446153, guid: be0fced037ec77f429a925090cb5d6f5, type: 3}
       propertyPath: _actor

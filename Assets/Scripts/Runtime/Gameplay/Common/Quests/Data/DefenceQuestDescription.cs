@@ -9,7 +9,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Data
     {
       None = 0,
       Idol = 1,
-      Fire = 2,
+      Fire = 2
     }
 
     public ObjectToDefend Object;

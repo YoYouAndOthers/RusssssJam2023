@@ -35,13 +35,13 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .Bind<CameraFollower>()
         .FromInstance(_cameraFollower)
         .AsSingle();
-      
+
       Container
         .Bind<IActorRegistry>()
         .To<ActorRegistry>()
         .FromNew()
         .AsSingle();
-      
+
       Container
         .Bind<IQuestStateMachine>()
         .To<QuestStateMachine>()

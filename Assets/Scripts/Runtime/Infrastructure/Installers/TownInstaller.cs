@@ -17,9 +17,9 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
     [SerializeField] private Actor _initialQuestGiver;
     [SerializeField] private DialogueEntryPresenter _dialogueEntryPresenter;
-    
-    private ICurtain _curtain;
     private CameraFollower _cameraFollower;
+
+    private ICurtain _curtain;
     private IQuestStateMachine _questStateMachine;
 
     [Inject]

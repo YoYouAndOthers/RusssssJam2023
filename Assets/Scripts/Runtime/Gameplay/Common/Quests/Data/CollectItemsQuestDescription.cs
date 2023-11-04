@@ -11,7 +11,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Data
       None = 0,
       Berries = 1,
       Mushrooms = 2,
-      SlavicVedas = 3,
+      SlavicVedas = 3
     }
 
     public CollectableType CollectablesType;

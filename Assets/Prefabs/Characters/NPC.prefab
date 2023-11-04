@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4308555248075762236}
   - component: {fileID: 6269677566038446153}
   m_Layer: 9
-  m_Name: TalkableNPS_Base
+  m_Name: NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

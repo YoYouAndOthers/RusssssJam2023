@@ -13,7 +13,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Data
       Lizapult = 3,
       BombStorage = 4,
       LizardCamp = 5,
-      LizardIdol = 6,
+      LizardIdol = 6
     }
 
     public HostileObjectType HostileObject;

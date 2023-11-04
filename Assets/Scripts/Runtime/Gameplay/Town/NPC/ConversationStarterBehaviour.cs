@@ -4,7 +4,6 @@ using RussSurvivor.Runtime.Gameplay.Common.Player;
 using RussSurvivor.Runtime.Gameplay.Town.Characters;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
-using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -19,12 +18,14 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
         ? conversations
         : null;
 
-    private IConversationDataBase _conversationDataBase;
-    private IDialogueSystem _dialogueSystem;
     private IActorRegistry _actorRegistry;
 
+    private IConversationDataBase _conversationDataBase;
+    private IDialogueSystem _dialogueSystem;
+
     [Inject]
-    private void Construct(IConversationDataBase conversationDataBase, IDialogueSystem dialogueSystem, IActorRegistry actorRegistry)
+    private void Construct(IConversationDataBase conversationDataBase, IDialogueSystem dialogueSystem,
+      IActorRegistry actorRegistry)
     {
       _conversationDataBase = conversationDataBase;
       _dialogueSystem = dialogueSystem;

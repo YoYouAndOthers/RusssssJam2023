@@ -15,7 +15,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Characters
 
     public void RegisterActor(ConversationStarterBehaviour actor, Guid id)
     {
-      if(!_actors.TryAdd(id, actor))
+      if (!_actors.TryAdd(id, actor))
         _actors[id] = actor;
     }
   }
