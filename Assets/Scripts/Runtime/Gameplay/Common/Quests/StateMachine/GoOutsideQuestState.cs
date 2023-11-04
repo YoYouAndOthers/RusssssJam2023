@@ -1,9 +1,14 @@
+using System;
 using UnityEngine;
 
 namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
 {
-  public class GoOutsideQuestState : QuestState
+  public class GoOutsideQuestState : QuestWithDirectionState
   {
+    public GoOutsideQuestState(Guid questId) : base(questId)
+    {
+    }
+
     public override Vector2 GetPosition()
     {
       return default;

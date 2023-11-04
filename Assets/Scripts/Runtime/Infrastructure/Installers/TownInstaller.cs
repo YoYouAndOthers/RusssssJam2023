@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
+using RussSurvivor.Runtime.Gameplay.Common.Quests.Data;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
@@ -16,6 +17,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
   {
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
     [SerializeField] private Actor _initialQuestGiver;
+    [SerializeField] private QuestConfig _initialQuestConfig;
     [SerializeField] private DialogueEntryPresenter _dialogueEntryPresenter;
     private CameraFollower _cameraFollower;
 
@@ -35,7 +37,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       await UniTask.WhenAll(
         Container.Resolve<IConversationDataBase>().Initialize(),
         Container.Resolve<IPlayerPrefabProvider>().Initialize());
-      _questStateMachine.InitializeAsNew(_initialQuestGiver.Id);
+      _questStateMachine.InitializeAsNew(_initialQuestConfig.Id, _initialQuestGiver.Id);
       _playerSpawnPoint.Initialize();
       _cameraFollower.Initialize(Container.Resolve<IPlayerRegistry>().GetPlayer());
       _dialogueEntryPresenter.Initialize();
@@ -64,6 +66,12 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<IDialogueSystem>()
         .To<DialogueSystem>()
+        .FromNew()
+        .AsSingle();
+      
+      Container
+        .Bind<IConversationConditionSolver>()
+        .To<ConversationConditionSolver>()
         .FromNew()
         .AsSingle();
     }

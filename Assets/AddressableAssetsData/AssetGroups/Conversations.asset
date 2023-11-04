@@ -17,12 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: bf3555194a93aef42bc1fbc0f8054852
   m_SerializeEntries:
-  - m_GUID: c01681e4920d49941b9772bbf153f668
-    m_Address: Conversation_Test
+  - m_GUID: 9814b0de4c427254581d1283e24b230c
+    m_Address: Assets/Dialogues/Conversations/Conversation_With_Granny.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - Conversation
     - Dialogues
+    - Conversation
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 60d5ef9f1bdf56a4f9658dd75e1cb0ca, type: 2}

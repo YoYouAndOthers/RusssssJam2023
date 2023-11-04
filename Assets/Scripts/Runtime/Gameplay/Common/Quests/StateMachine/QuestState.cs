@@ -1,9 +1,12 @@
-using UnityEngine;
+using System;
 
 namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
 {
   public abstract class QuestState
   {
-    public abstract Vector2 GetPosition();
+    public Guid QuestId { get; }
+
+    protected QuestState(Guid questId) =>
+      QuestId = questId;
   }
 }

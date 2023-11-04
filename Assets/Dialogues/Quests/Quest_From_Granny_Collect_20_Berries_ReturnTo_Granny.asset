@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 121caac703b349569a2ac993d97eebe7, type: 3}
-  m_Name: Quest_Defend_Idol_For_2Minutes
+  m_Name: Quest_From_Granny_Collect_20_Berries_ReturnTo_Granny
   m_EditorClassIdentifier: 
-  Name: Defend Idol
+  Name: Collect berries
   Description:
-    rid: 7267942389092974599
+    rid: 7267942389092974593
   references:
     version: 2
     RefIds:
-    - rid: 7267942389092974599
-      type: {class: DefenceQuestDescription, ns: RussSurvivor.Runtime.Gameplay.Common.Quests.Data, asm: RussSurvivor.Runtime}
+    - rid: 7267942389092974593
+      type: {class: CollectItemsQuestDescription, ns: RussSurvivor.Runtime.Gameplay.Common.Quests.Data, asm: RussSurvivor.Runtime}
       data:
         QuestRewardGiver: {fileID: 11400000, guid: 784b36f9c5a9eb14cbb61e6d9e9c5417, type: 2}
-        Object: 1
-        TimeToDefendSeconds: 120
+        CollectablesType: 1
+        CollectablesCount: 15
+        BringTo: {fileID: 11400000, guid: 784b36f9c5a9eb14cbb61e6d9e9c5417, type: 2}

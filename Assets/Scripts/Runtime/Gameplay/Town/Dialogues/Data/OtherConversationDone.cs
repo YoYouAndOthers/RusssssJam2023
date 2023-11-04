@@ -7,10 +7,5 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
   {
     public string name = "OtherConversationDone";
     public Conversation Conversation;
-
-    public override bool IsMet()
-    {
-      return false;
-    }
   }
 }

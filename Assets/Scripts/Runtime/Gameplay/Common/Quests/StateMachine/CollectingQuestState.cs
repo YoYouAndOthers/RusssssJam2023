@@ -1,17 +1,12 @@
+using System;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.Data;
-using UnityEngine;
 
 namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
 {
   public class CollectingQuestState : QuestState
   {
-    public CollectingQuestState(CollectItemsQuestDescription collectionDescription)
+    public CollectingQuestState(Guid questId, CollectItemsQuestDescription collectionDescription) : base(questId)
     {
-    }
-
-    public override Vector2 GetPosition()
-    {
-      return default;
     }
   }
 }

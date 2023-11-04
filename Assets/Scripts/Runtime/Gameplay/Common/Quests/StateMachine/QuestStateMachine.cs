@@ -11,9 +11,9 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
     public QuestStateMachine(IActorRegistry actorRegistry) =>
       _actorRegistry = actorRegistry;
 
-    public void InitializeAsNew(Guid initialNpcId)
+    public void InitializeAsNew(Guid questId, Guid initialNpcId)
     {
-      CurrentState = new TalkToNpcQuestState(initialNpcId, _actorRegistry);
+      CurrentState = new TalkToNpcQuestState(questId, initialNpcId, _actorRegistry);
     }
   }
 }

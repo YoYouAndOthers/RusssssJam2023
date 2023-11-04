@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
@@ -19,15 +20,20 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
         : null;
 
     private IActorRegistry _actorRegistry;
+    private IConversationConditionSolver _conversationConditionSolver;
 
     private IConversationDataBase _conversationDataBase;
     private IDialogueSystem _dialogueSystem;
 
     [Inject]
-    private void Construct(IConversationDataBase conversationDataBase, IDialogueSystem dialogueSystem,
+    private void Construct(
+      IConversationDataBase conversationDataBase,
+      IConversationConditionSolver conversationConditionSolver,
+      IDialogueSystem dialogueSystem,
       IActorRegistry actorRegistry)
     {
       _conversationDataBase = conversationDataBase;
+      _conversationConditionSolver = conversationConditionSolver;
       _dialogueSystem = dialogueSystem;
       _actorRegistry = actorRegistry;
     }
@@ -41,9 +47,11 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
     {
       Debug.Log("Starting conversation");
       Debug.Assert(Conversations != null, "Conversations != null");
-      if (Conversations.Any(k => k.ConditionsToStart.All(l => l.IsMet())))
+      Func<ConditionToStartBase, bool>
+        conditionPredicate = l => _conversationConditionSolver.IsConversationAvailable(l);
+      if (Conversations.Any(k => k.ConditionsToStart.All(conditionPredicate)))
       {
-        Conversation conversation = Conversations.First(k => k.ConditionsToStart.All(l => l.IsMet()));
+        Conversation conversation = Conversations.First(k => k.ConditionsToStart.All(conditionPredicate));
         _dialogueSystem.StartConversation(conversation.Id);
       }
       else

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b708d82aea384b0890c5584cb697a53f, type: 3}
   m_Name: Actor_Player
   m_EditorClassIdentifier: 
-  Name: Drocheslav
+  Name: "\u0414\u0440\u043E\u0447\u0435\u0441\u043B\u0430\u0432"
   IsPlayer: 1
   Icon: {fileID: 21300000, guid: c87186a6b979ac445abaac66b53655e1, type: 3}
   Description: 

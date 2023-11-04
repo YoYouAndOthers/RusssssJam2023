@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
 {
-  public class TalkToNpcQuestState : QuestState
+  public class TalkToNpcQuestState : QuestWithDirectionState
   {
     private readonly Guid _npcId;
     private readonly IActorRegistry _actorRegistry;
 
-    public TalkToNpcQuestState(Guid id, IActorRegistry actorRegistry)
+    public TalkToNpcQuestState(Guid questId, Guid npcId, IActorRegistry actorRegistry) : base(questId)
     {
-      _npcId = id;
+      _npcId = npcId;
       _actorRegistry = actorRegistry;
     }
 
