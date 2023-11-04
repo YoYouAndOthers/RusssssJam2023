@@ -41,7 +41,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container.Resolve<ClosestTargetPickerFactory>().Initialize();
 
       await Container.Resolve<ILoadService>().LoadAsync();
-      await Container.Resolve<IPlayerPrefabProvider>().Initialize();
+      await Container.Resolve<IPlayerPrefabProvider>().InitializeAsync();
       _playerSpawnPoint.Initialize();
       Container.Resolve<ObstacleSpawner>().SpawnObstacles();
       _cameraFollower.Initialize(Container.Resolve<IPlayerRegistry>().GetPlayer());

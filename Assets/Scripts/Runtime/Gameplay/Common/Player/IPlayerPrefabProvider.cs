@@ -4,7 +4,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
 {
   public interface IPlayerPrefabProvider
   {
-    UniTask Initialize();
+    UniTask InitializeAsync();
     PlayerBehaviourBase GetPlayerPrefab(PlayerPrefabType type);
   }
 }

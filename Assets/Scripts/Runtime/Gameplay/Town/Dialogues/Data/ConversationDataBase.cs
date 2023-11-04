@@ -17,7 +17,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
 
     private Dictionary<Guid, Conversation> _conversationsById = new();
 
-    public async UniTask Initialize()
+    public async UniTask InitializeAsync()
     {
       Debug.Log("Dialogue database initialization started");
       IList<Conversation> conversations =

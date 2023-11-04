@@ -1,5 +1,6 @@
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
+using RussSurvivor.Runtime.Gameplay.Common.Quests;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine;
 using RussSurvivor.Runtime.Gameplay.Common.Transitions;
 using RussSurvivor.Runtime.Gameplay.Town.Characters;
@@ -45,6 +46,18 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<IQuestStateMachine>()
         .To<QuestStateMachine>()
+        .FromNew()
+        .AsSingle();
+      
+      Container
+        .Bind<IQuestRegistry>()
+        .To<QuestRegistry>()
+        .FromNew()
+        .AsSingle();
+      
+      Container
+        .Bind<IQuestStateListFactory>()
+        .To<QuestStateListFactory>()
         .FromNew()
         .AsSingle();
     }

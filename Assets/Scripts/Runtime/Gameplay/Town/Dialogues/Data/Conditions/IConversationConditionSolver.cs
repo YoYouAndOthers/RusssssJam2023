@@ -1,7 +1,4 @@
-using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
-using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Conditions;
-
-namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
+namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Conditions
 {
   public interface IConversationConditionSolver
   {

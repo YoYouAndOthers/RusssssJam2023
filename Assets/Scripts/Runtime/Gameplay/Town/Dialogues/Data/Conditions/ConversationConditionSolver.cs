@@ -1,8 +1,6 @@
 using RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine;
-using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
-using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Conditions;
 
-namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
+namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Conditions
 {
   public class ConversationConditionSolver : IConversationConditionSolver
   {
@@ -15,7 +13,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
     {
       if (condition is CurrentQuestIs hasQuest)
       {
-        return _questStateMachine.CurrentState.QuestId == hasQuest.QuestConfig.Id;
+        return _questStateMachine.CurrentState.Value.QuestId == hasQuest.QuestConfig.Id;
       }
       return false;
     }

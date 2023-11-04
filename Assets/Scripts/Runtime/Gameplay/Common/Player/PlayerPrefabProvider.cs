@@ -8,7 +8,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
   {
     private Dictionary<PlayerPrefabType, PlayerBehaviourBase> _prefabsByType;
 
-    public async UniTask Initialize()
+    public async UniTask InitializeAsync()
     {
       Debug.Log("PlayerPrefabProvider initialization started");
       if (_prefabsByType != null)
