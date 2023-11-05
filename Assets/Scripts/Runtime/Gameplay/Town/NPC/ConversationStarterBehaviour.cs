@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
+using RussSurvivor.Runtime.Gameplay.Common.Timing;
 using RussSurvivor.Runtime.Gameplay.Town.Characters;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
@@ -23,6 +24,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
     private IActorRegistry _actorRegistry;
     private IConversationConditionSolver _conversationConditionSolver;
     private IConversationDataBase _conversationDataBase;
+    private IPauseService _pauseService;
     private IDialogueSystem _dialogueSystem;
 
     [Inject]
@@ -30,11 +32,13 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
       IConversationDataBase conversationDataBase,
       IConversationConditionSolver conversationConditionSolver,
       IDialogueSystem dialogueSystem,
+      IPauseService pauseService,
       IActorRegistry actorRegistry)
     {
       _conversationDataBase = conversationDataBase;
       _conversationConditionSolver = conversationConditionSolver;
       _dialogueSystem = dialogueSystem;
+      _pauseService = pauseService;
       _actorRegistry = actorRegistry;
     }
 
@@ -57,12 +61,22 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
       if (Conversations.Any(k => k.ConditionsToStart.All(conditionPredicate)))
       {
         Conversation conversation = Conversations.First(k => k.ConditionsToStart.All(conditionPredicate));
+        _pauseService.Pause();
         _dialogueSystem.StartConversation(conversation.Id);
       }
       else
       {
         Debug.Log("No conversation to start");
       }
+    }
+
+    protected override void PerformInteractionExit(PlayerTownBehaviour player)
+    {
+      Debug.Log("Leaving conversation");
+      if(_dialogueSystem.HasNextDialogueEntry.Value)
+        _dialogueSystem.CancelConversation();
+      else
+        _dialogueSystem.FinishConversation();
     }
   }
 }

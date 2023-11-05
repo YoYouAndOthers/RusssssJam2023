@@ -17,7 +17,17 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
         PerformInteraction(player);
       }
     }
+    
+    private void OnTriggerExit2D(Collider2D other)
+    {
+      if (other.attachedRigidbody.TryGetComponent(out PlayerTownBehaviour player))
+      {
+        Debug.Log("Player exited the trigger");
+        PerformInteractionExit(player);
+      }
+    }
 
     protected abstract void PerformInteraction(PlayerTownBehaviour player);
+    protected abstract void PerformInteractionExit(PlayerTownBehaviour player);
   }
 }

@@ -134,7 +134,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .AsSingle();
 
       Container
-        .Bind<ICooldownService>()
+        .Bind(typeof(ICooldownService), typeof(IPauseService))
         .To<CooldownService>()
         .FromNew()
         .AsSingle();

@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
+using UniRx;
 using UnityEngine;
 
 namespace RussSurvivor.Runtime.Gameplay.Common.Timing
 {
-  public class CooldownService : ICooldownService
+  public class CooldownService : ICooldownService, IPauseService
   {
     private int _counter;
     private IDayTimer _dayTimer;
@@ -24,8 +25,22 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Timing
       _updatables.Remove(updatable);
     }
 
+    public BoolReactiveProperty IsPaused { get; } = new();
+
+    public void Pause()
+    {
+      IsPaused.Value = true;
+    }
+
+    public void Resume()
+    {
+      IsPaused.Value = false;
+    }
+
     public void PerformTick(float deltaTime)
     {
+      if(IsPaused.Value)
+        return;
       _deltaTime += deltaTime;
       if (_counter % 3 == 0)
       {

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using RussSurvivor.Runtime.Gameplay.Common.Timing;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Models;
@@ -40,11 +41,13 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
     private Conversation _currentConversation;
     private Conversation _currentConversation1;
     private int _currentDialogueEntryIndex;
+    private IPauseService _pauseService;
 
-    public DialogueSystem(IConversationDataBase conversationDataBase, IConversationActionInvoker actionInvoker)
+    public DialogueSystem(IConversationDataBase conversationDataBase, IConversationActionInvoker actionInvoker, IPauseService pauseService)
     {
       _conversationDataBase = conversationDataBase;
       _actionInvoker = actionInvoker;
+      _pauseService = pauseService;
     }
 
     public void StartConversation(Guid conversationId)
@@ -75,6 +78,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
     {
       IsConversationActive.Value = false;
       Debug.Log($"Conversation {_currentConversation.Id.ToString()} canceled");
+      _pauseService.Resume();
     }
 
     public void FinishConversation()
@@ -87,6 +91,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
 
       _conversationDataBase.SetFinishedConversation(_currentConversation.Id);
       Debug.Log($"Conversation {_currentConversation.Id.ToString()} finished");
+      _pauseService.Resume();
     }
   }
 }
