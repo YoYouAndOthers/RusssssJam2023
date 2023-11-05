@@ -31,6 +31,13 @@ MonoBehaviour:
     - Actor
     - Dialogues
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f70f1dfe785d13748b65b0bfe0048d56
+    m_Address: Actor_NPC_Guardian
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Actor
+    - Dialogues
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 60d5ef9f1bdf56a4f9658dd75e1cb0ca, type: 2}
   m_SchemaSet:

@@ -11,7 +11,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
 
     public override Vector2 GetPosition()
     {
-      return default;
+      return Vector2.zero;
     }
   }
 }

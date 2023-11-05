@@ -17,5 +17,6 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Data
     }
 
     public HostileObjectType HostileObject;
+    public int AmountToDestroy;
   }
 }

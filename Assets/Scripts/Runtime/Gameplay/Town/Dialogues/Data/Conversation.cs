@@ -1,4 +1,5 @@
 using System;
+using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Conditions;
 using UnityEngine;
 
@@ -12,5 +13,6 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
     [SerializeReference, SubclassSelector] public ConditionToStartBase[] ConditionsToStart;
     public DialogueEntry[] Entries;
     public Guid Id = Guid.NewGuid();
+    [SerializeReference, SubclassSelector] public DialogueActionBase[] OnEndActions;
   }
 }

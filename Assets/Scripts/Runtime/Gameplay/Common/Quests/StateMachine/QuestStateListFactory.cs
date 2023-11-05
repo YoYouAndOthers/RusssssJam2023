@@ -29,6 +29,15 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
         states.Add(new ReturnToTownQuestState(questId));
         return states;
       }
+      
+      if (description is DestructionQuestDescription destructionQuest)
+      {
+        states.Add(new GoOutsideQuestState(questId));
+        states.Add(new DestroyNpcQuestState(questId, destructionQuest.HostileObject));
+        states.Add(new ReturnToTownQuestState(questId));
+        states.Add(new TalkToNpcQuestState(questId, destructionQuest.QuestRewardGiver.Id, _actorRegistry));
+        return states;
+      }
 
       return states;
     }

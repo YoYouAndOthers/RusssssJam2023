@@ -29,6 +29,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - Quests
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 952b5414639c103488eaa1597bd81f60
+    m_Address: Quest_From_Granny_Speak_To_Guardian
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Quests
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b57e500af9cfea4f946972fdaa65409
+    m_Address: Assets/Dialogues/Quests/Quest_From_Guardian_3LizardCamps_ReturnTo_Guardian.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Quests
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 60d5ef9f1bdf56a4f9658dd75e1cb0ca, type: 2}
   m_SchemaSet:
