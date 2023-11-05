@@ -19,6 +19,9 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
 
     public async UniTask InitializeAsync()
     {
+      if (_conversationsById.Any() && _actorsById.Any() && _actorsConversationsById.Any())
+        return;
+
       Debug.Log("Dialogue database initialization started");
       IList<Conversation> conversations =
         await Addressables.LoadAssetsAsync<Conversation>(_conversationKeys, null, Addressables.MergeMode.Intersection);
@@ -68,7 +71,10 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
     {
       Debug.Assert(_conversationsById.ContainsKey(conversationId), "_conversationsById.ContainsKey(conversationId)");
       if (!_conversationsById[conversationId].IsRepeatable)
+      {
+        Debug.Log($"Conversation {conversationId.ToString()} marked as finished");
         _finishedConversationsById.Add(conversationId, _conversationsById[conversationId]);
+      }
     }
   }
 }

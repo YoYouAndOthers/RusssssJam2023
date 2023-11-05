@@ -1,9 +1,11 @@
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
 using RussSurvivor.Runtime.Gameplay.Common.Quests;
+using RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine;
 using RussSurvivor.Runtime.Gameplay.Common.Transitions;
 using RussSurvivor.Runtime.Gameplay.Town.Characters;
+using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
 using RussSurvivor.Runtime.Infrastructure.Content;
 using RussSurvivor.Runtime.UI.Gameplay.Common.Quests;
 using UnityEngine;
@@ -15,6 +17,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
   {
     [SerializeField] private CameraFollower _cameraFollower;
     [SerializeField] private CollectionQuestUi _collectionQuestUi;
+    [SerializeField] private CollectingQuestResolver _collectingQuestResolver;
 
     public override void InstallBindings()
     {
@@ -74,7 +77,17 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .Bind<CollectionQuestUi>()
         .FromInstance(_collectionQuestUi)
         .AsSingle();
-      ;
+      
+      Container
+        .Bind<CollectingQuestResolver>()
+        .FromInstance(_collectingQuestResolver)
+        .AsSingle();
+      
+      Container
+        .Bind<IConversationDataBase>()
+        .To<ConversationDataBase>()
+        .FromNew()
+        .AsSingle();
     }
   }
 }

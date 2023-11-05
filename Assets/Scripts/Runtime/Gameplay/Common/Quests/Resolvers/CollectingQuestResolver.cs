@@ -15,7 +15,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
   public class CollectingQuestResolver : MonoBehaviour
   {
     private readonly List<IDisposable> _disposables = new();
-    private readonly List<CollectableItem> _collectables = new();
+    private readonly HashSet<CollectableItem> _collectables = new();
 
     public IntReactiveProperty CollectedAmount { get; } = new();
 
@@ -46,7 +46,6 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
     public void Initialize()
     {
       Dispose();
-
       _questStateMachine.CurrentState
         .Where(k => k is CollectingQuestState)
         .Subscribe(InitializeCollectablesByQuest)
@@ -55,6 +54,10 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
 
     public void RemoveCollectable(CollectableItem collectableItem)
     {
+      bool removeSuccessful = _collectables.Remove(collectableItem);
+      if (!removeSuccessful)
+        return;
+      Debug.Log("RemoveCollectable");
       CollectedAmount.Value++;
       _collecting.CollectedAmount++;
       if (CollectedAmount.Value == _collecting.CollectablesCount)
@@ -63,14 +66,12 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
           _questStateMachine.NextState<TalkToNpcQuestState>();
         else
           _questStateMachine.NextState<ReturnToTownQuestState>();
-        for (var i = 0; i < _collectables.Count; i++)
-          Destroy(_collectables[i].gameObject);
+        
+        CollectableItem[] collctablesArray = _collectables.ToArray();
+        for (var i = 0; i < collctablesArray.Length; i++)
+          Destroy(collctablesArray[i].gameObject);
 
         _collectables.Clear();
-      }
-      else
-      {
-        _collectables.Remove(collectableItem);
       }
     }
 

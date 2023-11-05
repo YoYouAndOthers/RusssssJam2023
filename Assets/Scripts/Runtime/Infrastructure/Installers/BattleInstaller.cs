@@ -9,6 +9,7 @@ using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers;
 using RussSurvivor.Runtime.Gameplay.Common.Transitions;
+using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
 using RussSurvivor.Runtime.UI.Gameplay.Common.Quests;
 using UnityEngine;
@@ -19,23 +20,26 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
   public class BattleInstaller : MonoInstaller, IInitializable, ITickable
   {
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
-    [SerializeField] private CollectingQuestResolver _collectingQuestResolver;
     private CameraFollower _cameraFollower;
     private CollectionQuestUi _collectionQuestUi;
     private ICooldownService _cooldownService;
     private ICurtain _curtain;
     private IGameplayTransitionService _gameplayTransitionService;
+    private CollectingQuestResolver _collectingQuestResolver;
 
     [Inject]
     private void Construct(
       ICurtain curtain,
+      IConversationDataBase conversationDataBase,
       IGameplayTransitionService gameplayTransitionService,
       CameraFollower cameraFollower,
+      CollectingQuestResolver collectingQuestResolver,
       CollectionQuestUi collectionQuestUi)
     {
       _curtain = curtain;
       _gameplayTransitionService = gameplayTransitionService;
       _cameraFollower = cameraFollower;
+      _collectingQuestResolver = collectingQuestResolver;
       _collectionQuestUi = collectionQuestUi;
     }
 
@@ -58,10 +62,10 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         Container.Resolve<IPlayerPrefabProvider>().InitializeAsync()
       );
 
-      _collectingQuestResolver.Initialize();
       _playerSpawnPoint.Initialize();
       //Container.Resolve<ObstacleSpawner>().SpawnObstacles();
       _cameraFollower.Initialize(Container.Resolve<IPlayerRegistry>().GetPlayer());
+      _collectingQuestResolver.Initialize();
       _collectionQuestUi.Initialize(_collectingQuestResolver);
       _curtain.Hide();
     }

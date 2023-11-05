@@ -29,6 +29,7 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Common.Quests
     private ICollectableItemPrefabProvider _prefabProvider;
 
     private IQuestStateMachine _questStateMachine;
+    private CollectingQuestResolver _resolver;
 
     [Inject]
     private void Construct(IQuestStateMachine questStateMachine, ICollectableItemPrefabProvider prefabProvider)
@@ -39,9 +40,9 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Common.Quests
 
     public void Initialize(CollectingQuestResolver resolver)
     {
-      _disposables.ForEach(k => k.Dispose());
-      _disposables.Clear();
-
+      if(_resolver != null)
+        return;
+      _resolver = resolver;
       _questStateMachine.CurrentState
         .Where(k => k is CollectingQuestState)
         .Subscribe(currentState =>
@@ -73,10 +74,14 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Common.Quests
 
       _questStateMachine.CurrentState
         .Where(k => k == null || k.QuestId != _currentQuestId)
-        .Subscribe(_ => gameObject.SetActive(false))
+        .Subscribe(_ =>
+        {
+          _returnToText.gameObject.SetActive(false);
+          gameObject.SetActive(false);
+        })
         .AddTo(_disposables);
 
-      resolver.CollectedAmount
+      _resolver.CollectedAmount
         .ObserveEveryValueChanged(k => k.Value)
         .Subscribe(newValue =>
         {

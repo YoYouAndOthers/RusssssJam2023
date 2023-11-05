@@ -34,6 +34,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
     public void CompleteCurrentQuest()
     {
       Debug.Log($"Completing quest {CurrentState.Value.QuestId}");
+      CurrentState.Value = null;
       States.Clear();
     }
   }

@@ -19,18 +19,27 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Conditions
       if (condition is CurrentQuestIs hasQuest)
       {
         Debug.Log($"Checking if quest {hasQuest.QuestConfig.Id} is active");
-        return _questStateMachine.CurrentState.Value != null &&
-               hasQuest.QuestConfig != null &&
-               _questStateMachine.CurrentState.Value.QuestId == hasQuest.QuestConfig.Id;
+        bool questIdsAreEqualAndNonNull = QuestIdsAreEqualAndNonNull(hasQuest);
+        Debug.Log($"Quest {hasQuest.QuestConfig.Id} is active: {questIdsAreEqualAndNonNull}");
+        return questIdsAreEqualAndNonNull;
       }
 
       if (condition is OtherConversationDone otherConversationDone)
       {
         Debug.Log($"Checking if conversation {otherConversationDone.Conversation.Id} is finished");
-        return _conversationDataBase.IsConversationFinished(otherConversationDone.Conversation.Id);
+        bool isConversationAvailable = _conversationDataBase.IsConversationFinished(otherConversationDone.Conversation.Id);
+        Debug.Log($"Conversation {otherConversationDone.Conversation.Id} is finished: {isConversationAvailable}");
+        return isConversationAvailable;
       }
 
       return false;
+    }
+
+    private bool QuestIdsAreEqualAndNonNull(CurrentQuestIs hasQuest)
+    {
+      return _questStateMachine.CurrentState.Value != null &&
+             hasQuest.QuestConfig != null &&
+             _questStateMachine.CurrentState.Value.QuestId == hasQuest.QuestConfig.Id;
     }
   }
 }

@@ -25,26 +25,30 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
     [SerializeField] private QuestConfig _initialQuestConfig;
     [SerializeField] private DialogueEntryPresenter _dialogueEntryPresenter;
-    [SerializeField] private CollectingQuestResolver _collectingQuestResolver;
     private CameraFollower _cameraFollower;
     private CollectionQuestUi _collectionQuestUi;
-
     private ICurtain _curtain;
     private IGameplayTransitionService _gameplayTransitionService;
+    private CollectingQuestResolver _collectingQuestResolver;
     private IQuestStateMachine _questStateMachine;
+    private IConversationDataBase _conversationDataBase;
 
     [Inject]
     private void Construct(
       ICurtain curtain,
+      IConversationDataBase conversationDataBase,
       IGameplayTransitionService gameplayTransitionService,
       CameraFollower cameraFollower,
       IQuestStateMachine questStateMachine,
+      CollectingQuestResolver collectingQuestResolver,
       CollectionQuestUi collectionQuestUi)
     {
       _curtain = curtain;
+      _conversationDataBase = conversationDataBase;
       _gameplayTransitionService = gameplayTransitionService;
       _cameraFollower = cameraFollower;
       _questStateMachine = questStateMachine;
+      _collectingQuestResolver = collectingQuestResolver;
       _collectionQuestUi = collectionQuestUi;
     }
 
@@ -52,7 +56,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     {
       _gameplayTransitionService.CurrentScene = SceneEntrance.SceneName.Town;
       await UniTask.WhenAll(
-        Container.Resolve<IConversationDataBase>().InitializeAsync(),
+        _conversationDataBase.InitializeAsync(),
         Container.Resolve<IPlayerPrefabProvider>().InitializeAsync(),
         Container.Resolve<IQuestRegistry>().InitializeAsync(),
         Container.Resolve<ICollectableItemPrefabProvider>().InitializeAsync());
@@ -77,12 +81,6 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind(typeof(IPlayerRegistry), typeof(ITownPlayerRegistry))
         .To<TownPlayerRegistry>()
-        .FromNew()
-        .AsSingle();
-
-      Container
-        .Bind<IConversationDataBase>()
-        .To<ConversationDataBase>()
         .FromNew()
         .AsSingle();
 
