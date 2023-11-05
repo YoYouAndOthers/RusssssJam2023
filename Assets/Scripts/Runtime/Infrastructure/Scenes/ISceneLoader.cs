@@ -10,5 +10,6 @@ namespace RussSurvivor.Runtime.Infrastructure.Scenes
     void LoadScene(SceneEntrance.SceneName sceneName, LoadSceneMode loadSceneMode = LoadSceneMode.Single);
     UniTask LoadSceneAsync(SceneEntrance.SceneName sceneName, LoadSceneMode loadSceneMode = LoadSceneMode.Single);
     UniTask UnloadSceneAsync(SceneEntrance.SceneName sceneName);
+    string GetSceneName(SceneEntrance.SceneName town);
   }
 }

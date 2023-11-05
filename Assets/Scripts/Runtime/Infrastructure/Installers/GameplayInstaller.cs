@@ -1,3 +1,7 @@
+using Cysharp.Threading.Tasks;
+using RussSurvivor.Runtime.Application.SaveLoad;
+using RussSurvivor.Runtime.Gameplay.Battle.Enemies;
+using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Content;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Registry;
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
@@ -9,18 +13,57 @@ using RussSurvivor.Runtime.Gameplay.Common.Transitions;
 using RussSurvivor.Runtime.Gameplay.Town.Characters;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
 using RussSurvivor.Runtime.Infrastructure.Content;
+using RussSurvivor.Runtime.Infrastructure.Scenes;
 using RussSurvivor.Runtime.UI.Gameplay.Common.Quests;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace RussSurvivor.Runtime.Infrastructure.Installers
 {
-  public class GameplayInstaller : MonoInstaller, ITickable
+  public class GameplayInstaller : MonoInstaller, IInitializable, ITickable
   {
     [SerializeField] private CameraFollower _cameraFollower;
     [SerializeField] private CollectionQuestUi _collectionQuestUi;
     [SerializeField] private CollectingQuestResolver _collectingQuestResolver;
     private ICooldownService _cooldownService;
+    private ISceneLoader _sceneLoader;
+
+    public bool IsInitializing { get; private set; }
+
+    [Inject]
+    private void Construct(ISceneLoader sceneLoader)
+    {
+      _sceneLoader = sceneLoader;
+    }
+
+    public async void Initialize()
+    {
+      IsInitializing = true;
+      await UniTask.WhenAll(
+        Container.Resolve<ILoadService>().LoadAsync(),
+        Container.Resolve<IPlayerPrefabProvider>().InitializeAsync(),
+        Container.Resolve<IQuestRegistry>().InitializeAsync(),
+        Container.Resolve<ICollectableItemPrefabProvider>().InitializeAsync(),
+        Container.Resolve<IConversationDataBase>().InitializeAsync(),
+        Container.Resolve<IEnemyTypeStaticProvider>().InitializeAsync(),
+        Container.Resolve<IWeaponConfigProvider>().InitializeAsync()
+      );
+
+      Container.Resolve<ICooldownService>().RegisterUpdatable(Container.Resolve<IDayTimer>());
+
+      await LoadTownSceneIfNeeded();
+      IsInitializing = false;
+    }
+
+    private async UniTask LoadTownSceneIfNeeded()
+    {
+      string townSceneName = _sceneLoader.GetSceneName(SceneEntrance.SceneName.Town);
+      string battleSceneName = _sceneLoader.GetSceneName(SceneEntrance.SceneName.Battle);
+      if (SceneManager.GetSceneByName(townSceneName).isLoaded || SceneManager.GetSceneByName(battleSceneName).isLoaded)
+        return;
+      await _sceneLoader.LoadSceneAsync(SceneEntrance.SceneName.Town, LoadSceneMode.Additive);
+    }
 
     public void Tick()
     {
@@ -31,7 +74,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     public override void InstallBindings()
     {
       Container
-        .BindInterfacesTo<GameplayInstaller>()
+        .BindInterfacesAndSelfTo<GameplayInstaller>()
         .FromInstance(this)
         .AsSingle();
 
@@ -107,6 +150,18 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<IDayTimer>()
         .To<DayTimer>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<IWeaponConfigProvider>()
+        .To<WeaponConfigProvider>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<IEnemyTypeStaticProvider>()
+        .To<EnemyTypeStaticProvider>()
         .FromNew()
         .AsSingle();
 

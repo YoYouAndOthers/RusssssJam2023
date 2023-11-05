@@ -36,7 +36,7 @@ MonoBehaviour:
     - Quests
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7b57e500af9cfea4f946972fdaa65409
-    m_Address: Assets/Dialogues/Quests/Quest_From_Guardian_3LizardCamps_ReturnTo_Guardian.asset
+    m_Address: Quest_From_Guardian_3LizardCamps_ReturnTo_Guardian
     m_ReadOnly: 0
     m_SerializedLabels:
     - Quests

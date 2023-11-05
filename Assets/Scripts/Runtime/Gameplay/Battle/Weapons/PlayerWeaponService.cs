@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Content;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Registry;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
 using RussSurvivor.Runtime.Gameplay.Common.Timing;
@@ -18,17 +20,20 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
     private ICooldownService _cooldownService;
     private WeaponBehaviourBase _fists;
     private WeaponFactory _weaponFactory;
+    private IWeaponConfigProvider _weaponConfigProvider;
     private IWeaponRegistry _weaponRegistry;
 
     [Inject]
     private void Construct(
       WeaponFactory weaponFactory,
       IWeaponRegistry weaponRegistry,
+      IWeaponConfigProvider weaponConfigProvider,
       ICooldownService cooldownService,
       IBattlePlayerRegistry battlePlayerRegistry)
     {
       _weaponFactory = weaponFactory;
       _weaponRegistry = weaponRegistry;
+      _weaponConfigProvider = weaponConfigProvider;
       _cooldownService = cooldownService;
       _battlePlayerRegistry = battlePlayerRegistry;
     }
@@ -57,9 +62,11 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
       _fists = _weaponFactory.Create(player.Fists, player);
       _cooldownService.RegisterUpdatable(_fists);
 
-      foreach (WeaponConfig weaponConfig in _weaponRegistry.Weapons)
+      foreach (Guid id in _weaponRegistry.GetWeaponIds())
       {
-        WeaponBehaviourBase weapon = _weaponFactory.Create(weaponConfig, player);
+        if(!_weaponConfigProvider.TryGetWeaponConfig(id, out WeaponConfig config))
+          continue;
+        WeaponBehaviourBase weapon = _weaponFactory.Create(config, player);
         _weapons.Add(weapon);
         _cooldownService.RegisterUpdatable(weapon);
       }

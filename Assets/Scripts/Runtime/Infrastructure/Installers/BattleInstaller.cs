@@ -8,7 +8,7 @@ using RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles;
 using RussSurvivor.Runtime.Gameplay.Battle.States;
 using RussSurvivor.Runtime.Gameplay.Battle.Timing;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
-using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Registry;
+using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Content;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target;
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
@@ -35,28 +35,36 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     private ICurtain _curtain;
     private IDayTimer _dayTimer;
     private IGameplayTransitionService _gameplayTransitionService;
-    private IWeaponRegistry _weaponRegistry;
+    private IWeaponConfigProvider _weaponConfigProvider;
+    private GameplayInstaller _gameplayInstaller;
 
     [Inject]
     private void Construct(
       ICurtain curtain,
       IDayTimer dayTimer,
       ICooldownService cooldownService,
-      IWeaponRegistry weaponRegistry,
+      IWeaponConfigProvider weaponConfigProvider,
       IConversationDataBase conversationDataBase,
       IGameplayTransitionService gameplayTransitionService,
       CameraFollower cameraFollower,
       CollectingQuestResolver collectingQuestResolver,
-      CollectionQuestUi collectionQuestUi)
+      CollectionQuestUi collectionQuestUi,
+      GameplayInstaller gameplayInstaller)
     {
       _curtain = curtain;
       _dayTimer = dayTimer;
       _cooldownService = cooldownService;
-      _weaponRegistry = weaponRegistry;
+      _weaponConfigProvider = weaponConfigProvider;
       _gameplayTransitionService = gameplayTransitionService;
       _cameraFollower = cameraFollower;
       _collectingQuestResolver = collectingQuestResolver;
       _collectionQuestUi = collectionQuestUi;
+      _gameplayInstaller = gameplayInstaller;
+    }
+
+    private void OnDestroy()
+    {
+      Container.Resolve<ObstacleSpawner>().Dispose();
     }
 
     private void OnApplicationQuit()
@@ -66,6 +74,8 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 
     public async void Initialize()
     {
+      await UniTask.WaitWhile(() => _gameplayInstaller.IsInitializing);
+
       _gameplayTransitionService.CurrentScene = SceneEntrance.SceneName.Battle;
       Debug.Log("Gameplay scene initializing");
       if (SceneEntrance.InitializedScene == SceneEntrance.SceneName.NotInitialized)
@@ -75,22 +85,11 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 
       Container.Resolve<ClosestTargetPickerFactory>().Initialize();
 
-      if (!_dayTimer.IsRunning)
-        _cooldownService.RegisterUpdatable(_dayTimer);
-
-      await UniTask.WhenAll(
-        Container.Resolve<ILoadService>().LoadAsync(),
-        Container.Resolve<IPlayerPrefabProvider>().InitializeAsync()
-      );
-
       _playerSpawnPoint.Initialize();
       Container.Resolve<ObstacleSpawner>().SpawnObstacles();
       _cameraFollower.Initialize(Container.Resolve<IPlayerRegistry>().GetPlayer());
       _collectingQuestResolver.Initialize();
       _collectionQuestUi.Initialize(_collectingQuestResolver);
-
-      if (_weaponRegistry.Weapons == null || !_weaponRegistry.Weapons.Any())
-        _weaponRegistry.Initialize();
 
       Container.Resolve<IPlayerWeaponService>().Initialize();
       _cooldownService.RegisterUpdatable(Container.Resolve<IPlayerWeaponService>());

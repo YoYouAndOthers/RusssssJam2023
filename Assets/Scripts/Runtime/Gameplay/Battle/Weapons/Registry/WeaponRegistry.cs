@@ -1,28 +1,25 @@
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons.Registry
 {
   public class WeaponRegistry : IWeaponRegistry
   {
-    public IEnumerable<WeaponConfig> Weapons => _weapons;
-    private List<WeaponConfig> _weapons;
-
     public void Initialize()
     {
-      Debug.Log("Weapon registry initialized");
-      _weapons = new List<WeaponConfig>();
     }
 
-    public void Add(WeaponConfig weapon)
+    public IEnumerable<Guid> GetWeaponIds()
     {
-      Debug.Log($"Weapon added: {weapon}");
-      _weapons.Add(weapon);
+      yield break;
     }
 
-    public void Remove(WeaponConfig weapon)
+    public void RegisterWeapon(Guid weaponId)
     {
-      _weapons.Remove(weapon);
+    }
+
+    public void UnregisterWeapon(Guid weaponId)
+    {
     }
   }
 }

@@ -46,5 +46,10 @@ namespace RussSurvivor.Runtime.Infrastructure.Scenes
       await SceneManager.UnloadSceneAsync(SceneNames[sceneName]);
       Debug.Log($"Scene {SceneNames[sceneName]} unloaded");
     }
+
+    public string GetSceneName(SceneEntrance.SceneName town)
+    {
+      return SceneNames[town];
+    }
   }
 }

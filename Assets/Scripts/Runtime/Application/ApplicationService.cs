@@ -1,6 +1,5 @@
 using RussSurvivor.Runtime.Infrastructure.Installers;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
-using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -22,11 +21,10 @@ namespace RussSurvivor.Runtime.Application
     {
     }
 
-    public async void NewGame()
+    public void NewGame()
     {
       _curtain.Show();
-      await _sceneLoader.LoadSceneAsync(SceneEntrance.SceneName.Gameplay);
-      await _sceneLoader.LoadSceneAsync(SceneEntrance.SceneName.Town, LoadSceneMode.Additive);
+      _sceneLoader.LoadScene(SceneEntrance.SceneName.Gameplay);
     }
 
     public void Quit()

@@ -49,6 +49,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5eb763fa39e890e43a93bfc144aefe26, type: 2}
   - {fileID: 11400000, guid: d1ba5a148a7d4cf499f39344f3d7587a, type: 2}
   - {fileID: 11400000, guid: b0c9fe289ea9bcd4f94125307c1ad819, type: 2}
+  - {fileID: 11400000, guid: 37c30af35eb25234d8a6261ca254fb24, type: 2}
+  - {fileID: 11400000, guid: dae0a505319fe6147aba4dc51e006223, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -93,6 +95,8 @@ MonoBehaviour:
     - Actor
     - Dialogues
     - Quests
+    - Weapons
+    - Enemies
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: e58bfb42c6da1dc47927361579ec6086, type: 2}

@@ -1,14 +1,17 @@
+using System;
 using RussSurvivor.Runtime.Gameplay.Battle.Environment.Navigation;
 using RussSurvivor.Runtime.Infrastructure.Extensions;
 using UnityEngine;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles
 {
-  public class ObstacleSpawner
+  public class ObstacleSpawner : IDisposable
   {
     private IInstantiator _instantiator;
     private INavMeshService _navMeshService;
+    private GameObject _obstacleParent;
 
     [Inject]
     private void Construct(IInstantiator instantiator, INavMeshService navMeshService)
@@ -20,7 +23,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles
     public void SpawnObstacles()
     {
       var obstacleConfig = Resources.Load<ObstaclesConfig>("Configs/Obstacles");
-      Transform obstacleParent = new GameObject("Obstacles").transform;
+      _obstacleParent = new GameObject("Obstacles");
       for (var i = 0; i < obstacleConfig.Number; i++)
       {
         Vector3 randomOnRing;
@@ -30,10 +33,16 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles
         } while (randomOnRing.y >= 0);
 
         _instantiator.InstantiatePrefabForComponent<ObstacleBehaviour>(obstacleConfig.Prefab,
-          randomOnRing, Quaternion.identity, obstacleParent);
+          randomOnRing, Quaternion.identity, _obstacleParent.transform);
       }
 
       _navMeshService.RebuildNavMesh();
+    }
+
+    public void Dispose()
+    {
+      Object.Destroy(_obstacleParent);
+      _obstacleParent = null;
     }
   }
 }
