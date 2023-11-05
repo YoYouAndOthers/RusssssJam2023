@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{fdac8b1d-13ec-4c7a-a302-005e8ff7c93d}">
+		<property name="assetPath">
+			<value>Стражник_Сдает_квест.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>2.8212244897959184</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{faa90811-25bc-4904-a279-5208ddbd5a1d}</destination>
+		</relationship>
+	</object>
+</objects>

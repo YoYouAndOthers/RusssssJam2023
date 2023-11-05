@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{d485f4ee-0a4f-44be-8525-08eb7c7f0da6}">
+		<property name="assetPath">
+			<value>Перун_успех.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>4.1012244897959187</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{faa90811-25bc-4904-a279-5208ddbd5a1d}</destination>
+		</relationship>
+	</object>
+</objects>
