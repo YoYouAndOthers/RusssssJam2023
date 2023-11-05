@@ -5,7 +5,7 @@ using Zenject;
 namespace RussSurvivor.Runtime.Gameplay.Common.Transitions
 {
   [RequireComponent(typeof(Collider2D))]
-  public class OutsideGateBehaviour : MonoBehaviour
+  public class GateBehaviour : MonoBehaviour
   {
     private IGameplayTransitionService _transitionService;
 
@@ -17,8 +17,8 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Transitions
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-      if (other.TryGetComponent(out PlayerTownBehaviour _))
-        _transitionService.GoToBattle();
+      if (other.TryGetComponent(out PlayerBehaviourBase _))
+        _transitionService.GoThroughGates();
     }
   }
 }

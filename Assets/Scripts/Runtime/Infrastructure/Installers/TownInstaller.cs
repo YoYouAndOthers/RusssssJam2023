@@ -6,6 +6,7 @@ using RussSurvivor.Runtime.Gameplay.Common.Quests;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.Data;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine;
+using RussSurvivor.Runtime.Gameplay.Common.Transitions;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions;
@@ -22,7 +23,6 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
   public class TownInstaller : MonoInstaller, IInitializable
   {
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
-    [SerializeField] private Actor _initialQuestGiver;
     [SerializeField] private QuestConfig _initialQuestConfig;
     [SerializeField] private DialogueEntryPresenter _dialogueEntryPresenter;
     [SerializeField] private CollectingQuestResolver _collectingQuestResolver;
@@ -30,16 +30,19 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     private CollectionQuestUi _collectionQuestUi;
 
     private ICurtain _curtain;
+    private IGameplayTransitionService _gameplayTransitionService;
     private IQuestStateMachine _questStateMachine;
 
     [Inject]
     private void Construct(
       ICurtain curtain,
+      IGameplayTransitionService gameplayTransitionService,
       CameraFollower cameraFollower,
       IQuestStateMachine questStateMachine,
       CollectionQuestUi collectionQuestUi)
     {
       _curtain = curtain;
+      _gameplayTransitionService = gameplayTransitionService;
       _cameraFollower = cameraFollower;
       _questStateMachine = questStateMachine;
       _collectionQuestUi = collectionQuestUi;
@@ -47,12 +50,15 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 
     public async void Initialize()
     {
+      _gameplayTransitionService.CurrentScene = SceneEntrance.SceneName.Town;
       await UniTask.WhenAll(
         Container.Resolve<IConversationDataBase>().InitializeAsync(),
         Container.Resolve<IPlayerPrefabProvider>().InitializeAsync(),
         Container.Resolve<IQuestRegistry>().InitializeAsync(),
         Container.Resolve<ICollectableItemPrefabProvider>().InitializeAsync());
-      _questStateMachine.InitializeAsNew(_initialQuestConfig.Id, _initialQuestGiver.Id);
+
+      if (_questStateMachine.CurrentState.Value == null)
+        _questStateMachine.StartNewQuest(_initialQuestConfig.Id);
       _playerSpawnPoint.Initialize();
       _cameraFollower.Initialize(Container.Resolve<IPlayerRegistry>().GetPlayer());
       _dialogueEntryPresenter.Initialize();

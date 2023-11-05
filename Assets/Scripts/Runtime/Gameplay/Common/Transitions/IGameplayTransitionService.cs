@@ -1,8 +1,10 @@
+using RussSurvivor.Runtime.Infrastructure.Installers;
+
 namespace RussSurvivor.Runtime.Gameplay.Common.Transitions
 {
   public interface IGameplayTransitionService
   {
-    void GoToBattle();
-    void ReturnToTown();
+    SceneEntrance.SceneName CurrentScene { get; set; }
+    void GoThroughGates();
   }
 }

@@ -74,6 +74,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .Bind<CollectionQuestUi>()
         .FromInstance(_collectionQuestUi)
         .AsSingle();
+      ;
     }
   }
 }

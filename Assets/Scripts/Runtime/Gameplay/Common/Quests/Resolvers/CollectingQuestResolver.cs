@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using RussSurvivor.Runtime.Gameplay.Common.Items.Collectables;
-using RussSurvivor.Runtime.Gameplay.Common.Quests.Data;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine;
+using RussSurvivor.Runtime.Gameplay.Common.Transitions;
 using RussSurvivor.Runtime.Infrastructure.Content;
+using RussSurvivor.Runtime.Infrastructure.Installers;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -15,48 +17,39 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
     private readonly List<IDisposable> _disposables = new();
     private readonly List<CollectableItem> _collectables = new();
 
-    [SerializeField] private CollectableItemSpawnPoint[] _berrySpawnPoints;
-    [SerializeField] private CollectableItemSpawnPoint[] _mushroomSpawnPoints;
-    [SerializeField] private CollectableItemSpawnPoint[] _vedasSpawnPoints;
-
     public IntReactiveProperty CollectedAmount { get; } = new();
 
     public int RequiredAmount => _collecting?.CollectablesCount ?? 0;
 
+    private CollectableItemSpawnPoint[] _berrySpawnPoints;
+
     private CollectingQuestState _collecting;
+
+    private IGameplayTransitionService _gameplayTransitionService;
+    private CollectableItemSpawnPoint[] _mushroomSpawnPoints;
 
     private ICollectableItemPrefabProvider _prefabProvider;
     private IQuestStateMachine _questStateMachine;
-
-    private Dictionary<CollectItemsQuestDescription.CollectableType, IEnumerable<CollectableItemSpawnPoint>>
-      _spawnPointsByType;
+    private CollectableItemSpawnPoint[] _vedasSpawnPoints;
 
     [Inject]
-    private void Construct(IQuestStateMachine questStateMachine, ICollectableItemPrefabProvider prefabProvider)
+    private void Construct(
+      IQuestStateMachine questStateMachine,
+      IGameplayTransitionService gameplayTransitionService,
+      ICollectableItemPrefabProvider prefabProvider)
     {
       _questStateMachine = questStateMachine;
+      _gameplayTransitionService = gameplayTransitionService;
       _prefabProvider = prefabProvider;
     }
 
     public void Initialize()
     {
-      _spawnPointsByType =
-        new Dictionary<CollectItemsQuestDescription.CollectableType, IEnumerable<CollectableItemSpawnPoint>>
-        {
-          [CollectItemsQuestDescription.CollectableType.Berries] = _berrySpawnPoints,
-          [CollectItemsQuestDescription.CollectableType.Mushrooms] = _mushroomSpawnPoints,
-          [CollectItemsQuestDescription.CollectableType.SlavicVedas] = _vedasSpawnPoints
-        };
+      Dispose();
 
       _questStateMachine.CurrentState
         .Where(k => k is CollectingQuestState)
-        .Subscribe(_ =>
-        {
-          _collecting = (CollectingQuestState)_questStateMachine.CurrentState.Value;
-          InstantiateCollectables(_collecting);
-
-          CollectedAmount.Value = _collecting.CollectedAmount;
-        })
+        .Subscribe(InitializeCollectablesByQuest)
         .AddTo(_disposables);
     }
 
@@ -66,7 +59,10 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
       _collecting.CollectedAmount++;
       if (CollectedAmount.Value == _collecting.CollectablesCount)
       {
-        _questStateMachine.NextState();
+        if (_gameplayTransitionService.CurrentScene == SceneEntrance.SceneName.Town)
+          _questStateMachine.NextState<TalkToNpcQuestState>();
+        else
+          _questStateMachine.NextState<ReturnToTownQuestState>();
         for (var i = 0; i < _collectables.Count; i++)
           Destroy(_collectables[i].gameObject);
 
@@ -80,6 +76,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
 
     public void Dispose()
     {
+      _collectables.Clear();
       foreach (IDisposable disposable in _disposables)
         disposable.Dispose();
       _disposables.Clear();
@@ -87,7 +84,9 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
 
     private void InstantiateCollectables(CollectingQuestState collecting)
     {
-      foreach (CollectableItemSpawnPoint spawnPoint in _spawnPointsByType[collecting.CollectableType])
+      IEnumerable<CollectableItemSpawnPoint> spawnPoints = FindObjectsOfType<CollectableItemSpawnPoint>()
+        .Where(k => k.Type == collecting.CollectableType);
+      foreach (CollectableItemSpawnPoint spawnPoint in spawnPoints)
       {
         CollectableItem collectableItem = Instantiate(
           _prefabProvider.GetPrefab(collecting.CollectableType),
@@ -97,6 +96,13 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
         _collectables.Add(collectableItem);
         collectableItem.Initialize(this);
       }
+    }
+
+    private void InitializeCollectablesByQuest(QuestState state)
+    {
+      _collecting = (CollectingQuestState)state;
+      InstantiateCollectables(_collecting);
+      CollectedAmount.Value = _collecting.CollectedAmount;
     }
   }
 }

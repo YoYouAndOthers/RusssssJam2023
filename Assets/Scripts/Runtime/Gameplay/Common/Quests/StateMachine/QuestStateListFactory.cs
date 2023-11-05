@@ -19,6 +19,14 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
       {
         states.Add(new CollectingQuestState(questId, collectingQuest));
         states.Add(new TalkToNpcQuestState(questId, collectingQuest.BringTo.Id, _actorRegistry));
+        states.Add(new ReturnToTownQuestState(questId));
+        return states;
+      }
+
+      if (description is TalkToNpcQuestDescription talkingQuest)
+      {
+        states.Add(new TalkToNpcQuestState(questId, talkingQuest.NpcToTalkTo.Id, _actorRegistry));
+        states.Add(new ReturnToTownQuestState(questId));
         return states;
       }
 
