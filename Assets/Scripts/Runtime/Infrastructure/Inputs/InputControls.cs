@@ -37,6 +37,15 @@ namespace RussSurvivor.Runtime.Infrastructure.Inputs
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""a66c5892-5342-4edc-af52-b650ed3163d7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -94,6 +103,17 @@ namespace RussSurvivor.Runtime.Infrastructure.Inputs
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0204a5e1-840a-4cb8-9ce1-b9dd583fc28e"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -131,6 +151,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Inputs
             // Gameplay
             m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
             m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
+            m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
             // Debug
             m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
             m_Debug_CallConsole = m_Debug.FindAction("CallConsole", throwIfNotFound: true);
@@ -196,11 +217,13 @@ namespace RussSurvivor.Runtime.Infrastructure.Inputs
         private readonly InputActionMap m_Gameplay;
         private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
         private readonly InputAction m_Gameplay_Movement;
+        private readonly InputAction m_Gameplay_Dash;
         public struct GameplayActions
         {
             private @InputControls m_Wrapper;
             public GameplayActions(@InputControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
+            public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
             public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -213,6 +236,9 @@ namespace RussSurvivor.Runtime.Infrastructure.Inputs
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
 
             private void UnregisterCallbacks(IGameplayActions instance)
@@ -220,6 +246,9 @@ namespace RussSurvivor.Runtime.Infrastructure.Inputs
                 @Movement.started -= instance.OnMovement;
                 @Movement.performed -= instance.OnMovement;
                 @Movement.canceled -= instance.OnMovement;
+                @Dash.started -= instance.OnDash;
+                @Dash.performed -= instance.OnDash;
+                @Dash.canceled -= instance.OnDash;
             }
 
             public void RemoveCallbacks(IGameplayActions instance)
@@ -286,6 +315,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Inputs
         public interface IGameplayActions
         {
             void OnMovement(InputAction.CallbackContext context);
+            void OnDash(InputAction.CallbackContext context);
         }
         public interface IDebugActions
         {
