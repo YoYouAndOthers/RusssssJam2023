@@ -1,11 +1,13 @@
 using Cysharp.Threading.Tasks;
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
+using RussSurvivor.Runtime.Gameplay.Battle.Timing;
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
 using RussSurvivor.Runtime.Gameplay.Common.Quests;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.Data;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine;
+using RussSurvivor.Runtime.Gameplay.Common.Timing;
 using RussSurvivor.Runtime.Gameplay.Common.Transitions;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
@@ -32,10 +34,14 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     private CollectingQuestResolver _collectingQuestResolver;
     private IQuestStateMachine _questStateMachine;
     private IConversationDataBase _conversationDataBase;
+    private IDayTimer _dayTimer;
+    private ICooldownService _cooldownService;
 
     [Inject]
     private void Construct(
       ICurtain curtain,
+      IDayTimer dayTimer,
+      ICooldownService cooldownService,
       IConversationDataBase conversationDataBase,
       IGameplayTransitionService gameplayTransitionService,
       CameraFollower cameraFollower,
@@ -44,6 +50,8 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       CollectionQuestUi collectionQuestUi)
     {
       _curtain = curtain;
+      _dayTimer = dayTimer;
+      _cooldownService = cooldownService;
       _conversationDataBase = conversationDataBase;
       _gameplayTransitionService = gameplayTransitionService;
       _cameraFollower = cameraFollower;
@@ -60,6 +68,9 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         Container.Resolve<IPlayerPrefabProvider>().InitializeAsync(),
         Container.Resolve<IQuestRegistry>().InitializeAsync(),
         Container.Resolve<ICollectableItemPrefabProvider>().InitializeAsync());
+
+      if (!_dayTimer.IsRunning)
+        _cooldownService.RegisterUpdatable(_dayTimer);
 
       if (_questStateMachine.CurrentState.Value == null)
         _questStateMachine.StartNewQuest(_initialQuestConfig.Id);

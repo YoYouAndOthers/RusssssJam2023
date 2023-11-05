@@ -17,7 +17,7 @@ using Zenject;
 
 namespace RussSurvivor.Runtime.Infrastructure.Installers
 {
-  public class BattleInstaller : MonoInstaller, IInitializable, ITickable
+  public class BattleInstaller : MonoInstaller, IInitializable
   {
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
     private CameraFollower _cameraFollower;
@@ -70,12 +70,6 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       _curtain.Hide();
     }
 
-    public void Tick()
-    {
-      _cooldownService ??= Container.Resolve<ICooldownService>();
-      _cooldownService.PerformTick(Time.deltaTime);
-    }
-
     public override void InstallBindings()
     {
       Container
@@ -100,12 +94,6 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 
       Container
         .Bind<WeaponFactory>()
-        .FromNew()
-        .AsSingle();
-
-      Container
-        .Bind<ICooldownService>()
-        .To<CooldownService>()
         .FromNew()
         .AsSingle();
 

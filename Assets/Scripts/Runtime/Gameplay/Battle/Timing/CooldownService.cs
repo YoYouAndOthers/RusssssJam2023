@@ -1,19 +1,28 @@
-using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
+using System.Collections.Generic;
+using System.Linq;
+using RussSurvivor.Runtime.Gameplay.Common.Timing;
+using UnityEngine;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.Timing
 {
   public class CooldownService : ICooldownService
   {
-    private readonly IEnemyWeaponService _enemyWeaponService;
-    private readonly IPlayerWeaponService _playerWeaponService;
+    private HashSet<ICooldownUpdatable> _updatables = new();
     private int _counter;
 
     private float _deltaTime;
+    private IDayTimer _dayTimer;
 
-    public CooldownService(IPlayerWeaponService playerWeaponService, IEnemyWeaponService enemyWeaponService)
+    public void RegisterUpdatable(ICooldownUpdatable updatable)
     {
-      _playerWeaponService = playerWeaponService;
-      _enemyWeaponService = enemyWeaponService;
+      Debug.Log($"Registering updatable: {updatable}");
+      _updatables.Add(updatable);
+    }
+
+    public void UnregisterUpdatable(ICooldownUpdatable updatable)
+    {
+      Debug.Log($"Unregistering updatable: {updatable}");
+      _updatables.Remove(updatable);
     }
 
     public void PerformTick(float deltaTime)
@@ -21,7 +30,6 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Timing
       _deltaTime += deltaTime;
       if (_counter % 3 == 0)
       {
-        _counter = 1;
         UpdateAll(_deltaTime);
         _deltaTime = 0;
       }
@@ -29,12 +37,22 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Timing
       {
         _counter++;
       }
+
+      if (_counter % 20 == 0)
+      {
+        _updatables = new HashSet<ICooldownUpdatable>(_updatables.ToArray());
+        _counter = 1;
+      }
     }
 
     private void UpdateAll(float deltaTime)
     {
-      foreach (WeaponBehaviourBase playerWeapon in _playerWeaponService.Weapons)
-        playerWeapon.UpdateCoolDown(deltaTime);
+      foreach (ICooldownUpdatable updatable in _updatables)
+      {
+        if(updatable == null || updatable.IsReady)
+          continue;
+        updatable.UpdateCooldown(deltaTime);
+      }
     }
   }
 }

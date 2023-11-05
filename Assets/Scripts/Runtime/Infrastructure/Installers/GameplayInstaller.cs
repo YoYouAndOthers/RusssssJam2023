@@ -1,8 +1,10 @@
+using RussSurvivor.Runtime.Gameplay.Battle.Timing;
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
 using RussSurvivor.Runtime.Gameplay.Common.Quests;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine;
+using RussSurvivor.Runtime.Gameplay.Common.Timing;
 using RussSurvivor.Runtime.Gameplay.Common.Transitions;
 using RussSurvivor.Runtime.Gameplay.Town.Characters;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
@@ -13,23 +15,30 @@ using Zenject;
 
 namespace RussSurvivor.Runtime.Infrastructure.Installers
 {
-  public class GameplayInstaller : MonoInstaller
+  public class GameplayInstaller : MonoInstaller, ITickable
   {
     [SerializeField] private CameraFollower _cameraFollower;
     [SerializeField] private CollectionQuestUi _collectionQuestUi;
     [SerializeField] private CollectingQuestResolver _collectingQuestResolver;
+    private ICooldownService _cooldownService;
+
+    public void Tick()
+    {
+      _cooldownService ??= Container.Resolve<ICooldownService>();
+      _cooldownService.PerformTick(Time.deltaTime);
+    }
 
     public override void InstallBindings()
     {
       Container
-        .Bind<IPlayerPrefabProvider>()
-        .To<PlayerPrefabProvider>()
-        .FromNew()
+        .BindInterfacesTo<GameplayInstaller>()
+        .FromInstance(this)
         .AsSingle();
 
       Container
-        .Bind<GameplayInstaller>()
-        .FromInstance(this)
+        .Bind<IPlayerPrefabProvider>()
+        .To<PlayerPrefabProvider>()
+        .FromNew()
         .AsSingle();
 
       Container
@@ -77,15 +86,27 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .Bind<CollectionQuestUi>()
         .FromInstance(_collectionQuestUi)
         .AsSingle();
-      
+
       Container
         .Bind<CollectingQuestResolver>()
         .FromInstance(_collectingQuestResolver)
         .AsSingle();
-      
+
       Container
         .Bind<IConversationDataBase>()
         .To<ConversationDataBase>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<ICooldownService>()
+        .To<CooldownService>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<IDayTimer>()
+        .To<DayTimer>()
         .FromNew()
         .AsSingle();
     }
