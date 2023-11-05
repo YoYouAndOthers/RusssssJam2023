@@ -31,7 +31,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Timing
 
     public void UpdateCooldown(float deltaTime)
     {
-      if (_battleStateMachine.CurrentState is MainBattleState)
+      if (_battleStateMachine.CurrentState.Value is MainBattleState)
       {
         _battleTimeLeft -= deltaTime;
 
@@ -40,7 +40,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Timing
         return;
       }
 
-      if (_battleStateMachine.CurrentState is EndSpawningState)
+      if (_battleStateMachine.CurrentState.Value is EndSpawningState)
       {
         _escapeTimeLeft -= deltaTime;
 
@@ -49,7 +49,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Timing
         return;
       }
 
-      if (_battleStateMachine.CurrentState is BossState)
+      if (_battleStateMachine.CurrentState.Value is BossState)
       {
         _bossTimeLeft -= deltaTime;
 

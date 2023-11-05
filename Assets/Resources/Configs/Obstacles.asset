@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Obstacles
   m_EditorClassIdentifier: 
   Prefab: {fileID: 3260288951329897965, guid: 2d469c2650bb6a2488c291f1b5b2d5a7, type: 3}
-  Number: 300
+  Number: 100
   Radius: 30

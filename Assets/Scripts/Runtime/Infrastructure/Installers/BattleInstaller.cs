@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using RussSurvivor.Runtime.Application.SaveLoad;
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
+using RussSurvivor.Runtime.Gameplay.Battle.Enemies;
 using RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles;
 using RussSurvivor.Runtime.Gameplay.Battle.States;
 using RussSurvivor.Runtime.Gameplay.Battle.Timing;
@@ -28,10 +29,13 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     private ICooldownService _cooldownService;
     private ICurtain _curtain;
     private IGameplayTransitionService _gameplayTransitionService;
+    private IDayTimer _dayTimer;
 
     [Inject]
     private void Construct(
       ICurtain curtain,
+      IDayTimer dayTimer,
+      ICooldownService cooldownService,
       IConversationDataBase conversationDataBase,
       IGameplayTransitionService gameplayTransitionService,
       CameraFollower cameraFollower,
@@ -39,6 +43,8 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       CollectionQuestUi collectionQuestUi)
     {
       _curtain = curtain;
+      _dayTimer = dayTimer;
+      _cooldownService = cooldownService;
       _gameplayTransitionService = gameplayTransitionService;
       _cameraFollower = cameraFollower;
       _collectingQuestResolver = collectingQuestResolver;
@@ -60,13 +66,17 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         InitializeAsSubsequentScene();
 
       Container.Resolve<ClosestTargetPickerFactory>().Initialize();
+
+      if (!_dayTimer.IsRunning)
+        _cooldownService.RegisterUpdatable(_dayTimer);
+      
       await UniTask.WhenAll(
         Container.Resolve<ILoadService>().LoadAsync(),
         Container.Resolve<IPlayerPrefabProvider>().InitializeAsync()
       );
 
       _playerSpawnPoint.Initialize();
-      //Container.Resolve<ObstacleSpawner>().SpawnObstacles();
+      Container.Resolve<ObstacleSpawner>().SpawnObstacles();
       _cameraFollower.Initialize(Container.Resolve<IPlayerRegistry>().GetPlayer());
       _collectingQuestResolver.Initialize();
       _collectionQuestUi.Initialize(_collectingQuestResolver);
@@ -124,6 +134,12 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<IBattleTimer>()
         .To<BattleTimer>()
+        .FromNew()
+        .AsSingle();
+      
+      Container
+        .Bind<IEnemyRegistry>()
+        .To<EnemyRegistry>()
         .FromNew()
         .AsSingle();
     }

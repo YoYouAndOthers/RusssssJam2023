@@ -18,8 +18,16 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles
     {
       var obstacleConfig = Resources.Load<ObstaclesConfig>("Configs/Obstacles");
       for (var i = 0; i < obstacleConfig.Number; i++)
+      {
+        Vector3 randomOnRing;
+        do
+        {
+          randomOnRing = (Vector3.down * 2).RandomOnRing(5, obstacleConfig.Radius);
+        } while (randomOnRing.y >= 0);
+
         _instantiator.InstantiatePrefabForComponent<ObstacleBehaviour>(obstacleConfig.Prefab,
-          Vector3.zero.RandomOnRing(5, obstacleConfig.Radius), Quaternion.identity, null);
+          randomOnRing, Quaternion.identity, null);
+      }
     }
   }
 }

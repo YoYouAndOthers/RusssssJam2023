@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.States
@@ -14,7 +15,9 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.States
       [typeof(EndBattleState)] = new EndBattleState()
     };
 
-    public IBattleState CurrentState { get; private set; }
+    private readonly ReactiveProperty<IBattleState> _currentBattleState = new();
+
+    public IReactiveProperty<IBattleState> CurrentState => _currentBattleState;
 
     public void SetState<TState>() where TState : class, IBattleState
     {
@@ -25,8 +28,9 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.States
 
     private TState ChangeState<TState>() where TState : class, IBattleState
     {
-      CurrentState?.Exit();
-      CurrentState = _states[typeof(TState)] as TState;
+      _currentBattleState?.Value?.Exit();
+      if(_currentBattleState != null)
+       _currentBattleState.Value = _states[typeof(TState)] as TState;
       return _states[typeof(TState)] as TState;
     }
   }
