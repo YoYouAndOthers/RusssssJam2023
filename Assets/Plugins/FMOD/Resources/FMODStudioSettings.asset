@@ -484,8 +484,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: AudioSource/RUSSES/RUSSES.fspro
-  sourceBankPath: AudioSource/RUSSES/Build
+  sourceProjectPath: AudioSource/2/2.fspro
+  sourceBankPath: AudioSource/2/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -509,7 +509,8 @@ MonoBehaviour:
   MasterBanks:
   - Master
   Banks:
-  - TEST
+  - AMB
+  - MUSIC
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
