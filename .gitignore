@@ -81,3 +81,4 @@ crashlytics-build.properties
 !/Assets/Plugins/Sirenix/Demos/*.unitypackage 
 Assets/MyPhone.device
 Assets/MyPhone.device.meta
+*.csproj.meta
