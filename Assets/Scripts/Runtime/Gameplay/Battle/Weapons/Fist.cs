@@ -27,7 +27,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-      if (!other.TryGetComponent(out IDamagable damageable))
+      if (!other.attachedRigidbody.TryGetComponent(out IDamagable damageable))
         return;
 
       if (_piercingStat == -1)

@@ -4,5 +4,7 @@
   {
     bool AllEnemiesDead { get; }
     bool NoBoss { get; }
+    void Add(EnemyBehaviour enemyBehaviour);
+    void Remove(EnemyBehaviour enemyBehaviour);
   }
 }

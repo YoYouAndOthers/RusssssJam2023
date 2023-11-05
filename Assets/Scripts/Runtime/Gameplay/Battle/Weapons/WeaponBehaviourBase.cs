@@ -54,8 +54,6 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
     public virtual bool ReadyToPerform(out Vector3 direction)
     {
       bool hasTarget = TargetDirectionPickStrategy.Get(out direction);
-      Debug.Log($"Weapon {name} ready to perform: {IsReady} has target: {hasTarget} is performing: {IsPerforming}");
-
       return !IsPerforming && IsReady && hasTarget;
     }
 
