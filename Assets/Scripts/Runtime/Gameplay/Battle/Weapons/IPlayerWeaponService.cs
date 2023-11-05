@@ -1,11 +1,10 @@
-using System.Collections.Generic;
+using System;
+using RussSurvivor.Runtime.Gameplay.Common.Timing;
+using Zenject;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
 {
-  public interface IPlayerWeaponService
+  public interface IPlayerWeaponService : IInitializable, ICooldownUpdatable, IDisposable
   {
-    IEnumerable<WeaponBehaviourBase> Weapons { get; }
-    void Add(WeaponBehaviourBase weapon);
-    void Remove(WeaponBehaviourBase weapon);
   }
 }

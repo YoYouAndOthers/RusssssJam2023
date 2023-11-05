@@ -29,8 +29,8 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.States
     private TState ChangeState<TState>() where TState : class, IBattleState
     {
       _currentBattleState?.Value?.Exit();
-      if(_currentBattleState != null)
-       _currentBattleState.Value = _states[typeof(TState)] as TState;
+      if (_currentBattleState != null)
+        _currentBattleState.Value = _states[typeof(TState)] as TState;
       return _states[typeof(TState)] as TState;
     }
   }

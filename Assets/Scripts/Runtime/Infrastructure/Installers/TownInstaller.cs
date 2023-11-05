@@ -1,5 +1,7 @@
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
+using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Registry;
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
 using RussSurvivor.Runtime.Gameplay.Common.Quests;
@@ -35,12 +37,14 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     private IDayTimer _dayTimer;
     private IGameplayTransitionService _gameplayTransitionService;
     private IQuestStateMachine _questStateMachine;
+    private IWeaponRegistry _weaponRegistry;
 
     [Inject]
     private void Construct(
       ICurtain curtain,
       IDayTimer dayTimer,
       ICooldownService cooldownService,
+      IWeaponRegistry weaponRegistry,
       IConversationDataBase conversationDataBase,
       IGameplayTransitionService gameplayTransitionService,
       CameraFollower cameraFollower,
@@ -51,6 +55,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       _curtain = curtain;
       _dayTimer = dayTimer;
       _cooldownService = cooldownService;
+      _weaponRegistry = weaponRegistry;
       _conversationDataBase = conversationDataBase;
       _gameplayTransitionService = gameplayTransitionService;
       _cameraFollower = cameraFollower;
@@ -70,6 +75,8 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 
       if (!_dayTimer.IsRunning)
         _cooldownService.RegisterUpdatable(_dayTimer);
+      if (_weaponRegistry.Weapons == null || !_weaponRegistry.Weapons.Any())
+        _weaponRegistry.Initialize();
 
       if (_questStateMachine.CurrentState.Value == null)
         _questStateMachine.StartNewQuest(_initialQuestConfig.Id);

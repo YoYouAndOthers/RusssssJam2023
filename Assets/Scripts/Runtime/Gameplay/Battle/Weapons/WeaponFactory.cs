@@ -1,5 +1,6 @@
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Damage;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target;
+using UnityEngine;
 using Zenject;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
@@ -17,11 +18,14 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
 
     public WeaponBehaviourBase Create(WeaponConfig config, IWeaponOwner owner)
     {
+      Debug.Assert(config != null, "Weapon config is null");
+      Debug.Assert(owner != null, "Weapon owner is null");
+      Debug.Assert(config.Prefab != null, "Weapon prefab is null");
       var weapon =
         _instantiator.InstantiatePrefabForComponent<WeaponBehaviourBase>(config.Prefab, owner.WeaponsContainer);
       ITargetDirectionPickStrategy targetDirectionPickStrategy = CreateTargetPickStrategy(config, owner, weapon);
       IDamageMaker damageMaker = CreateDamageMaker(config.Damage);
-      weapon.Initialize(config, owner, targetDirectionPickStrategy, damageMaker);
+      weapon.Initialize(config, targetDirectionPickStrategy, damageMaker);
       return weapon;
     }
 

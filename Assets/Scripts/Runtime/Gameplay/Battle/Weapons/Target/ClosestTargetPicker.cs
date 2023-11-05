@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target
@@ -28,18 +29,21 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-      if (other.TryGetComponent(out ITarget target) && target != _owner)
+      if (other.attachedRigidbody.TryGetComponent(out ITarget target) && target != _owner)
         _targets.Add(target);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-      if (other.TryGetComponent(out ITarget target) && target != _owner)
+      if (other.attachedRigidbody.TryGetComponent(out ITarget target) && target != _owner)
         _targets.Remove(target);
     }
 
     public void Initialize(ITarget owner, float radius, int layerMask)
     {
+      Debug.Assert(owner != null, "Owner is null");
+      Debug.Log(
+        $"ClosestTargetPicker for {owner} initialized with radius {radius.ToString(CultureInfo.InvariantCulture)}");
       _collider = GetComponent<CircleCollider2D>();
       _collider.isTrigger = true;
       _collider.callbackLayers = new LayerMask { value = layerMask };

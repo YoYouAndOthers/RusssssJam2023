@@ -1,3 +1,4 @@
+using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Registry;
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
 using RussSurvivor.Runtime.Gameplay.Common.Quests;
@@ -106,6 +107,12 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<IDayTimer>()
         .To<DayTimer>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<IWeaponRegistry>()
+        .To<WeaponRegistry>()
         .FromNew()
         .AsSingle();
     }

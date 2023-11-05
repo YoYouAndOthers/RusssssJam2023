@@ -9,19 +9,21 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
     [SerializeField] private Fist _fists;
     private float _reach;
 
-    public override void Initialize(WeaponConfig config, IWeaponOwner owner,
+    public override void Initialize(WeaponConfig config,
       ITargetDirectionPickStrategy targetDirectionPickStrategy,
       IDamageMaker damageMaker)
     {
-      base.Initialize(config, owner, targetDirectionPickStrategy, damageMaker);
+      Debug.Log("Fists initialized");
+      base.Initialize(config, targetDirectionPickStrategy, damageMaker);
       _fists.Initialize(config.DamagableLayers, config.WeaponStats[WeaponStatType.Piercing]);
       _reach = config.Reach;
     }
 
-    protected override async void Perform(Vector3 direction)
+    public override async void Perform(Vector3 direction)
     {
+      Debug.Log("Fists perform");
       base.Perform(direction);
-      await _fists.MakeHit(direction - transform.position, _reach, DamageMaker);
+      await _fists.MakeHit(direction, _reach, DamageMaker);
       IsPerforming = false;
     }
   }

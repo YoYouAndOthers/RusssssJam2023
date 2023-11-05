@@ -83,6 +83,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Battle
       objectReference: {fileID: 0}
+    - target: {fileID: 8702886674614822326, guid: 8f17f967b9ab19242a47132332031726, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8915673379511837037, guid: 8f17f967b9ab19242a47132332031726, type: 3}
       propertyPath: <WeaponsContainer>k__BackingField
       value: 
@@ -133,4 +137,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerMovement: {fileID: 5422243001836628580}
+  <Fists>k__BackingField: {fileID: 11400000, guid: c5a6e6544644fe342b296313e94032fd, type: 2}
   <WeaponsContainer>k__BackingField: {fileID: 3754884759858497961}

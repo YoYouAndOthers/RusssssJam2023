@@ -8,9 +8,9 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
   public class EnemyBehaviour : MonoBehaviour
   {
     [SerializeField] private NavMeshAgent _agent;
+    private IEnemyRegistry _enemyRegistry;
 
     private IPlayerRegistry _playerRegistry;
-    private IEnemyRegistry _enemyRegistry;
 
     [Inject]
     private void Construct(IPlayerRegistry playerRegistry, IEnemyRegistry enemyRegistry)
@@ -28,7 +28,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
     private void Update()
     {
       PlayerBehaviourBase playerBehaviourBase = _playerRegistry.GetPlayer();
-      if(playerBehaviourBase == null)
+      if (playerBehaviourBase == null)
         return;
       _agent.SetDestination(playerBehaviourBase.transform.position);
     }

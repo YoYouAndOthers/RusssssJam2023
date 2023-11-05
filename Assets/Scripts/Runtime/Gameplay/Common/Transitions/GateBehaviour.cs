@@ -10,11 +10,11 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Transitions
   [RequireComponent(typeof(Collider2D))]
   public class GateBehaviour : MonoBehaviour
   {
-    private IGameplayTransitionService _transitionService;
     [SerializeField] private GameObject _pathBlocker;
 
     [InjectOptional] private IBattleStateMachine _battleStateMachine;
     [InjectOptional] private IEnemyRegistry _enemyRegistry;
+    private IGameplayTransitionService _transitionService;
 
     [Inject]
     private void Construct(IGameplayTransitionService transitionService)
@@ -24,7 +24,8 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Transitions
 
     private void Awake()
     {
-      _pathBlocker?.SetActive(false);
+      if (_pathBlocker != null)
+        _pathBlocker.SetActive(false);
       if (_battleStateMachine != null && _enemyRegistry != null)
       {
         _battleStateMachine.CurrentState
@@ -35,7 +36,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Transitions
               _pathBlocker.SetActive(false);
           })
           .AddTo(this);
-        
+
         _battleStateMachine.CurrentState
           .Where(k => k is MainBattleState)
           .Subscribe(_ => _pathBlocker.SetActive(true))

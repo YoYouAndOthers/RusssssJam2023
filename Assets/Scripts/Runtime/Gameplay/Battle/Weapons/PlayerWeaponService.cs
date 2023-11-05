@@ -1,5 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
+using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Registry;
+using RussSurvivor.Runtime.Gameplay.Common.Player;
+using RussSurvivor.Runtime.Gameplay.Common.Timing;
 using UnityEngine;
+using Zenject;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
 {
@@ -7,17 +12,67 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
   {
     private readonly List<WeaponBehaviourBase> _weapons = new();
 
-    public IEnumerable<WeaponBehaviourBase> Weapons => _weapons;
+    public bool IsReady => false;
+    public float TimeLeft { get; }
+    private IBattlePlayerRegistry _battlePlayerRegistry;
+    private ICooldownService _cooldownService;
+    private WeaponBehaviourBase _fists;
+    private WeaponFactory _weaponFactory;
+    private IWeaponRegistry _weaponRegistry;
 
-    public void Add(WeaponBehaviourBase weapon)
+    [Inject]
+    private void Construct(
+      WeaponFactory weaponFactory,
+      IWeaponRegistry weaponRegistry,
+      ICooldownService cooldownService,
+      IBattlePlayerRegistry battlePlayerRegistry)
     {
-      Debug.Log($"Weapon added: {weapon}");
-      _weapons.Add(weapon);
+      _weaponFactory = weaponFactory;
+      _weaponRegistry = weaponRegistry;
+      _cooldownService = cooldownService;
+      _battlePlayerRegistry = battlePlayerRegistry;
     }
 
-    public void Remove(WeaponBehaviourBase weapon)
+    public void UpdateCooldown(float deltaTime)
     {
-      _weapons.Remove(weapon);
+      IEnumerable<WeaponBehaviourBase> availableWeapons = GetAvailableWeapons();
+      var weaponsCountPerTick = 2;
+      foreach (WeaponBehaviourBase weapon in availableWeapons)
+        if (weaponsCountPerTick > 0 && weapon.ReadyToPerform(out Vector3 direction))
+        {
+          weapon.Perform(direction);
+          weaponsCountPerTick--;
+        }
+
+      if (weaponsCountPerTick > 0)
+        if (_fists.ReadyToPerform(out Vector3 direction))
+          _fists.Perform(direction);
+    }
+
+    public void Initialize()
+    {
+      Debug.Log("Player Weapons Service initialized");
+      PlayerBattleBehaviour player = _battlePlayerRegistry.GetBattlePlayer();
+
+      _fists = _weaponFactory.Create(player.Fists, player);
+      _cooldownService.RegisterUpdatable(_fists);
+
+      foreach (WeaponConfig weaponConfig in _weaponRegistry.Weapons)
+      {
+        WeaponBehaviourBase weapon = _weaponFactory.Create(weaponConfig, player);
+        _weapons.Add(weapon);
+        _cooldownService.RegisterUpdatable(weapon);
+      }
+    }
+
+    public void Dispose()
+    {
+      _cooldownService.UnregisterUpdatable(this);
+    }
+
+    private IEnumerable<WeaponBehaviourBase> GetAvailableWeapons()
+    {
+      return _weapons.Where(weapon => weapon.IsReady);
     }
   }
 }

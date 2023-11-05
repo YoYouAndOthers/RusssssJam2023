@@ -1,3 +1,4 @@
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using RussSurvivor.Runtime.Application.SaveLoad;
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
@@ -7,6 +8,7 @@ using RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles;
 using RussSurvivor.Runtime.Gameplay.Battle.States;
 using RussSurvivor.Runtime.Gameplay.Battle.Timing;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
+using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Registry;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target;
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
@@ -25,20 +27,22 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
   {
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
     [SerializeField] private NavMeshService _navMeshService;
-    
+
     private CameraFollower _cameraFollower;
     private CollectingQuestResolver _collectingQuestResolver;
     private CollectionQuestUi _collectionQuestUi;
     private ICooldownService _cooldownService;
     private ICurtain _curtain;
-    private IGameplayTransitionService _gameplayTransitionService;
     private IDayTimer _dayTimer;
+    private IGameplayTransitionService _gameplayTransitionService;
+    private IWeaponRegistry _weaponRegistry;
 
     [Inject]
     private void Construct(
       ICurtain curtain,
       IDayTimer dayTimer,
       ICooldownService cooldownService,
+      IWeaponRegistry weaponRegistry,
       IConversationDataBase conversationDataBase,
       IGameplayTransitionService gameplayTransitionService,
       CameraFollower cameraFollower,
@@ -48,6 +52,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       _curtain = curtain;
       _dayTimer = dayTimer;
       _cooldownService = cooldownService;
+      _weaponRegistry = weaponRegistry;
       _gameplayTransitionService = gameplayTransitionService;
       _cameraFollower = cameraFollower;
       _collectingQuestResolver = collectingQuestResolver;
@@ -84,6 +89,11 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       _collectingQuestResolver.Initialize();
       _collectionQuestUi.Initialize(_collectingQuestResolver);
 
+      if (_weaponRegistry.Weapons == null || !_weaponRegistry.Weapons.Any())
+        _weaponRegistry.Initialize();
+
+      Container.Resolve<IPlayerWeaponService>().Initialize();
+      _cooldownService.RegisterUpdatable(Container.Resolve<IPlayerWeaponService>());
       Container.Resolve<IBattleTimer>().Initialize(5, 5, 5);
       Container.Resolve<IBattleStateMachine>().SetState<MainBattleState>();
 
