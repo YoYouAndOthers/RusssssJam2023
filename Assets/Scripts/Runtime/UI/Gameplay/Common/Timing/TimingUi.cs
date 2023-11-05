@@ -10,13 +10,16 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Common.Timing
   public class TimingUi : MonoBehaviour
   {
     [SerializeField] private TextMeshProUGUI _timeText;
+    [SerializeField] private GameObject _pausePanel;
 
     private IDayTimer _dayTimer;
+    private IPauseService _pauseService;
 
     [Inject]
-    private void Construct(IDayTimer dayTimer)
+    private void Construct(IDayTimer dayTimer, IPauseService pauseService)
     {
       _dayTimer = dayTimer;
+      _pauseService = pauseService;
     }
 
     private void Awake()
@@ -26,6 +29,12 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Common.Timing
         {
           TimeSpan timespan = TimeSpan.FromSeconds(x);
           _timeText.text = $"{timespan.Minutes.ToString()}:{timespan.Seconds.ToString()}";
+        })
+        .AddTo(this);
+
+      _pauseService.IsPaused.Subscribe(x =>
+        {
+          _pausePanel.SetActive(x);
         })
         .AddTo(this);
     }

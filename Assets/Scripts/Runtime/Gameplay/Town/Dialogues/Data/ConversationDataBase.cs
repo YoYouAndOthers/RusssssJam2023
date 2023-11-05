@@ -73,7 +73,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
       if (!_conversationsById[conversationId].IsRepeatable)
       {
         Debug.Log($"Conversation {conversationId.ToString()} marked as finished");
-        _finishedConversationsById.Add(conversationId, _conversationsById[conversationId]);
+        _finishedConversationsById.TryAdd(conversationId, _conversationsById[conversationId]);
       }
     }
   }
