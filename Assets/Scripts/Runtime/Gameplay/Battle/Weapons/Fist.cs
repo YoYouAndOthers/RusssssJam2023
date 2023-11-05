@@ -63,8 +63,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
       _cancellationTokenSource = new CancellationTokenSource();
       _damageMaker = damageMaker;
       _collider.enabled = true;
-      Vector2 directionNormalized = direction.normalized;
-      await MoveFist(directionNormalized, reach + transform.localPosition.magnitude, _cancellationTokenSource.Token);
+      await MoveFist(direction, reach + transform.localPosition.magnitude, _cancellationTokenSource.Token);
       _collider.enabled = false;
       await ReturnToStart();
     }
@@ -80,9 +79,11 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
       transform.localPosition = _initialPosition;
     }
 
-    private IEnumerator MoveFist(Vector2 directionNormalized, float reach, CancellationToken cancellationToken)
+    private IEnumerator MoveFist(Vector2 direction, float reach, CancellationToken cancellationToken)
     {
       float distance = reach;
+      Vector3 directionNormalized = ((Vector3)direction - transform.position).normalized;
+
       while (distance > 0)
       {
         if (cancellationToken.IsCancellationRequested)
