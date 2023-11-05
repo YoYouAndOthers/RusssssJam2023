@@ -2,12 +2,14 @@ using Cysharp.Threading.Tasks;
 using RussSurvivor.Runtime.Application.SaveLoad;
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
 using RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles;
+using RussSurvivor.Runtime.Gameplay.Battle.States;
 using RussSurvivor.Runtime.Gameplay.Battle.Timing;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target;
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers;
+using RussSurvivor.Runtime.Gameplay.Common.Timing;
 using RussSurvivor.Runtime.Gameplay.Common.Transitions;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
@@ -21,11 +23,11 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
   {
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
     private CameraFollower _cameraFollower;
+    private CollectingQuestResolver _collectingQuestResolver;
     private CollectionQuestUi _collectionQuestUi;
     private ICooldownService _cooldownService;
     private ICurtain _curtain;
     private IGameplayTransitionService _gameplayTransitionService;
-    private CollectingQuestResolver _collectingQuestResolver;
 
     [Inject]
     private void Construct(
@@ -56,6 +58,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         InitializeAsInitialScene();
       else
         InitializeAsSubsequentScene();
+
       Container.Resolve<ClosestTargetPickerFactory>().Initialize();
       await UniTask.WhenAll(
         Container.Resolve<ILoadService>().LoadAsync(),
@@ -67,6 +70,9 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       _cameraFollower.Initialize(Container.Resolve<IPlayerRegistry>().GetPlayer());
       _collectingQuestResolver.Initialize();
       _collectionQuestUi.Initialize(_collectingQuestResolver);
+
+      Container.Resolve<IBattleTimer>().Initialize(5, 5, 5);
+      Container.Resolve<IBattleStateMachine>().SetState<MainBattleState>();
       _curtain.Hide();
     }
 
@@ -106,6 +112,18 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<IEnemyWeaponService>()
         .To<EnemyWeaponService>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<IBattleStateMachine>()
+        .To<BattleStateMachine>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<IBattleTimer>()
+        .To<BattleTimer>()
         .FromNew()
         .AsSingle();
     }

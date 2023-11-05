@@ -29,7 +29,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
         states.Add(new ReturnToTownQuestState(questId));
         return states;
       }
-      
+
       if (description is DestructionQuestDescription destructionQuest)
       {
         states.Add(new GoOutsideQuestState(questId));

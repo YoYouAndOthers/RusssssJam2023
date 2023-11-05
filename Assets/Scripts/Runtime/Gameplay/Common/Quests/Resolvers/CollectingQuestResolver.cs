@@ -66,7 +66,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
           _questStateMachine.NextState<TalkToNpcQuestState>();
         else
           _questStateMachine.NextState<ReturnToTownQuestState>();
-        
+
         CollectableItem[] collctablesArray = _collectables.ToArray();
         for (var i = 0; i < collctablesArray.Length; i++)
           Destroy(collctablesArray[i].gameObject);

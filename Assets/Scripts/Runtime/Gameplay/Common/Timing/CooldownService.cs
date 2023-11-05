@@ -1,17 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
-using RussSurvivor.Runtime.Gameplay.Common.Timing;
 using UnityEngine;
 
-namespace RussSurvivor.Runtime.Gameplay.Battle.Timing
+namespace RussSurvivor.Runtime.Gameplay.Common.Timing
 {
   public class CooldownService : ICooldownService
   {
-    private HashSet<ICooldownUpdatable> _updatables = new();
     private int _counter;
+    private IDayTimer _dayTimer;
 
     private float _deltaTime;
-    private IDayTimer _dayTimer;
+    private HashSet<ICooldownUpdatable> _updatables = new();
 
     public void RegisterUpdatable(ICooldownUpdatable updatable)
     {
@@ -49,7 +48,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Timing
     {
       foreach (ICooldownUpdatable updatable in _updatables)
       {
-        if(updatable == null || updatable.IsReady)
+        if (updatable == null || updatable.IsReady)
           continue;
         updatable.UpdateCooldown(deltaTime);
       }

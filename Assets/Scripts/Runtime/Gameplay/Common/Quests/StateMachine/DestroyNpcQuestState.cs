@@ -7,7 +7,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
   public class DestroyNpcQuestState : QuestWithDirectionState
   {
     public DestructionQuestDescription.HostileObjectType DestructionQuestHostileType;
-    
+
     public DestroyNpcQuestState(Guid questId,
       DestructionQuestDescription.HostileObjectType destructionQuestHostileObject) : base(questId) =>
       DestructionQuestHostileType = destructionQuestHostileObject;

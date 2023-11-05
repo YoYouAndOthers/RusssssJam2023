@@ -1,9 +1,9 @@
-namespace RussSurvivor.Runtime.Gameplay.Battle.Timing
+namespace RussSurvivor.Runtime.Gameplay.Common.Timing
 {
   public interface ICooldownUpdatable
   {
-    void UpdateCooldown(float deltaTime);
     float TimeLeft { get; }
     bool IsReady { get; }
+    void UpdateCooldown(float deltaTime);
   }
 }

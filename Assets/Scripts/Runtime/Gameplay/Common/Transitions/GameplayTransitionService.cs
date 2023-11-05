@@ -14,9 +14,9 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Transitions
     private readonly ICurtain _curtain;
     private readonly CameraFollower _cameraFollower;
     private readonly IQuestStateMachine _questStateMachine;
+    private readonly IQuestRegistry _questRegistry;
 
     public SceneEntrance.SceneName CurrentScene { get; set; }
-    private readonly IQuestRegistry _questRegistry;
 
     public GameplayTransitionService(
       ISceneLoader sceneLoader,

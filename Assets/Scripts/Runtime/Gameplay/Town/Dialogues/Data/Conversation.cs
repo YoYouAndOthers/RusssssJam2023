@@ -12,7 +12,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
     public bool IsRepeatable;
     [SerializeReference, SubclassSelector] public ConditionToStartBase[] ConditionsToStart;
     public DialogueEntry[] Entries;
-    public Guid Id = Guid.NewGuid();
     [SerializeReference, SubclassSelector] public DialogueActionBase[] OnEndActions;
+    public Guid Id = Guid.NewGuid();
   }
 }

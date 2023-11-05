@@ -81,13 +81,9 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
     {
       IsConversationActive.Value = false;
       if (_currentConversation.OnEndActions != null)
-      {
         foreach (DialogueActionBase onEndAction in _currentConversation.OnEndActions)
-        {
           if (!_actionInvoker.TryInvokeAction(onEndAction))
             Debug.LogError($"Action {onEndAction.GetType().Name} not invoked!");
-        }
-      }
 
       _conversationDataBase.SetFinishedConversation(_currentConversation.Id);
       Debug.Log($"Conversation {_currentConversation.Id.ToString()} finished");

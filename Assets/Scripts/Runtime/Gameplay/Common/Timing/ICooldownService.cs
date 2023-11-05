@@ -1,4 +1,4 @@
-namespace RussSurvivor.Runtime.Gameplay.Battle.Timing
+namespace RussSurvivor.Runtime.Gameplay.Common.Timing
 {
   public interface ICooldownService
   {

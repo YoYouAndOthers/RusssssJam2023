@@ -1,6 +1,5 @@
 using Cysharp.Threading.Tasks;
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
-using RussSurvivor.Runtime.Gameplay.Battle.Timing;
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
 using RussSurvivor.Runtime.Gameplay.Common.Quests;
@@ -28,14 +27,14 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     [SerializeField] private QuestConfig _initialQuestConfig;
     [SerializeField] private DialogueEntryPresenter _dialogueEntryPresenter;
     private CameraFollower _cameraFollower;
-    private CollectionQuestUi _collectionQuestUi;
-    private ICurtain _curtain;
-    private IGameplayTransitionService _gameplayTransitionService;
     private CollectingQuestResolver _collectingQuestResolver;
-    private IQuestStateMachine _questStateMachine;
+    private CollectionQuestUi _collectionQuestUi;
     private IConversationDataBase _conversationDataBase;
-    private IDayTimer _dayTimer;
     private ICooldownService _cooldownService;
+    private ICurtain _curtain;
+    private IDayTimer _dayTimer;
+    private IGameplayTransitionService _gameplayTransitionService;
+    private IQuestStateMachine _questStateMachine;
 
     [Inject]
     private void Construct(

@@ -40,7 +40,7 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Common.Quests
 
     public void Initialize(CollectingQuestResolver resolver)
     {
-      if(_resolver != null)
+      if (_resolver != null)
         return;
       _resolver = resolver;
       _questStateMachine.CurrentState
