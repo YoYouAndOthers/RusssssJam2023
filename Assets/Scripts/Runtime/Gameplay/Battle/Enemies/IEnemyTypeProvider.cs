@@ -1,11 +1,10 @@
-using System;
 using Cysharp.Threading.Tasks;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
 {
-  public interface IEnemyTypeStaticProvider
+  public interface IEnemyTypeProvider
   {
     UniTask InitializeAsync();
-    bool TryGetEnemyConfig(Guid enemyTypeId, out EnemyConfig config);
+    bool TryGetEnemyConfig(EnemyType enemyTypeId, out EnemyConfig config);
   }
 }

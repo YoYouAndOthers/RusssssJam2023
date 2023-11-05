@@ -8,16 +8,11 @@ using Zenject;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
 {
-  public class EnemyBehaviour : MonoBehaviour, ITarget, IHealth, IDamagable
+  public abstract class EnemyBehaviour : MonoBehaviour, ITarget, IHealth, IDamagable
   {
     [SerializeField] private NavMeshAgent _agent;
-    private IEnemyRegistry _enemyRegistry;
-    private IPlayerRegistry _playerRegistry;
+    public float TimeLeft { get; private set; }
 
-    private float _currentHealth;
-    private float _timeBeforeRegen;
-    public Vector3 Position => transform.position + Vector3.up;
-    public float TimeLeft => _timeBeforeRegen;
     public bool IsReady => CurrentHealth >= MaxHealth;
 
     public float CurrentHealth
@@ -26,33 +21,36 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
       private set
       {
         if (value > MaxHealth)
+        {
           _currentHealth = MaxHealth;
+        }
         else if (value < 0)
         {
           _currentHealth = 0;
           Kill();
         }
         else
+        {
           _currentHealth = value;
+        }
       }
     }
 
     public float MaxHealth { get; private set; }
     public float RegenerationPerSec { get; private set; }
+    public Vector3 Position => transform.position + Vector3.up;
+
+    public EnemyType EnemyType { get; set; }
+
+    private float _currentHealth;
+    private IEnemyRegistry _enemyRegistry;
+    private IPlayerRegistry _playerRegistry;
 
     [Inject]
     private void Construct(IPlayerRegistry playerRegistry, IEnemyRegistry enemyRegistry)
     {
       _playerRegistry = playerRegistry;
       _enemyRegistry = enemyRegistry;
-    }
-
-    public void Initialize(EnemyConfig config)
-    {
-      MaxHealth = config.MaxHealth;
-      CurrentHealth = config.MaxHealth;
-      RegenerationPerSec = config.RegenerationPerSec;
-      _enemyRegistry.Add(this);
     }
 
     private void Awake()
@@ -86,12 +84,20 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
 
     public void UpdateCooldown(float deltaTime)
     {
-      _timeBeforeRegen -= deltaTime;
-      if (_timeBeforeRegen <= 0)
+      TimeLeft -= deltaTime;
+      if (TimeLeft <= 0)
       {
         CurrentHealth += RegenerationPerSec * deltaTime;
-        _timeBeforeRegen = 1;
+        TimeLeft = 1;
       }
+    }
+
+    public void Initialize(EnemyConfig config)
+    {
+      EnemyType = config.Type;
+      MaxHealth = config.MaxHealth;
+      CurrentHealth = config.MaxHealth;
+      RegenerationPerSec = config.RegenerationPerSec;
     }
   }
 }

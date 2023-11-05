@@ -1,15 +1,11 @@
-using System;
 using System.Collections.Generic;
+using RussSurvivor.Runtime.Gameplay.Battle.Enemies;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.Settings
 {
   public struct EnemyWaveSettings
   {
-    public Dictionary<Guid, int> EnemyNumbersByType;
-
-    public EnemyWaveSettings(Dictionary<Guid, int> enemyNumbersByType)
-    {
-      EnemyNumbersByType = enemyNumbersByType;
-    }
+    public Dictionary<EnemyType, int> EnemyNumbersByType;
+    public float SpawnDuration;
   }
 }

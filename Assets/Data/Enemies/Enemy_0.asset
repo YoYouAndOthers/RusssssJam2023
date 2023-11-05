@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd245f18a50434498c1cedd67f53605, type: 3}
   m_Name: Enemy_0
   m_EditorClassIdentifier: 
+  Type: 1
   MaxHealth: 10
   RegenerationPerSec: 0.2
+  Prefab: {fileID: 3040242517659371388, guid: 4acbdfd9ce18d234fa7e95bbfdc84c70, type: 3}

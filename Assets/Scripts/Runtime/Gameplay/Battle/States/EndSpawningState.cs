@@ -9,5 +9,9 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.States
     public void Exit()
     {
     }
+
+    public void Execute(float deltaTime)
+    {
+    }
   }
 }

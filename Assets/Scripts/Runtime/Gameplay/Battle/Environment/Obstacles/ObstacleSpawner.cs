@@ -20,6 +20,12 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles
       _navMeshService = navMeshService;
     }
 
+    public void Dispose()
+    {
+      Object.Destroy(_obstacleParent);
+      _obstacleParent = null;
+    }
+
     public void SpawnObstacles()
     {
       var obstacleConfig = Resources.Load<ObstaclesConfig>("Configs/Obstacles");
@@ -37,12 +43,6 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles
       }
 
       _navMeshService.RebuildNavMesh();
-    }
-
-    public void Dispose()
-    {
-      Object.Destroy(_obstacleParent);
-      _obstacleParent = null;
     }
   }
 }

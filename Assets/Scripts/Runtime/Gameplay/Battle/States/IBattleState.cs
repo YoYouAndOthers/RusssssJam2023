@@ -4,5 +4,6 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.States
   {
     void Enter();
     void Exit();
+    void Execute(float deltaTime);
   }
 }

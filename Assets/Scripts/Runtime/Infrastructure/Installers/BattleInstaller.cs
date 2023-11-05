@@ -1,14 +1,13 @@
-using System.Linq;
 using Cysharp.Threading.Tasks;
 using RussSurvivor.Runtime.Application.SaveLoad;
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
 using RussSurvivor.Runtime.Gameplay.Battle.Enemies;
 using RussSurvivor.Runtime.Gameplay.Battle.Environment.Navigation;
 using RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles;
+using RussSurvivor.Runtime.Gameplay.Battle.Settings;
 using RussSurvivor.Runtime.Gameplay.Battle.States;
 using RussSurvivor.Runtime.Gameplay.Battle.Timing;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
-using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Content;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target;
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
@@ -27,24 +26,23 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
   {
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
     [SerializeField] private NavMeshService _navMeshService;
+    [SerializeField] private EnemySpawner _enemySpawner;
+    private IBattleSettingsService _battleSettingsService;
 
     private CameraFollower _cameraFollower;
     private CollectingQuestResolver _collectingQuestResolver;
     private CollectionQuestUi _collectionQuestUi;
     private ICooldownService _cooldownService;
     private ICurtain _curtain;
-    private IDayTimer _dayTimer;
-    private IGameplayTransitionService _gameplayTransitionService;
-    private IWeaponConfigProvider _weaponConfigProvider;
     private GameplayInstaller _gameplayInstaller;
+    private IGameplayTransitionService _gameplayTransitionService;
 
     [Inject]
     private void Construct(
       ICurtain curtain,
-      IDayTimer dayTimer,
       ICooldownService cooldownService,
-      IWeaponConfigProvider weaponConfigProvider,
       IConversationDataBase conversationDataBase,
+      IBattleSettingsService battleSettingsService,
       IGameplayTransitionService gameplayTransitionService,
       CameraFollower cameraFollower,
       CollectingQuestResolver collectingQuestResolver,
@@ -52,9 +50,8 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       GameplayInstaller gameplayInstaller)
     {
       _curtain = curtain;
-      _dayTimer = dayTimer;
       _cooldownService = cooldownService;
-      _weaponConfigProvider = weaponConfigProvider;
+      _battleSettingsService = battleSettingsService;
       _gameplayTransitionService = gameplayTransitionService;
       _cameraFollower = cameraFollower;
       _collectingQuestResolver = collectingQuestResolver;
@@ -91,9 +88,10 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       _collectingQuestResolver.Initialize();
       _collectionQuestUi.Initialize(_collectingQuestResolver);
 
+      Container.Resolve<EnemySpawner>().Initialize();
       Container.Resolve<IPlayerWeaponService>().Initialize();
       _cooldownService.RegisterUpdatable(Container.Resolve<IPlayerWeaponService>());
-      Container.Resolve<IBattleTimer>().Initialize(5, 5, 5);
+      Container.Resolve<IBattleTimer>().Initialize();
       Container.Resolve<IBattleStateMachine>().SetState<MainBattleState>();
 
       _curtain.Hide();
@@ -160,6 +158,16 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .Bind<INavMeshService>()
         .To<NavMeshService>()
         .FromInstance(_navMeshService)
+        .AsSingle();
+
+      Container
+        .Bind<EnemySpawner>()
+        .FromInstance(_enemySpawner)
+        .AsSingle();
+
+      Container
+        .Bind<EnemyFactory>()
+        .FromNew()
         .AsSingle();
     }
 

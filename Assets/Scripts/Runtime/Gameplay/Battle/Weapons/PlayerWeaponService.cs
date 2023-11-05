@@ -19,8 +19,8 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
     private IBattlePlayerRegistry _battlePlayerRegistry;
     private ICooldownService _cooldownService;
     private WeaponBehaviourBase _fists;
-    private WeaponFactory _weaponFactory;
     private IWeaponConfigProvider _weaponConfigProvider;
+    private WeaponFactory _weaponFactory;
     private IWeaponRegistry _weaponRegistry;
 
     [Inject]
@@ -64,7 +64,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
 
       foreach (Guid id in _weaponRegistry.GetWeaponIds())
       {
-        if(!_weaponConfigProvider.TryGetWeaponConfig(id, out WeaponConfig config))
+        if (!_weaponConfigProvider.TryGetWeaponConfig(id, out WeaponConfig config))
           continue;
         WeaponBehaviourBase weapon = _weaponFactory.Create(config, player);
         _weapons.Add(weapon);

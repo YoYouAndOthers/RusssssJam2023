@@ -8,15 +8,15 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles
 {
   public class ObstacleBehaviour : MonoBehaviour, ITarget, IDamagable
   {
-    private INavMeshService _navMeshService;
     public Vector3 Position => transform.position;
+    private INavMeshService _navMeshService;
 
     [Inject]
     private void Construct(INavMeshService navMeshService)
     {
       _navMeshService = navMeshService;
     }
-    
+
     public bool TryTakeDamage(float damage, bool percent = false)
     {
       Kill();

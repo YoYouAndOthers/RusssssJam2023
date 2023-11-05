@@ -14,7 +14,8 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons.Content
     public async UniTask InitializeAsync()
     {
       Debug.Log("Weapon registry initialized");
-      IList<WeaponConfig> weapons = await Addressables.LoadAssetsAsync<WeaponConfig>(new List<string>() { "Weapons" }, null,
+      IList<WeaponConfig> weapons = await Addressables.LoadAssetsAsync<WeaponConfig>(new List<string> { "Weapons" },
+        null,
         Addressables.MergeMode.Intersection);
       _weapons = weapons.ToDictionary(config => config.Id);
     }

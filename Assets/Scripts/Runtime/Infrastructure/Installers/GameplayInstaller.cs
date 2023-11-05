@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using RussSurvivor.Runtime.Application.SaveLoad;
 using RussSurvivor.Runtime.Gameplay.Battle.Enemies;
+using RussSurvivor.Runtime.Gameplay.Battle.Settings;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Content;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Registry;
 using RussSurvivor.Runtime.Gameplay.Common.Cinema;
@@ -26,10 +27,10 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     [SerializeField] private CameraFollower _cameraFollower;
     [SerializeField] private CollectionQuestUi _collectionQuestUi;
     [SerializeField] private CollectingQuestResolver _collectingQuestResolver;
-    private ICooldownService _cooldownService;
-    private ISceneLoader _sceneLoader;
 
     public bool IsInitializing { get; private set; }
+    private ICooldownService _cooldownService;
+    private ISceneLoader _sceneLoader;
 
     [Inject]
     private void Construct(ISceneLoader sceneLoader)
@@ -46,7 +47,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         Container.Resolve<IQuestRegistry>().InitializeAsync(),
         Container.Resolve<ICollectableItemPrefabProvider>().InitializeAsync(),
         Container.Resolve<IConversationDataBase>().InitializeAsync(),
-        Container.Resolve<IEnemyTypeStaticProvider>().InitializeAsync(),
+        Container.Resolve<IEnemyTypeProvider>().InitializeAsync(),
         Container.Resolve<IWeaponConfigProvider>().InitializeAsync()
       );
 
@@ -54,15 +55,6 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 
       await LoadTownSceneIfNeeded();
       IsInitializing = false;
-    }
-
-    private async UniTask LoadTownSceneIfNeeded()
-    {
-      string townSceneName = _sceneLoader.GetSceneName(SceneEntrance.SceneName.Town);
-      string battleSceneName = _sceneLoader.GetSceneName(SceneEntrance.SceneName.Battle);
-      if (SceneManager.GetSceneByName(townSceneName).isLoaded || SceneManager.GetSceneByName(battleSceneName).isLoaded)
-        return;
-      await _sceneLoader.LoadSceneAsync(SceneEntrance.SceneName.Town, LoadSceneMode.Additive);
     }
 
     public void Tick()
@@ -160,8 +152,8 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .AsSingle();
 
       Container
-        .Bind<IEnemyTypeStaticProvider>()
-        .To<EnemyTypeStaticProvider>()
+        .Bind<IEnemyTypeProvider>()
+        .To<EnemyTypeProvider>()
         .FromNew()
         .AsSingle();
 
@@ -170,6 +162,21 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .To<WeaponRegistry>()
         .FromNew()
         .AsSingle();
+
+      Container
+        .Bind<IBattleSettingsService>()
+        .To<BattleSettingsService>()
+        .FromNew()
+        .AsSingle();
+    }
+
+    private async UniTask LoadTownSceneIfNeeded()
+    {
+      string townSceneName = _sceneLoader.GetSceneName(SceneEntrance.SceneName.Town);
+      string battleSceneName = _sceneLoader.GetSceneName(SceneEntrance.SceneName.Battle);
+      if (SceneManager.GetSceneByName(townSceneName).isLoaded || SceneManager.GetSceneByName(battleSceneName).isLoaded)
+        return;
+      await _sceneLoader.LoadSceneAsync(SceneEntrance.SceneName.Town, LoadSceneMode.Additive);
     }
   }
 }

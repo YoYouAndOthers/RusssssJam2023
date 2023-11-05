@@ -16,9 +16,10 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target
 
     public bool Get(out Vector3 direction)
     {
-      if (_closestTargetPicker.Targets.Any())
+      if (_closestTargetPicker.Targets.Any(k => k != null))
       {
-        direction = _closestTargetPicker.Targets.OrderBy(k => Vector2.Distance(_owner.Position, k.Position)).First()
+        direction = _closestTargetPicker.Targets.Where(k => k != null)
+          .OrderBy(k => Vector2.Distance(_owner.Position, k.Position)).First()
           .Position;
         return true;
       }

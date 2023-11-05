@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using RussSurvivor.Runtime.Gameplay.Battle.Enemies;
+using RussSurvivor.Runtime.Gameplay.Battle.Settings;
 using UniRx;
 using UnityEngine;
 
@@ -7,17 +9,21 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.States
 {
   public class BattleStateMachine : IBattleStateMachine
   {
-    private readonly Dictionary<Type, IBattleState> _states = new()
-    {
-      [typeof(MainBattleState)] = new MainBattleState(),
-      [typeof(EndSpawningState)] = new EndSpawningState(),
-      [typeof(BossState)] = new BossState(),
-      [typeof(EndBattleState)] = new EndBattleState()
-    };
+    private readonly Dictionary<Type, IBattleState> _states;
 
     private readonly ReactiveProperty<IBattleState> _currentBattleState = new();
 
     public IReactiveProperty<IBattleState> CurrentState => _currentBattleState;
+
+    public BattleStateMachine(IBattleSettingsService battleSettingsService, IEnemyRegistry enemyRegistry,
+      EnemyFactory enemyFactory) =>
+      _states = new Dictionary<Type, IBattleState>
+      {
+        [typeof(MainBattleState)] = new MainBattleState(this, battleSettingsService, enemyRegistry, enemyFactory),
+        [typeof(EndSpawningState)] = new EndSpawningState(),
+        [typeof(BossState)] = new BossState(),
+        [typeof(EndBattleState)] = new EndBattleState()
+      };
 
     public void SetState<TState>() where TState : class, IBattleState
     {
