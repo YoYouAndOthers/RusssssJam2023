@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680cb4e43381467892066969ea37aef3, type: 3}
   m_Name: Obstacles
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 3260288951329897965, guid: 2d469c2650bb6a2488c291f1b5b2d5a7, type: 3}
-  Number: 100
+  Prefab: {fileID: 1930691374812358166, guid: 2d469c2650bb6a2488c291f1b5b2d5a7, type: 3}
+  Number: 30
   Radius: 30

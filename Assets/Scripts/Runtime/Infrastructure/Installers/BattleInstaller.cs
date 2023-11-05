@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using RussSurvivor.Runtime.Application.SaveLoad;
 using RussSurvivor.Runtime.Gameplay.Battle.Characters;
 using RussSurvivor.Runtime.Gameplay.Battle.Enemies;
+using RussSurvivor.Runtime.Gameplay.Battle.Environment.Navigation;
 using RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles;
 using RussSurvivor.Runtime.Gameplay.Battle.States;
 using RussSurvivor.Runtime.Gameplay.Battle.Timing;
@@ -23,6 +24,8 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
   public class BattleInstaller : MonoInstaller, IInitializable
   {
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
+    [SerializeField] private NavMeshService _navMeshService;
+    
     private CameraFollower _cameraFollower;
     private CollectingQuestResolver _collectingQuestResolver;
     private CollectionQuestUi _collectionQuestUi;
@@ -69,7 +72,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 
       if (!_dayTimer.IsRunning)
         _cooldownService.RegisterUpdatable(_dayTimer);
-      
+
       await UniTask.WhenAll(
         Container.Resolve<ILoadService>().LoadAsync(),
         Container.Resolve<IPlayerPrefabProvider>().InitializeAsync()
@@ -83,6 +86,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 
       Container.Resolve<IBattleTimer>().Initialize(5, 5, 5);
       Container.Resolve<IBattleStateMachine>().SetState<MainBattleState>();
+
       _curtain.Hide();
     }
 
@@ -136,11 +140,17 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .To<BattleTimer>()
         .FromNew()
         .AsSingle();
-      
+
       Container
         .Bind<IEnemyRegistry>()
         .To<EnemyRegistry>()
         .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<INavMeshService>()
+        .To<NavMeshService>()
+        .FromInstance(_navMeshService)
         .AsSingle();
     }
 
