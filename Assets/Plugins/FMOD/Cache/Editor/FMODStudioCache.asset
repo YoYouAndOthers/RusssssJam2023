@@ -27,6 +27,140 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 10164
+--- !u!114 &-8111307442874807936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/AMB VILLAGE
+  m_EditorClassIdentifier: 
+  Path: event:/AMB VILLAGE
+  Guid:
+    Data1: -1473478141
+    Data2: 1292936109
+    Data3: -1276532859
+    Data4: -806959130
+  Banks:
+  - {fileID: -6960896532921056165}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 43606
+--- !u!114 &-6960896532921056165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/AMB.bank
+  m_EditorClassIdentifier: 
+  Path: AudioSource/2/Build/Desktop/AMB.bank
+  Name: AMB
+  StudioPath: bank:/AMB
+  lastModified: 638348035259350770
+  FileSizes:
+  - Name: Desktop
+    Value: 415968
+  Exists: 1
+--- !u!114 &-6517612318321120736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: AudioSource/2/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638348118766491008
+  FileSizes:
+  - Name: Desktop
+    Value: 1036
+  Exists: 1
+--- !u!114 &-5352089671009890012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: AudioSource/2/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638348118766520927
+  FileSizes:
+  - Name: Desktop
+    Value: 960
+  Exists: 1
+--- !u!114 &-5042917388773571093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/MUSIC.bank
+  m_EditorClassIdentifier: 
+  Path: AudioSource/2/Build/Desktop/MUSIC.bank
+  Name: MUSIC
+  StudioPath: bank:/MUSIC
+  lastModified: 638348118767077583
+  FileSizes:
+  - Name: Desktop
+    Value: 2219616
+  Exists: 1
+--- !u!114 &-3729553709223199627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BOSS MUSIC
+  m_EditorClassIdentifier: 
+  Path: event:/BOSS MUSIC
+  Guid:
+    Data1: -398369149
+    Data2: 1311639131
+    Data3: 273890214
+    Data4: 661812135
+  Banks:
+  - {fileID: -5042917388773571093}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-3342406257306739291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,7 +176,7 @@ MonoBehaviour:
   Path: AudioSource/RUSSES/Build/Desktop/TEST.bank
   Name: TEST
   StudioPath: bank:/TEST
-  lastModified: 638345566901850403
+  lastModified: 638347987559829869
   FileSizes:
   - Name: Desktop
     Value: 155680
@@ -60,18 +194,48 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 3688079478923181824}
-  - {fileID: 8155216351162514682}
-  - {fileID: -3342406257306739291}
+  - {fileID: -5352089671009890012}
+  - {fileID: -6960896532921056165}
+  - {fileID: -6517612318321120736}
+  - {fileID: -5042917388773571093}
   EditorEvents:
-  - {fileID: -8488178744708906286}
+  - {fileID: -8111307442874807936}
+  - {fileID: -3729553709223199627}
+  - {fileID: 2878245776657395150}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 8155216351162514682}
+  - {fileID: -6517612318321120736}
   StringsBanks:
-  - {fileID: 3688079478923181824}
-  cacheTime: 638345566901850403
+  - {fileID: -5352089671009890012}
+  cacheTime: 638348118767077583
   cacheVersion: 131608
+--- !u!114 &2878245776657395150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BATTLE MUSIC
+  m_EditorClassIdentifier: 
+  Path: event:/BATTLE MUSIC
+  Guid:
+    Data1: 1560803049
+    Data2: 1212103521
+    Data3: 1555807888
+    Data4: -24122192
+  Banks:
+  - {fileID: -5042917388773571093}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 166567
 --- !u!114 &3688079478923181824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,7 +251,7 @@ MonoBehaviour:
   Path: AudioSource/RUSSES/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638345566901839787
+  lastModified: 638347987559802202
   FileSizes:
   - Name: Desktop
     Value: 800
@@ -107,7 +271,7 @@ MonoBehaviour:
   Path: AudioSource/RUSSES/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638345566901834593
+  lastModified: 638347987559796669
   FileSizes:
   - Name: Desktop
     Value: 1036

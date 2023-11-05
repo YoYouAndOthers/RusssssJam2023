@@ -350,6 +350,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 5361476957747779352, guid: 5b30eaabd533e4b4ba7dcdcb74ab560e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5362349966120060720, guid: 5b30eaabd533e4b4ba7dcdcb74ab560e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -394,14 +398,17 @@ PrefabInstance:
     - {fileID: 4467395801071253890, guid: 5b30eaabd533e4b4ba7dcdcb74ab560e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4758451026186446619, guid: 5b30eaabd533e4b4ba7dcdcb74ab560e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1786707661}
   m_SourcePrefab: {fileID: 100100000, guid: 5b30eaabd533e4b4ba7dcdcb74ab560e, type: 3}
 --- !u!114 &313103920 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2713561223853671796, guid: 5b30eaabd533e4b4ba7dcdcb74ab560e, type: 3}
   m_PrefabInstance: {fileID: 313103919}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1786707657}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 190a777c1ff743c48b5fb0cea435356e, type: 3}
@@ -534,6 +541,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeText: {fileID: 218023913}
+--- !u!1 &1786707657 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4758451026186446619, guid: 5b30eaabd533e4b4ba7dcdcb74ab560e, type: 3}
+  m_PrefabInstance: {fileID: 313103919}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1786707661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786707657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1 &1805767457
 GameObject:
   m_ObjectHideFlags: 0
