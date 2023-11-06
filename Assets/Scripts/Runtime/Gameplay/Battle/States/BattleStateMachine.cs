@@ -22,7 +22,8 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.States
         [typeof(MainBattleState)] = new MainBattleState(this, battleSettingsService, enemyRegistry, enemyFactory),
         [typeof(EndSpawningState)] = new EndSpawningState(),
         [typeof(BossState)] = new BossState(),
-        [typeof(EndBattleState)] = new EndBattleState()
+        [typeof(EndBattleState)] = new EndBattleState(),
+        [typeof(GameOverState)] = new GameOverState()
       };
 
     public void SetState<TState>() where TState : class, IBattleState

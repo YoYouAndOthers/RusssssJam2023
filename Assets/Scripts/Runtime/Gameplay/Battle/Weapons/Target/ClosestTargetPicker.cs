@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
+using RussSurvivor.Runtime.Gameplay.Battle.Enemies;
 using UnityEngine;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target
@@ -30,7 +31,9 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target
     private void OnTriggerEnter2D(Collider2D other)
     {
       if (other.attachedRigidbody.TryGetComponent(out ITarget target) && target != _owner)
+      {
         _targets.Add(target);
+      }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -49,6 +52,11 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target
       _collider.callbackLayers = new LayerMask { value = layerMask };
       Radius = radius;
       _owner = owner;
+    }
+
+    public void RemoveTarget(EnemyBehaviour enemyBehaviour)
+    {
+      _targets.Remove(enemyBehaviour);
     }
   }
 }

@@ -7,6 +7,7 @@ using RussSurvivor.Runtime.Gameplay.Common.Player;
 using RussSurvivor.Runtime.Gameplay.Common.Timing;
 using UnityEngine;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
 {
@@ -75,6 +76,17 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
     public void Dispose()
     {
       _cooldownService.UnregisterUpdatable(this);
+    }
+
+    public void ClearWeapons()
+    {
+      _cooldownService.UnregisterUpdatable(_fists);
+      Object.Destroy(_fists);
+      foreach (WeaponBehaviourBase weapon in _weapons)
+      {
+        _cooldownService.UnregisterUpdatable(weapon);
+        Object.Destroy(weapon);
+      }
     }
 
     private IEnumerable<WeaponBehaviourBase> GetAvailableWeapons()

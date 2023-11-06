@@ -1,7 +1,10 @@
 using RussSurvivor.Runtime.Gameplay.Battle.Combat;
+using RussSurvivor.Runtime.Gameplay.Battle.States;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Damage;
+using RussSurvivor.Runtime.Gameplay.Common.Cinema;
 using UnityEngine;
+using Zenject;
 
 namespace RussSurvivor.Runtime.Gameplay.Common.Player
 {
@@ -17,20 +20,29 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
     public bool IsReady => CurrentHealth >= MaxHealth;
 
     private IPlayerWeaponService _playerWeaponService;
+    private IBattleStateMachine _battleStateMachine;
+
+    [Inject]
+    private void Construct(IBattleStateMachine battleStateMachine, IPlayerWeaponService playerWeaponService)
+    {
+      _battleStateMachine = battleStateMachine;
+      _playerWeaponService = playerWeaponService;
+    }
 
     public bool TryTakeDamage(float damage, bool percent = false)
     {
       Debug.Log($"Player take damage: {damage}");
-      if(percent)
+      if (percent)
         damage = MaxHealth * damage / 100f;
-      
+
       CurrentHealth -= damage;
-      
-      if (CurrentHealth <= 0)
+
+      if (CurrentHealth <= 0 && _battleStateMachine.CurrentState.Value is not GameOverState)
       {
         Kill();
         return false;
       }
+
       return true;
     }
 
@@ -42,9 +54,10 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
 
     public void Kill()
     {
-      Debug.LogError("Player is dead");
+      _battleStateMachine.SetState<GameOverState>();
       Destroy(PlayerDash);
       Destroy(PlayerMovement);
+      _playerWeaponService.ClearWeapons();
     }
   }
 }

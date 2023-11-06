@@ -6,5 +6,6 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
 {
   public interface IPlayerWeaponService : IInitializable, ICooldownUpdatable, IDisposable
   {
+    void ClearWeapons();
   }
 }

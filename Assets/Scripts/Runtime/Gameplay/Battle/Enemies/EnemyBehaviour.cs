@@ -87,6 +87,8 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
     public void Kill()
     {
       _enemyRegistry.Remove(this);
+      foreach (ClosestTargetPicker targetPicker in FindObjectsOfType<ClosestTargetPicker>())
+        targetPicker.RemoveTarget(this);
       Destroy(gameObject);
     }
 
