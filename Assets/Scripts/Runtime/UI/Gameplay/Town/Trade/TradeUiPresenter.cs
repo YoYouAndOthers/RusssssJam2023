@@ -1,6 +1,7 @@
 using System.Linq;
 using AYellowpaper.SerializedCollections;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
+using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
 using RussSurvivor.Runtime.Gameplay.Town.Economics.Currency;
 using RussSurvivor.Runtime.Gameplay.Town.Economics.Trade;
 using TMPro;
@@ -13,6 +14,7 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
 {
   public class TradeUiPresenter : MonoBehaviour, IInitializable
   {
+    [SerializeField] private Actor _traderConfig;
     [SerializeField] private SerializedDictionary<CurrencyType, Sprite> _currencyIconByType = new();
     [SerializeField] private SerializedDictionary<CurrencyType, TextMeshProUGUI> _amountsByType = new();
     [SerializeField] private SerializedDictionary<CurrencyType, Image> _iconsByType = new();
@@ -22,6 +24,8 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
 
     [SerializeField] private RectTransform[] _weaponToByuSlots;
     [SerializeField] private Button _beatButton;
+    [SerializeField] private Transform _traderIconTransform;
+
     private IInstantiator _instantiator;
     private IMoneyRegistry _moneyRegistry;
     private ITraderService _traderService;
@@ -36,6 +40,9 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
 
     public void Initialize()
     {
+      if (_traderIconTransform.childCount == 0)
+        _instantiator.InstantiatePrefab(_traderConfig.DefaultAnimation, _traderIconTransform);
+
       _traderService.WeaponsForTrade
         .ObserveAdd()
         .Subscribe(OnWeaponAdded)
