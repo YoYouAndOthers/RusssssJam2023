@@ -23,12 +23,14 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
 
     [SerializeField] private GameObject _weaponCostContainer;
     [SerializeField] private Transform[] _weaponSlots;
+    private IMoneyRegistry _moneyRegistry;
 
     [Inject]
-    private void Construct(IInstantiator instantiator, ITraderService traderService)
+    private void Construct(IInstantiator instantiator, ITraderService traderService, IMoneyRegistry moneyRegistry)
     {
       _instantiator = instantiator;
       _traderService = traderService;
+      _moneyRegistry = moneyRegistry;
     }
 
     public void Initialize()
@@ -57,7 +59,12 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
       WeaponConfig weapon = weaponConfig.Value;
       var item = _instantiator.InstantiatePrefabResourceForComponent<WeaponTradeUiItem>("Prefabs/UI/WeaponTradeUiItem",
         _weaponSlots[weaponConfig.Index]);
-      item.Initialize(weapon, this);
+      item.Initialize(weapon, this, _moneyRegistry);
+      _moneyRegistry.Money
+        .ObserveReplace()
+        .Where(k => k.Key == weapon.CostType)
+        .Subscribe(_ => item.UpdateAvailability(_moneyRegistry.CanSpendMoney(weapon.CostType, weapon.CostAmount)))
+        .AddTo(item);
     }
 
     private void OnWeaponRemoved(CollectionRemoveEvent<WeaponConfig> weaponConfig)

@@ -13,6 +13,7 @@ using RussSurvivor.Runtime.Gameplay.Common.Timing;
 using RussSurvivor.Runtime.Gameplay.Common.Transitions;
 using RussSurvivor.Runtime.Gameplay.Town.Characters;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
+using RussSurvivor.Runtime.Gameplay.Town.Economics.Currency;
 using RussSurvivor.Runtime.Infrastructure.Content;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
 using RussSurvivor.Runtime.UI.Gameplay.Common.Quests;
@@ -52,7 +53,8 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       );
 
       Container.Resolve<ICooldownService>().RegisterUpdatable(Container.Resolve<IDayTimer>());
-
+      Container.Resolve<IMoneyRegistry>().Initialize();
+      
       await LoadTownSceneIfNeeded();
       IsInitializing = false;
     }
@@ -166,6 +168,12 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<IBattleSettingsService>()
         .To<BattleSettingsService>()
+        .FromNew()
+        .AsSingle();
+      
+      Container
+        .Bind<IMoneyRegistry>()
+        .To<MoneyRegistry>()
         .FromNew()
         .AsSingle();
     }
