@@ -15,6 +15,8 @@ public class CharecterViewController : MonoBehaviour
     public float dashDelay = 0.3f;
     public float dashDuration = 0.3f;
     public float dashEndTime = 0.3f;
+
+    private AnimationState currentState;
     
     public enum AnimationState
     {
@@ -28,42 +30,46 @@ public class CharecterViewController : MonoBehaviour
         animator.SetFloat(DirectionKey_X, dir.x);
         animator.SetFloat(DirectionKey_Y, dir.y);
         
-        switch (animationState)
+        if (animationState != currentState)
         {
-            case AnimationState.Idle:
-                animator.SetTrigger(triggerKey_Idle);
-                break;
-            case AnimationState.Run:
-                animator.SetTrigger(triggerKey_Run);
-                break;
-            case AnimationState.Dash:
+            switch (animationState)
+            {
+                case AnimationState.Idle:
+                    animator.SetTrigger(triggerKey_Idle);
+                    break;
+                case AnimationState.Run:
+                    animator.SetTrigger(triggerKey_Run);
+                    break;
+                case AnimationState.Dash:
                 
-                fxDashDust.transform.right = -dir;
-                fxDashDust.Play();
+                    fxDashDust.transform.right = -dir;
+                    fxDashDust.Play();
                 
-                animator.SetTrigger(triggerKey_DashIn); // Приказали стартануть
-                StartCoroutine(DashIn(dashDelay));  
+                    animator.SetTrigger(triggerKey_DashIn); // Приказали стартануть
+                    StartCoroutine(DashIn(dashDelay));  
                 
-                IEnumerator DashIn(float time)
-                {
-                    yield return new WaitForSeconds(time);
-                    animator.SetTrigger(triggerKey_DashFly); // Приказали перейти в полет
-                    StartCoroutine(DashFly(dashDuration));
-                }
+                    IEnumerator DashIn(float time)
+                    {
+                        yield return new WaitForSeconds(time);
+                        animator.SetTrigger(triggerKey_DashFly); // Приказали перейти в полет
+                        StartCoroutine(DashFly(dashDuration));
+                    }
                 
-                IEnumerator DashFly(float time)
-                {
-                    yield return new WaitForSeconds(time);
-                    animator.SetTrigger(triggerKey_DashIn); // Приказали перейти приземление
-                    StartCoroutine(DashEnd(dashEndTime));
-                }
+                    IEnumerator DashFly(float time)
+                    {
+                        yield return new WaitForSeconds(time);
+                        animator.SetTrigger(triggerKey_DashIn); // Приказали перейти приземление
+                        StartCoroutine(DashEnd(dashEndTime));
+                    }
                 
-                IEnumerator DashEnd(float time)
-                {
-                    yield return new WaitForSeconds(time);
-                    animator.SetTrigger(triggerKey_Idle); // Приказали перейти в айдл
-                }
-                break;
+                    IEnumerator DashEnd(float time)
+                    {
+                        yield return new WaitForSeconds(time);
+                        animator.SetTrigger(triggerKey_Idle); // Приказали перейти в айдл
+                    }
+                    break;
+            }
+            currentState = animationState;
         }
     }
 }
