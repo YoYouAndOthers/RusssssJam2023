@@ -2,6 +2,7 @@ using System;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
 using UnityEditor;
 using UnityEditor.UIElements;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace RussSurvivor.Editor.CustomInspectors
@@ -42,6 +43,15 @@ namespace RussSurvivor.Editor.CustomInspectors
           ApplyDamageDirection();
         });
       _root.Q<PropertyField>("DamageDirectionType").schedule.Execute(ApplyDamageDirection);
+
+      _root.Q<IMGUIContainer>().onGUIHandler = () =>
+      {
+        if (_data.Icon == null)
+          return;
+        Rect rect = GUILayoutUtility.GetRect(80, 80, 80, 80);
+        EditorGUI.DrawPreviewTexture(rect, _data.Icon.texture);
+      };
+
       _root.Q<LayerMaskField>("DamagableLayers").value = _data.DamagableLayers;
       _root.Q<LayerMaskField>("DamagableLayers").RegisterValueChangedCallback(
         newEvt =>

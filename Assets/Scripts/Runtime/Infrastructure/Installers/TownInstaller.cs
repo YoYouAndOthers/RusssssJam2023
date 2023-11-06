@@ -18,6 +18,7 @@ using RussSurvivor.Runtime.Infrastructure.Content;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
 using RussSurvivor.Runtime.UI.Gameplay.Common.Quests;
 using RussSurvivor.Runtime.UI.Gameplay.Town.Dialogues;
+using RussSurvivor.Runtime.UI.Gameplay.Town.Trade;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -29,6 +30,8 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
     [SerializeField] private QuestConfig _initialQuestConfig;
     [SerializeField] private DialogueEntryPresenter _dialogueEntryPresenter;
+    [SerializeField] private TradeUiPresenter _tradeUiPresenter;
+
     private CameraFollower _cameraFollower;
     private CollectingQuestResolver _collectingQuestResolver;
     private CollectionQuestUi _collectionQuestUi;
@@ -81,13 +84,8 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       _collectingQuestResolver.Initialize();
       _collectionQuestUi.Initialize(_collectingQuestResolver);
       Container.Resolve<ITraderService>().Initialize();
-      Container.Resolve<ITraderService>().WeaponsForTrade
-        .ObserveAdd()
-        .Subscribe(_ =>
-        {
-          Debug.Log($"Weapon {_.Value.Name} added for trade");
-        })
-        .AddTo(this);
+      _tradeUiPresenter.Initialize();
+
       _curtain.Hide();
     }
 

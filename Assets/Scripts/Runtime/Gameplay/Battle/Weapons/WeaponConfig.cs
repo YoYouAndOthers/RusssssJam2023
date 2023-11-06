@@ -10,6 +10,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
     public string Name;
     public string Description;
     public bool CanBeTraded;
+    public Sprite Icon;
     [Tooltip("Cooldown without modifiers in seconds")] public float InitialCooldown;
     public WeaponDamage Damage;
     [Tooltip("Direction of weapon attack")] public DamageDirectionType DamageDirectionType;

@@ -1,11 +1,17 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <Style src="project://database/Assets/Scripts/Editor/CustomInspectors/WeaponConfig/WeaponConfigEditor.uss?fileID=7433441132597879392&amp;guid=e1752772223e27641af29fed22b27d54&amp;type=3#WeaponConfigEditor" />
-    <ui:VisualElement name="IdContainer" style="flex-grow: 1; flex-direction: row;">
-        <ui:Label tabindex="-1" text="Id:" parse-escape-sequences="true" display-tooltip-when-elided="true" />
-        <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Id" />
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+        <ui:IMGUIContainer name="Icon" />
+        <ui:VisualElement style="flex-grow: 1;">
+            <ui:VisualElement name="IdContainer" style="flex-grow: 1; flex-direction: row;">
+                <ui:Label tabindex="-1" text="Id:" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Id" />
+            </ui:VisualElement>
+            <uie:PropertyField name="Name" binding-path="Name" />
+            <uie:PropertyField name="Icon" binding-path="Icon" />
+            <uie:PropertyField name="CanBeTraded" binding-path="CanBeTraded" />
+        </ui:VisualElement>
     </ui:VisualElement>
-    <uie:PropertyField name="Name" binding-path="Name" />
-    <uie:PropertyField name="CanBeTraded" binding-path="CanBeTraded" />
     <uie:PropertyField binding-path="Damage" name="Damage" />
     <uie:PropertyField name="DamageDirectionType" binding-path="DamageDirectionType" />
     <uie:PropertyField name="BaseSize" binding-path="BaseSize" />

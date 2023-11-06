@@ -12,6 +12,9 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Economics.Trade
   {
     private readonly ReactiveCollection<WeaponConfig> _weaponsForTrade = new();
     public IReadOnlyReactiveCollection<WeaponConfig> WeaponsForTrade => _weaponsForTrade;
+
+    public BoolReactiveProperty IsTrading { get; } = new();
+
     private IPauseService _pauseService;
     private IWeaponConfigProvider _weaponConfigProvider;
 
@@ -32,6 +35,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Economics.Trade
       Debug.Log("Trade started");
       _pauseService.Pause();
       IEnumerable<WeaponConfig> weaponsForTrade = _weaponConfigProvider.GetRandomWeaponTypesToSell(5);
+      IsTrading.Value = true;
       foreach (WeaponConfig weaponConfig in weaponsForTrade)
         _weaponsForTrade.Add(weaponConfig);
     }
@@ -39,6 +43,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Economics.Trade
     public void EndTrade()
     {
       _weaponsForTrade.Clear();
+      IsTrading.Value = false;
       Debug.Log("Trade ended");
       _pauseService.Resume();
     }
