@@ -9,7 +9,7 @@ using Zenject;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
 {
-  public abstract class EnemyBehaviour : MonoBehaviour, ITarget, IHealth, IDamagable
+  public abstract class EnemyBehaviour : MonoBehaviour, ITarget, IHealth, IDamagable, ICollisionDamage
   {
     [SerializeField] private NavMeshAgent _agent;
     public float TimeLeft { get; private set; }
@@ -40,6 +40,10 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
     public float MaxHealth { get; private set; }
     public float RegenerationPerSec { get; private set; }
     public Vector3 Position => transform.position + Vector3.up;
+
+    public int Damage { get; private set; }
+
+    public float Delay { get; private set; }
 
     public EnemyType EnemyType { get; set; }
 
@@ -102,6 +106,8 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
       MaxHealth = config.MaxHealth;
       CurrentHealth = config.MaxHealth;
       RegenerationPerSec = config.RegenerationPerSec;
+      Damage = config.Damage;
+      Delay = config.DamageDelay;
     }
   }
 }

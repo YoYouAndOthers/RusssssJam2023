@@ -511,6 +511,7 @@ MonoBehaviour:
   Banks:
   - AMB
   - MUSIC
+  - "\u041E\u0417\u0412\u0423\u0427\u041A\u0410"
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Enemy_0
   m_EditorClassIdentifier: 
   Type: 1
-  MaxHealth: 10
-  RegenerationPerSec: 0.2
+  MaxHealth: 3
+  RegenerationPerSec: 0
+  Damage: 1
+  DamageDelay: 0.6
   Prefab: {fileID: 3040242517659371388, guid: 4acbdfd9ce18d234fa7e95bbfdc84c70, type: 3}

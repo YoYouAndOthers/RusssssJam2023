@@ -103,6 +103,17 @@ PrefabInstance:
       insertIndex: 1
       addedObject: {fileID: 7382353469973125324}
   m_SourcePrefab: {fileID: 100100000, guid: 8f17f967b9ab19242a47132332031726, type: 3}
+--- !u!114 &3323138724721099733 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1437450497074050308, guid: 8f17f967b9ab19242a47132332031726, type: 3}
+  m_PrefabInstance: {fileID: 4462205816213485265}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5972685568610958968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896e237662634146b4a42cb85fc4e339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3504480771246735331 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 958873361391225138, guid: 8f17f967b9ab19242a47132332031726, type: 3}
@@ -136,6 +147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 278e8aaf1e9e4a66be06ec7036068e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerMovement: {fileID: 5422243001836628580}
+  PlayerMovement: {fileID: 5422243001836628580}
+  PlayerDash: {fileID: 3323138724721099733}
   <Fists>k__BackingField: {fileID: 11400000, guid: c5a6e6544644fe342b296313e94032fd, type: 2}
   <WeaponsContainer>k__BackingField: {fileID: 3754884759858497961}
+  <CurrentHealth>k__BackingField: 10
+  <MaxHealth>k__BackingField: 10
+  <RegenerationPerSec>k__BackingField: 0

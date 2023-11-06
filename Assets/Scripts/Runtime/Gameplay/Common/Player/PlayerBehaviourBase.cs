@@ -4,6 +4,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
 {
   public abstract class PlayerBehaviourBase : MonoBehaviour
   {
-    [SerializeField] private PlayerMovement _playerMovement;
+    [SerializeField] protected PlayerMovement PlayerMovement;
+    [SerializeField] protected PlayerDash PlayerDash;
   }
 }

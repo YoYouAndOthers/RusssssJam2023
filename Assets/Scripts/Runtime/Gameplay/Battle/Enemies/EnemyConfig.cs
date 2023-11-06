@@ -8,6 +8,8 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
     public EnemyType Type;
     public float MaxHealth;
     public float RegenerationPerSec;
+    public int Damage;
+    public float DamageDelay;
     public EnemyBehaviour Prefab;
   }
 }
