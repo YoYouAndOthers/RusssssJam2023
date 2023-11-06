@@ -8,6 +8,7 @@
             <uie:PropertyField binding-path="Icon" name="Icon" />
         </ui:VisualElement>
     </ui:VisualElement>
+    <uie:PropertyField name="IsTrader" binding-path="IsTrader" />
     <uie:PropertyField binding-path="DefaultAnimation" name="DefaultAnimation" />
     <uie:PropertyField name="Description" binding-path="Description" />
 </ui:UXML>

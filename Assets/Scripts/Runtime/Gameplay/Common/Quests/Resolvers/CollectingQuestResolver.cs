@@ -43,6 +43,14 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
       _prefabProvider = prefabProvider;
     }
 
+    public void Dispose()
+    {
+      _collectables.Clear();
+      foreach (IDisposable disposable in _disposables)
+        disposable.Dispose();
+      _disposables.Clear();
+    }
+
     public void Initialize()
     {
       Dispose();
@@ -73,14 +81,6 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
 
         _collectables.Clear();
       }
-    }
-
-    public void Dispose()
-    {
-      _collectables.Clear();
-      foreach (IDisposable disposable in _disposables)
-        disposable.Dispose();
-      _disposables.Clear();
     }
 
     private void InstantiateCollectables(CollectingQuestState collecting)

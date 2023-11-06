@@ -24,8 +24,8 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
     private IActorRegistry _actorRegistry;
     private IConversationConditionSolver _conversationConditionSolver;
     private IConversationDataBase _conversationDataBase;
-    private IPauseService _pauseService;
     private IDialogueSystem _dialogueSystem;
+    private IPauseService _pauseService;
 
     [Inject]
     private void Construct(

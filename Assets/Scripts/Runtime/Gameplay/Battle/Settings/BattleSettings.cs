@@ -17,7 +17,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Settings
         new EnemyWaveSettings
           { SpawnDuration = 10, EnemyNumbersByType = new Dictionary<EnemyType, int> { [EnemyType.Lizard] = 7 } },
         new EnemyWaveSettings
-          { SpawnDuration = 10, EnemyNumbersByType = new Dictionary<EnemyType, int> { [EnemyType.Lizard] = 10 } },
+          { SpawnDuration = 10, EnemyNumbersByType = new Dictionary<EnemyType, int> { [EnemyType.Lizard] = 10 } }
       }
     };
 

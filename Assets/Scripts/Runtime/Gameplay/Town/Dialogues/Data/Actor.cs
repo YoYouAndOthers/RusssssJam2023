@@ -8,9 +8,10 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
   {
     public string Name;
     public bool IsPlayer;
+    public bool IsTrader;
     public Sprite Icon;
     public string Description;
-    public Guid Id = Guid.NewGuid();
     public GameObject DefaultAnimation;
+    public Guid Id = Guid.NewGuid();
   }
 }

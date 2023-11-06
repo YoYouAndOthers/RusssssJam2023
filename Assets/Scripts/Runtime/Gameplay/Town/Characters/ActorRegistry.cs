@@ -6,14 +6,14 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Characters
 {
   public class ActorRegistry : IActorRegistry
   {
-    private readonly Dictionary<Guid, ConversationStarterBehaviour> _actors = new();
+    private readonly Dictionary<Guid, IntarectableNpcBehaviourBase> _actors = new();
 
-    public bool TryGetActor(Guid id, out ConversationStarterBehaviour actor)
+    public bool TryGetActor(Guid id, out IntarectableNpcBehaviourBase actor)
     {
       return _actors.TryGetValue(id, out actor);
     }
 
-    public void RegisterActor(ConversationStarterBehaviour actor, Guid id)
+    public void RegisterActor(IntarectableNpcBehaviourBase actor, Guid id)
     {
       if (!_actors.TryAdd(id, actor))
         _actors[id] = actor;

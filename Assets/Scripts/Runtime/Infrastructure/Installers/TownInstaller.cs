@@ -13,6 +13,7 @@ using RussSurvivor.Runtime.Gameplay.Town.Dialogues;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Conditions;
+using RussSurvivor.Runtime.Gameplay.Town.Economics.Trade;
 using RussSurvivor.Runtime.Infrastructure.Content;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
 using RussSurvivor.Runtime.UI.Gameplay.Common.Quests;
@@ -78,6 +79,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       _dialogueEntryPresenter.Initialize();
       _collectingQuestResolver.Initialize();
       _collectionQuestUi.Initialize(_collectingQuestResolver);
+      Container.Resolve<ITraderService>().Initialize();
       _curtain.Hide();
     }
 
@@ -109,6 +111,12 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container
         .Bind<IConversationActionInvoker>()
         .To<ConversationActionInvoker>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<ITraderService>()
+        .To<TraderService>()
         .FromNew()
         .AsSingle();
     }

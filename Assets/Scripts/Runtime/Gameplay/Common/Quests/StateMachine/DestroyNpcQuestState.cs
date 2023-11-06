@@ -1,5 +1,4 @@
 using System;
-using RussSurvivor.Runtime.Gameplay.Battle.Enemies;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.Data;
 using UnityEngine;
 
@@ -10,6 +9,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
     public readonly DestructionQuestDescription.HostileObjectType DestructionQuestHostileType;
     public readonly int NpcToDestroyCount;
     private readonly Vector2 _position;
+
     public DestroyNpcQuestState(Guid questId,
       DestructionQuestDescription description) : base(questId)
     {

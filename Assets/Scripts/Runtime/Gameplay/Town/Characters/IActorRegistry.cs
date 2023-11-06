@@ -5,8 +5,8 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Characters
 {
   public interface IActorRegistry
   {
-    bool TryGetActor(Guid id, out ConversationStarterBehaviour actor);
-    void RegisterActor(ConversationStarterBehaviour actor, Guid id);
+    bool TryGetActor(Guid id, out IntarectableNpcBehaviourBase actor);
+    void RegisterActor(IntarectableNpcBehaviourBase actor, Guid id);
     void CleanActor(Guid actorId);
   }
 }

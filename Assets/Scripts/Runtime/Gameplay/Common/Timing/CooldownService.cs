@@ -7,6 +7,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Timing
 {
   public class CooldownService : ICooldownService, IPauseService
   {
+    public BoolReactiveProperty IsPaused { get; } = new();
     private int _counter;
     private IDayTimer _dayTimer;
 
@@ -25,21 +26,9 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Timing
       _updatables.Remove(updatable);
     }
 
-    public BoolReactiveProperty IsPaused { get; } = new();
-
-    public void Pause()
-    {
-      IsPaused.Value = true;
-    }
-
-    public void Resume()
-    {
-      IsPaused.Value = false;
-    }
-
     public void PerformTick(float deltaTime)
     {
-      if(IsPaused.Value)
+      if (IsPaused.Value)
         return;
       _deltaTime += deltaTime;
       if (_counter % 3 == 0)
@@ -57,6 +46,16 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Timing
         _updatables = new HashSet<ICooldownUpdatable>(_updatables.ToArray());
         _counter = 1;
       }
+    }
+
+    public void Pause()
+    {
+      IsPaused.Value = true;
+    }
+
+    public void Resume()
+    {
+      IsPaused.Value = false;
     }
 
     private void UpdateAll(float deltaTime)

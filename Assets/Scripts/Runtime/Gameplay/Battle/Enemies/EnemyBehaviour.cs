@@ -10,12 +10,19 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
 {
   public abstract class EnemyBehaviour : MonoBehaviour, ITarget, IHealth, IDamagable, ICollisionDamage
   {
+    public int Damage { get; private set; }
+
+    public float Delay { get; private set; }
     public float TimeLeft { get; private set; }
 
     public bool IsReady => CurrentHealth.Value >= MaxHealth;
 
     public FloatReactiveProperty CurrentHealth { get; } = new();
-    
+
+    public float MaxHealth { get; private set; }
+    public float RegenerationPerSec { get; private set; }
+    public Vector3 Position => gameObject != null ? transform.position + Vector3.up : Vector3.positiveInfinity;
+
     private float CurrentHealthValue
     {
       get => _currentHealth;
@@ -40,20 +47,12 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
       }
     }
 
-    public float MaxHealth { get; private set; }
-    public float RegenerationPerSec { get; private set; }
-    public Vector3 Position => gameObject != null ? transform.position + Vector3.up : Vector3.positiveInfinity;
-
-    public int Damage { get; private set; }
-
-    public float Delay { get; private set; }
-
     public EnemyType EnemyType { get; set; }
-    
+
     private float _currentHealth;
+    private IDamageCountService _damageCountService;
 
     private IEnemyRegistry _enemyRegistry;
-    private IDamageCountService _damageCountService;
 
     [Inject]
     private void Construct(IEnemyRegistry enemyRegistry, IDamageCountService damageCountService)
@@ -75,7 +74,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
     public void Kill()
     {
       _enemyRegistry.Remove(this);
-      if(gameObject != null)
+      if (gameObject != null)
         Destroy(gameObject);
     }
 

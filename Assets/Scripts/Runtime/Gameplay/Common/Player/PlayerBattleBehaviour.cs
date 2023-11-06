@@ -12,17 +12,17 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
   {
     [field: SerializeField] public WeaponConfig Fists { get; private set; }
     [field: SerializeField] public Transform WeaponsContainer { get; private set; }
-    public Vector3 Position => transform.position;
     [field: SerializeField] public float CurrentHealthValue { get; private set; }
     [field: SerializeField] public float MaxHealth { get; private set; }
     [field: SerializeField] public float RegenerationPerSec { get; private set; }
     public float TimeLeft { get; }
-    
-    public FloatReactiveProperty CurrentHealth { get; private set; } = new();
+
+    public FloatReactiveProperty CurrentHealth { get; } = new();
     public bool IsReady => CurrentHealth.Value >= MaxHealth;
+    public Vector3 Position => transform.position;
+    private IBattleStateMachine _battleStateMachine;
 
     private IPlayerWeaponService _playerWeaponService;
-    private IBattleStateMachine _battleStateMachine;
 
     [Inject]
     private void Construct(IBattleStateMachine battleStateMachine, IPlayerWeaponService playerWeaponService)
@@ -53,18 +53,18 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
       return true;
     }
 
-    public void UpdateCooldown(float deltaTime)
-    {
-      CurrentHealth.Value += deltaTime * RegenerationPerSec;
-      CurrentHealth.Value = Mathf.Clamp(CurrentHealth.Value, 0f, MaxHealth);
-    }
-
     public void Kill()
     {
       _battleStateMachine.SetState<GameOverState>();
       Destroy(PlayerDash);
       Destroy(PlayerMovement);
       _playerWeaponService.ClearWeapons();
+    }
+
+    public void UpdateCooldown(float deltaTime)
+    {
+      CurrentHealth.Value += deltaTime * RegenerationPerSec;
+      CurrentHealth.Value = Mathf.Clamp(CurrentHealth.Value, 0f, MaxHealth);
     }
   }
 }

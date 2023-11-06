@@ -21,8 +21,6 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
     private readonly IConversationActionInvoker _actionInvoker;
     private readonly IPauseService _pauseService;
 
-    private Actor _currentActor;
-
     public IReactiveProperty<DialogueEntryModel> CurrentDialogueEntry => _currentDialogueEntry;
 
     public IReactiveProperty<ActorModel> NpcActor => _npcActor;
@@ -50,42 +48,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
       }
     }
 
-    private void SetupAnimation(DialogueEntry currentConversationEntry)
-    {
-      var overrideAnimation = false;
-      if (currentConversationEntry.Speaker.IsPlayer)
-      {
-        foreach (DialogueActionBase actionBase in currentConversationEntry.Actions)
-        {
-          if (actionBase is OverrideActorAnimation animationAction)
-          {
-            _playerActor.Value = new ActorModel { AnimationPrefab = animationAction.AnimationPrefab };
-            overrideAnimation = true;
-          }
-          break;
-        }
-      }
-      else
-      {
-        foreach (DialogueActionBase actionBase in currentConversationEntry.Actions)
-        {
-          if (actionBase is OverrideActorAnimation animationAction)
-          {
-            _npcActor.Value = new ActorModel { AnimationPrefab = animationAction.AnimationPrefab };
-            overrideAnimation = true;
-          }
-          break;
-        }
-      }
-
-      if (overrideAnimation)
-        return;
-
-      if (currentConversationEntry.Speaker.IsPlayer)
-        _playerActor.Value = new ActorModel { AnimationPrefab = currentConversationEntry.Speaker.DefaultAnimation };
-      else
-        _npcActor.Value = new ActorModel { AnimationPrefab = currentConversationEntry.Speaker.DefaultAnimation };
-    }
+    private Actor _currentActor;
 
     private Conversation _currentConversation;
     private int _currentDialogueEntryIndex;
@@ -140,6 +103,41 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
       _conversationDataBase.SetFinishedConversation(_currentConversation.Id);
       Debug.Log($"Conversation {_currentConversation.Id.ToString()} finished");
       _pauseService.Resume();
+    }
+
+    private void SetupAnimation(DialogueEntry currentConversationEntry)
+    {
+      var overrideAnimation = false;
+      if (currentConversationEntry.Speaker.IsPlayer)
+        foreach (DialogueActionBase actionBase in currentConversationEntry.Actions)
+        {
+          if (actionBase is OverrideActorAnimation animationAction)
+          {
+            _playerActor.Value = new ActorModel { AnimationPrefab = animationAction.AnimationPrefab };
+            overrideAnimation = true;
+          }
+
+          break;
+        }
+      else
+        foreach (DialogueActionBase actionBase in currentConversationEntry.Actions)
+        {
+          if (actionBase is OverrideActorAnimation animationAction)
+          {
+            _npcActor.Value = new ActorModel { AnimationPrefab = animationAction.AnimationPrefab };
+            overrideAnimation = true;
+          }
+
+          break;
+        }
+
+      if (overrideAnimation)
+        return;
+
+      if (currentConversationEntry.Speaker.IsPlayer)
+        _playerActor.Value = new ActorModel { AnimationPrefab = currentConversationEntry.Speaker.DefaultAnimation };
+      else
+        _npcActor.Value = new ActorModel { AnimationPrefab = currentConversationEntry.Speaker.DefaultAnimation };
     }
   }
 }

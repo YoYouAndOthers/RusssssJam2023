@@ -10,22 +10,11 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Combat
   {
     [SerializeField] private EnemyBehaviour _owner;
     private float _currentDamageTime;
-    
-    public bool TryApply(IDamagable damagable)
-    {
-      return damagable.TryTakeDamage(_owner.Damage);
-    }
-
-    public void SetValue(float value)
-    {
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
       if (other.attachedRigidbody.TryGetComponent(out PlayerBattleBehaviour player))
-      {
         _currentDamageTime = 0;
-      }
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -39,6 +28,15 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Combat
           _currentDamageTime = 0;
         }
       }
+    }
+
+    public bool TryApply(IDamagable damagable)
+    {
+      return damagable.TryTakeDamage(_owner.Damage);
+    }
+
+    public void SetValue(float value)
+    {
     }
   }
 }

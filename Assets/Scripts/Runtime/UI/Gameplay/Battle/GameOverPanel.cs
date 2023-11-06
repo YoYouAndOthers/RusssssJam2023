@@ -12,8 +12,8 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Battle
   {
     [SerializeField] private GameObject _panel;
     [SerializeField] private Button _toMainMenuButton;
-    private ISceneLoader _sceneLoader;
     private IBattleStateMachine _battleStateMachine;
+    private ISceneLoader _sceneLoader;
 
     [Inject]
     private void Construct(ISceneLoader sceneLoader, IBattleStateMachine battleStateMachine)

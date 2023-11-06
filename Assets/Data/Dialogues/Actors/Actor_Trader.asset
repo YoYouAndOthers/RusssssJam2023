@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b708d82aea384b0890c5584cb697a53f, type: 3}
+  m_Name: Actor_Trader
+  m_EditorClassIdentifier: 
+  Name: "\u0422\u043E\u0440\u0433\u043E\u0432\u0435\u0446"
+  IsPlayer: 0
+  IsTrader: 1
+  Icon: {fileID: 0}
+  Description: 
+  DefaultAnimation: {fileID: 9189395473205123256, guid: 2fc1f9183a4e0e64aa0ff003391ef1d3, type: 3}

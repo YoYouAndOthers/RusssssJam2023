@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AYellowpaper.SerializedCollections;
 using Cysharp.Threading.Tasks;
 using RussSurvivor.Runtime.Gameplay.Battle.Enemies;
@@ -14,31 +13,32 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Quests
 {
   public class DestroyNpcQuestResolver : MonoBehaviour
   {
-    [SerializeField]
-    private SerializedDictionary<DestructionQuestDescription.HostileObjectType, Transform> _transformsByType;
-
     private static readonly Dictionary<DestructionQuestDescription.HostileObjectType, EnemyType>
       EnemyTypeToHostileObjectType =
         new()
         {
-          { DestructionQuestDescription.HostileObjectType.LizardCamp, EnemyType.LizardCamp },
+          { DestructionQuestDescription.HostileObjectType.LizardCamp, EnemyType.LizardCamp }
         };
 
-    private IQuestStateMachine _questStateMachine;
-    private DestroyNpcQuestState _state;
+    [SerializeField]
+    private SerializedDictionary<DestructionQuestDescription.HostileObjectType, Transform> _transformsByType;
+
+    public IntReactiveProperty NpcToDestroyCount { get; } = new();
     private EnemyFactory _enemyFactory;
     private IEnemyRegistry _enemyRegistry;
     private bool _initialized;
-    private List<EnemyBehaviour> _npcs = new();
+    private readonly List<EnemyBehaviour> _npcs = new();
 
-    public IntReactiveProperty NpcToDestroyCount { get; } = new();
+    private IQuestStateMachine _questStateMachine;
+    private DestroyNpcQuestState _state;
 
-    public void Initialize()
+    [Inject]
+    private void Construct(IQuestStateMachine questStateMachine, EnemyFactory enemyFactory,
+      IEnemyRegistry enemyRegistry)
     {
-      NpcToDestroyCount
-        .Where(k => k == 0)
-        .Subscribe(_ => _questStateMachine.NextState<ReturnToTownQuestState>())
-        .AddTo(this);
+      _questStateMachine = questStateMachine;
+      _enemyFactory = enemyFactory;
+      _enemyRegistry = enemyRegistry;
     }
 
     private void Update()
@@ -50,19 +50,17 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Quests
         return;
       }
 
-      if (_npcs.Count(k => k != null) == 0 && _initialized && _questStateMachine.CurrentState.Value is DestroyNpcQuestState)
-      {
+      if (_npcs.Count(k => k != null) == 0 && _initialized &&
+          _questStateMachine.CurrentState.Value is DestroyNpcQuestState)
         _questStateMachine.NextState<ReturnToTownQuestState>();
-      }
     }
 
-    [Inject]
-    private void Construct(IQuestStateMachine questStateMachine, EnemyFactory enemyFactory,
-      IEnemyRegistry enemyRegistry)
+    public void Initialize()
     {
-      _questStateMachine = questStateMachine;
-      _enemyFactory = enemyFactory;
-      _enemyRegistry = enemyRegistry;
+      NpcToDestroyCount
+        .Where(k => k == 0)
+        .Subscribe(_ => _questStateMachine.NextState<ReturnToTownQuestState>())
+        .AddTo(this);
     }
 
     private async void InitializeNpcByQuest(QuestState state)

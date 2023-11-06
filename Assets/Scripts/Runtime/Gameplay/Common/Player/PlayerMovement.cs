@@ -8,11 +8,11 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
   {
     [SerializeField] private float _speed = 5f;
     [SerializeField] private Rigidbody2D _rigidbody2D;
-    
+
     [SerializeField] private CharecterViewController _view;
-    private Vector2 lastViewDirection;
-    
+
     private IInputService _inputService;
+    private Vector2 lastViewDirection;
 
     [Inject]
     private void Construct(IInputService inputService)

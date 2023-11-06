@@ -31,9 +31,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target
     private void OnTriggerEnter2D(Collider2D other)
     {
       if (other.attachedRigidbody.TryGetComponent(out ITarget target) && target != _owner)
-      {
         _targets.Add(target);
-      }
     }
 
     private void OnTriggerExit2D(Collider2D other)

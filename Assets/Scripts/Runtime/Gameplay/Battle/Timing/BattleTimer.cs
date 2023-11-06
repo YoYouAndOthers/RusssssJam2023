@@ -60,7 +60,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Timing
 
     public void Dispose()
     {
-      _cooldownService.UnregisterUpdatable(this);      
+      _cooldownService.UnregisterUpdatable(this);
     }
   }
 }

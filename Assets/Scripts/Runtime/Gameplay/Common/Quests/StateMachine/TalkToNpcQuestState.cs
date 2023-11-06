@@ -18,7 +18,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
 
     public override Vector2 GetPosition()
     {
-      bool actorExists = _actorRegistry.TryGetActor(_npcId, out ConversationStarterBehaviour actor);
+      bool actorExists = _actorRegistry.TryGetActor(_npcId, out IntarectableNpcBehaviourBase actor);
       if (actorExists)
         return actor.transform.position;
 

@@ -4,6 +4,6 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
   {
     None = 0,
     Lizard = 1,
-    LizardCamp = 2,
+    LizardCamp = 2
   }
 }
