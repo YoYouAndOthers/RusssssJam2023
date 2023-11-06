@@ -82,3 +82,5 @@ crashlytics-build.properties
 Assets/MyPhone.device
 Assets/MyPhone.device.meta
 *.csproj.meta
+fmod_editor.log
+fmod_editor.log
