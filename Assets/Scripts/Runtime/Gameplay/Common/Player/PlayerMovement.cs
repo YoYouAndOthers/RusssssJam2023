@@ -32,7 +32,10 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
           lastViewDirection = direction;
           _view.PlayAnimation(CharecterViewController.AnimationState.Run, lastViewDirection);
         }
-        _view.PlayAnimation(CharecterViewController.AnimationState.Idle, lastViewDirection);
+        else
+        {
+          _view.PlayAnimation(CharecterViewController.AnimationState.Idle, lastViewDirection);
+        }
       }
     }
 

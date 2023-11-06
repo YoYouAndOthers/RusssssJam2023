@@ -281,9 +281,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dashSpeed: 10
-  _dashDuration: 0.2
+  _dashDelay: 0.1
+  _dashDuration: 0.4
   _dashCooldown: 1
   _rigidbody2D: {fileID: 5128111242346614437}
+  _view: {fileID: 4963523176585715025}
 --- !u!70 &4848074895199609110
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
