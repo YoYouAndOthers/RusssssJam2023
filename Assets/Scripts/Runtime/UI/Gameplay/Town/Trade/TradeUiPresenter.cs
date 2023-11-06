@@ -1,3 +1,4 @@
+using System.Linq;
 using AYellowpaper.SerializedCollections;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
 using RussSurvivor.Runtime.Gameplay.Town.Economics.Currency;
@@ -23,6 +24,8 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
 
     [SerializeField] private GameObject _weaponCostContainer;
     [SerializeField] private Transform[] _weaponSlots;
+
+    [SerializeField] private RectTransform[] _weaponToByuSlots;
     private IMoneyRegistry _moneyRegistry;
 
     [Inject]
@@ -89,6 +92,17 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
     public void HideWeaponCost()
     {
       _weaponCostContainer.SetActive(false);
+    }
+
+    public bool TrySetWeaponBought(Vector3 transformPosition, WeaponConfig weapon)
+    {
+      if (_weaponToByuSlots.Any(slot => RectTransformUtility.RectangleContainsScreenPoint(slot, transformPosition)))
+      {
+        _traderService.AddToCart(weapon);
+        return true;
+      }
+
+      return false;
     }
   }
 }

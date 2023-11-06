@@ -16,6 +16,7 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
     private IMoneyRegistry _moneyRegistry;
     private bool _dragged;
     private Vector2 _delta;
+    private Vector3 _startPosition;
 
     public void Initialize(WeaponConfig weapon, TradeUiPresenter tradeUiPresenter, IMoneyRegistry moneyRegistry)
     {
@@ -33,6 +34,7 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
       if(!_moneyRegistry.CanSpendMoney(_weapon.CostType, _weapon.CostAmount))
         return;
       
+      _startPosition = transform.position;
       _delta = (Vector2)transform.position - eventData.position;
       _dragged = true;
     }
@@ -46,6 +48,8 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
     public void OnEndDrag(PointerEventData eventData)
     {
       _dragged = false;
+      if(!_tradeUiPresenter.TrySetWeaponBought(transform.position, _weapon))
+        transform.position = _startPosition;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

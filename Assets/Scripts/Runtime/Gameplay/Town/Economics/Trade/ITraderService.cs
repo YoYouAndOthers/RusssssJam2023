@@ -10,5 +10,6 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Economics.Trade
     BoolReactiveProperty IsTrading { get; }
     void StartTrade();
     void EndTrade();
+    void AddToCart(WeaponConfig weapon);
   }
 }
