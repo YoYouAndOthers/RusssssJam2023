@@ -13,9 +13,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Economics.Trade
     BoolReactiveProperty IsBeaten { get; }
     void StartTrade();
     void EndTrade();
-    void AddToCart(WeaponConfig weapon);
-    bool IsInCart(WeaponConfig weapon);
-    void RemoveFromCart(WeaponConfig weapon);
     IReadOnlyDictionary<CurrencyType, int> GetCartCost();
+    void BuyWeapon(WeaponConfig weapon);
   }
 }

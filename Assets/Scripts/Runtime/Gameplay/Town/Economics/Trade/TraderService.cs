@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Content;
+using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Registry;
 using RussSurvivor.Runtime.Gameplay.Common.Timing;
 using RussSurvivor.Runtime.Gameplay.Town.Economics.Currency;
 using UniRx;
@@ -23,12 +24,16 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Economics.Trade
 
     private IPauseService _pauseService;
     private IWeaponConfigProvider _weaponConfigProvider;
+    private IWeaponRegistry _weaponRegistry;
+    private IMoneyRegistry _moneyRegistry;
 
     [Inject]
-    private void Construct(IPauseService pauseService, IWeaponConfigProvider weaponConfigProvider)
+    private void Construct(IPauseService pauseService, IWeaponConfigProvider weaponConfigProvider, IWeaponRegistry weaponRegistry, IMoneyRegistry moneyRegistry)
     {
       _pauseService = pauseService;
       _weaponConfigProvider = weaponConfigProvider;
+      _weaponRegistry = weaponRegistry;
+      _moneyRegistry = moneyRegistry;
     }
 
     public void Initialize()
@@ -75,6 +80,12 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Economics.Trade
         .GroupBy(k => k.CostType)
         .ToDictionary(k => k.Key, k => k.Sum(l => l.CostAmount));
       return Modified(result);
+    }
+
+    public void BuyWeapon(WeaponConfig weapon)
+    {
+      _moneyRegistry.TrySpendMoney(weapon.CostType, weapon.CostAmount, IsBeaten.Value);
+      _weaponRegistry.RegisterWeapon(weapon.Id);
     }
 
     private IReadOnlyDictionary<CurrencyType, int> Modified(Dictionary<CurrencyType, int> oldValue)

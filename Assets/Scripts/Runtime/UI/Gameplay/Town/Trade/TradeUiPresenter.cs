@@ -1,6 +1,7 @@
 using System.Linq;
 using AYellowpaper.SerializedCollections;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
+using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Registry;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
 using RussSurvivor.Runtime.Gameplay.Town.Economics.Currency;
 using RussSurvivor.Runtime.Gameplay.Town.Economics.Trade;
@@ -29,10 +30,13 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
     private IInstantiator _instantiator;
     private IMoneyRegistry _moneyRegistry;
     private ITraderService _traderService;
+    private IWeaponRegistry _weaponRegistry;
 
     [Inject]
-    private void Construct(IInstantiator instantiator, ITraderService traderService, IMoneyRegistry moneyRegistry)
+    private void Construct(IInstantiator instantiator, ITraderService traderService, IMoneyRegistry moneyRegistry,
+      IWeaponRegistry weaponRegistry)
     {
+      _weaponRegistry = weaponRegistry;
       _instantiator = instantiator;
       _traderService = traderService;
       _moneyRegistry = moneyRegistry;
@@ -99,21 +103,7 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
       {
         item.transform.position = _weaponToByuSlots.First(slot =>
           RectTransformUtility.RectangleContainsScreenPoint(slot, item.transform.position)).position;
-        _traderService.AddToCart(weapon);
-        return true;
-      }
-
-      return false;
-    }
-
-    public bool TrySetWeaponBack(WeaponTradeUiItem weaponTradeUiItem, WeaponConfig weapon)
-    {
-      if (_weaponSlots.Select(k => k.GetComponent<RectTransform>()).Any(slot =>
-            RectTransformUtility.RectangleContainsScreenPoint(slot, weaponTradeUiItem.transform.position)))
-      {
-        weaponTradeUiItem.transform.position = _weaponSlots.Select(k => k.GetComponent<RectTransform>()).First(slot =>
-          RectTransformUtility.RectangleContainsScreenPoint(slot, weaponTradeUiItem.transform.position)).position;
-        _traderService.RemoveFromCart(weapon);
+        _traderService.BuyWeapon(weapon);
         return true;
       }
 
@@ -128,16 +118,21 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
       foreach (TextMeshProUGUI text in _amountsByType.Values)
         text.gameObject.SetActive(false);
 
-      _weaponCostContainer.SetActive(true);
-      if (weapon.CostType == CurrencyType.Zelkovyu)
-        _iconsByType[CurrencyType.Polushka].gameObject.SetActive(true);
-      else if (weapon.CostType == CurrencyType.Serebryachok)
-        _iconsByType[CurrencyType.Chetvertushka].gameObject.SetActive(true);
-      else
-        _iconsByType[weapon.CostType].gameObject.SetActive(true);
-
       _amountsByType[weapon.CostType].gameObject.SetActive(true);
       _amountsByType[weapon.CostType].text = weapon.CostAmount.ToString();
+      _weaponCostContainer.SetActive(true);
+      switch (weapon.CostType)
+      {
+        case CurrencyType.Zelkovyu:
+          _iconsByType[CurrencyType.Polushka].gameObject.SetActive(true);
+          return;
+        case CurrencyType.Serebryachok:
+          _iconsByType[CurrencyType.Chetvertushka].gameObject.SetActive(true);
+          return;
+        default:
+          _iconsByType[weapon.CostType].gameObject.SetActive(true);
+          break;
+      }
     }
 
     private void OnWeaponAdded(CollectionAddEvent<WeaponConfig> weaponConfig)
@@ -145,7 +140,7 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
       WeaponConfig weapon = weaponConfig.Value;
       var item = _instantiator.InstantiatePrefabResourceForComponent<WeaponTradeUiItem>("Prefabs/UI/WeaponTradeUiItem",
         _weaponSlots[weaponConfig.Index]);
-      item.Initialize(weapon, this, _traderService, _moneyRegistry);
+      item.Initialize(weapon, this, _traderService, _moneyRegistry, _weaponRegistry);
       _traderService.IsBeaten
         .Where(l => l)
         .Subscribe(_ => item.UpdateAvailability(_moneyRegistry.CanSpendMoney(weapon.CostType, weapon.CostAmount, true)))

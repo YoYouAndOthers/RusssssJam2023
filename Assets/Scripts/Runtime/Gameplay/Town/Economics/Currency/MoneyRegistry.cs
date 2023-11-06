@@ -29,7 +29,20 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Economics.Currency
     {
       if (!CanSpendMoney(currencyType, amount, isBeaten))
         return false;
-      _money[currencyType] -= amount;
+      if (isBeaten)
+      {
+        switch (currencyType)
+        {
+          case CurrencyType.Polushka:
+          case CurrencyType.Zelkovyu:
+            _money[CurrencyType.Polushka] -= amount;
+            break;
+          case CurrencyType.Serebryachok:
+          case CurrencyType.Chetvertushka:
+            _money[CurrencyType.Chetvertushka] -= amount;
+            break;
+        }
+      }
       return true;
     }
 
