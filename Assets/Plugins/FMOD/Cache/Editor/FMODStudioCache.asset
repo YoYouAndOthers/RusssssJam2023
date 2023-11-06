@@ -248,10 +248,10 @@ MonoBehaviour:
   Path: AudioSource/2/Build/Desktop/MC.bank
   Name: MC
   StudioPath: bank:/MC
-  lastModified: 638348917745281445
+  lastModified: 638348936691445118
   FileSizes:
   - Name: Desktop
-    Value: 81152
+    Value: 225312
   Exists: 1
 --- !u!114 &-7486384206581582406
 MonoBehaviour:
@@ -448,7 +448,7 @@ MonoBehaviour:
   Path: AudioSource/2/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638348917744892666
+  lastModified: 638348936690427800
   FileSizes:
   - Name: Desktop
     Value: 2346
@@ -680,11 +680,38 @@ MonoBehaviour:
   Path: AudioSource/2/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638348917744902448
+  lastModified: 638348936690437771
   FileSizes:
   - Name: Desktop
-    Value: 2464
+    Value: 2590
   Exists: 1
+--- !u!114 &-5178536315142474534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sword
+  m_EditorClassIdentifier: 
+  Path: event:/Sword
+  Guid:
+    Data1: 1154222416
+    Data2: 1335669114
+    Data3: -776659551
+    Data4: 179015022
+  Banks:
+  - {fileID: -7516219599283957714}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
 --- !u!114 &-5042917388773571093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1084,12 +1111,15 @@ MonoBehaviour:
   - {fileID: 1976986781337079678}
   - {fileID: 6940393282288461673}
   - {fileID: -440123221056830781}
+  - {fileID: 7416203465770161746}
+  - {fileID: -5178536315142474534}
+  - {fileID: 8596188129521243340}
   EditorParameters: []
   MasterBanks:
   - {fileID: -6517612318321120736}
   StringsBanks:
   - {fileID: -5352089671009890012}
-  cacheTime: 638348917745281445
+  cacheTime: 638348936691445118
   cacheVersion: 131608
 --- !u!114 &270712485063968445
 MonoBehaviour:
@@ -1763,6 +1793,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &7416203465770161746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Bow
+  m_EditorClassIdentifier: 
+  Path: event:/Bow
+  Guid:
+    Data1: 1234637845
+    Data2: 1170270546
+    Data3: -1495842919
+    Data4: -97930022
+  Banks:
+  - {fileID: -7516219599283957714}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1000
 --- !u!114 &8155216351162514682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1783,3 +1840,30 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1036
   Exists: 1
+--- !u!114 &8596188129521243340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Fist
+  m_EditorClassIdentifier: 
+  Path: event:/Fist
+  Guid:
+    Data1: -84508291
+    Data2: 1170034738
+    Data3: -1477436768
+    Data4: -485418056
+  Banks:
+  - {fileID: -7516219599283957714}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 420

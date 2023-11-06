@@ -8,7 +8,7 @@
 [LOG] SystemI::init                            : Output requires a sample rate of 44100Hz, resampling will occur.
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000001944D3A8D38 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000001953285BCF8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -20,320 +20,11 @@
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
-[LOG] SystemI::createSound                     : filename = AudioSource/2/Build/Desktop/AMB.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] AsyncThread::add                         : add sound to async queue : soundi = 000001952CCA35F8, queue head = 000001952CDFFFE8, queue count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001952CCA35F8
-[LOG] SystemI::createSoundInternal             :     Create name='AudioSource/2/Build/Desktop/AMB.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 414304
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 1664
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000194560CFCD0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='VILLAGE AMB', format=5, channels=2, frequency=48000, lengthbytes=413856, lengthpcm=2093111, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.147400.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001952CCA35F8
-[LOG] SoundI::release                          : VILLAGE AMB (000001952CCA26C8)
-[LOG] SoundI::release                          :     VILLAGE AMB (00000193B5B2CD38)
-[LOG] SoundI::release                          :     VILLAGE AMB (000001952CC9BFD8)
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 70144
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 10624
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000005AEF4FF288
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFA9CE3FA0
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFA9CE3F60
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFA9CE4080
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFA9CE4140
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001942233DCF8
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[ERR] CodecOggVorbis::openInternal             : failed to open as ogg
-[ERR] CodecMOD::openInternal                   : 'M.K.' etc ID check failed [}???]
-[ERR] CodecS3M::openInternal                   : 'SCRM' ID check failed [�&:]
-[ERR] CodecXM::openInternal                    : 'Extended Module: ' ID check failed [?i?]
-[ERR] CodecIT::openInternal                    : 'IMPM' etc ID check failed [?i?]
-[ERR] CodecMIDI::openInternal                  : 'HThd' ID check failed [?i?]
-[ERR] CodecMPEG::openInternal                  : failed to open as mpeg
-[ERR] ResourceLoader::asyncLoadResourceThread  : Failed to load waveform {57b8cf0f-b262-4a8b-9274-37ef0c0dc1db} (error 19)
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 70144
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 10624
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000005AEF4FF288
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFA9CE3FA0
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFA9CE3F60
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFA9CE4080
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFA9CE4140
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001942233DCF8
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[ERR] CodecOggVorbis::openInternal             : failed to open as ogg
-[ERR] CodecMOD::openInternal                   : 'M.K.' etc ID check failed [}???]
-[ERR] CodecS3M::openInternal                   : 'SCRM' ID check failed [�&:]
-[ERR] CodecXM::openInternal                    : 'Extended Module: ' ID check failed [?i?]
-[ERR] CodecIT::openInternal                    : 'IMPM' etc ID check failed [?i?]
-[ERR] CodecMIDI::openInternal                  : 'HThd' ID check failed [?i?]
-[ERR] CodecMPEG::openInternal                  : failed to open as mpeg
-[ERR] ResourceLoader::asyncLoadResourceThread  : Failed to load waveform {ff256829-a1d6-419e-9554-27c7766b3c32} (error 19)
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 70144
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 10624
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000005AEF4FF288
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFA9CE3FA0
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFA9CE3F60
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFA9CE4080
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFA9CE4140
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001942233DCF8
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[ERR] CodecOggVorbis::openInternal             : failed to open as ogg
-[ERR] CodecMOD::openInternal                   : 'M.K.' etc ID check failed [}???]
-[ERR] CodecS3M::openInternal                   : 'SCRM' ID check failed [�&:]
-[ERR] CodecXM::openInternal                    : 'Extended Module: ' ID check failed [?i?]
-[ERR] CodecIT::openInternal                    : 'IMPM' etc ID check failed [?i?]
-[ERR] CodecMIDI::openInternal                  : 'HThd' ID check failed [?i?]
-[ERR] CodecMPEG::openInternal                  : failed to open as mpeg
-[ERR] ResourceLoader::asyncLoadResourceThread  : Failed to load waveform {01608937-4709-44cf-8cde-65262e89fbb8} (error 19)
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 70144
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 10624
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000005AEF4FF288
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFA9CE3FA0
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFA9CE3F60
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFA9CE4080
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFA9CE4140
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001942233DCF8
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[ERR] CodecOggVorbis::openInternal             : failed to open as ogg
-[ERR] CodecMOD::openInternal                   : 'M.K.' etc ID check failed [}???]
-[ERR] CodecS3M::openInternal                   : 'SCRM' ID check failed [�&:]
-[ERR] CodecXM::openInternal                    : 'Extended Module: ' ID check failed [?i?]
-[ERR] CodecIT::openInternal                    : 'IMPM' etc ID check failed [?i?]
-[ERR] CodecMIDI::openInternal                  : 'HThd' ID check failed [?i?]
-[ERR] CodecMPEG::openInternal                  : failed to open as mpeg
-[ERR] ResourceLoader::asyncLoadResourceThread  : Failed to load waveform {dcf86d3f-5f90-426d-b3c8-e45e9a38b8aa} (error 19)
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 70144
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 10624
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000005AEF4FF288
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFA9CE3FA0
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFA9CE3F60
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFA9CE4080
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFA9CE4140
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001942233DCF8
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[ERR] CodecOggVorbis::openInternal             : failed to open as ogg
-[ERR] CodecMOD::openInternal                   : 'M.K.' etc ID check failed [}???]
-[ERR] CodecS3M::openInternal                   : 'SCRM' ID check failed [�&:]
-[ERR] CodecXM::openInternal                    : 'Extended Module: ' ID check failed [?i?]
-[ERR] CodecIT::openInternal                    : 'IMPM' etc ID check failed [?i?]
-[ERR] CodecMIDI::openInternal                  : 'HThd' ID check failed [?i?]
-[ERR] CodecMPEG::openInternal                  : failed to open as mpeg
-[ERR] ResourceLoader::asyncLoadResourceThread  : Failed to load waveform {ab14ef6a-09af-4cd1-999b-acf95f97cfd5} (error 19)
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 70144
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 10624
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000005AEF4FF288
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFA9CE3FA0
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFA9CE3F60
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFA9CE4080
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFA9CE4140
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001942233DCF8
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[ERR] CodecOggVorbis::openInternal             : failed to open as ogg
-[ERR] CodecMOD::openInternal                   : 'M.K.' etc ID check failed [}???]
-[ERR] CodecS3M::openInternal                   : 'SCRM' ID check failed [�&:]
-[ERR] CodecXM::openInternal                    : 'Extended Module: ' ID check failed [?i?]
-[ERR] CodecIT::openInternal                    : 'IMPM' etc ID check failed [?i?]
-[ERR] CodecMIDI::openInternal                  : 'HThd' ID check failed [?i?]
-[ERR] CodecMPEG::openInternal                  : failed to open as mpeg
-[ERR] ResourceLoader::asyncLoadResourceThread  : Failed to load waveform {d00602a7-929b-4b90-8aef-0fd9be2bf0fa} (error 19)
-[WRN] EventModelAPIData::getSampleLoadingState : Event '{a5a486fe-be6c-4c68-9685-600bede4a365}' waveform in error state
-[WRN] SoundSourceInstrumentInstance::startChannelIfReady : Resource type 2 for instrument {22efb25d-e84e-4fa4-9db7-ab3a7f8657a7} has returned 76 and will now stop.
-[LOG] SoundI::release                          : Footstep 2.wav (000001944E5230E8)
-[LOG] SystemI::createSoundInternal             : Create name='fmod:///remote/E:/SIBERIAN GAMEJAM/RusssssJam2023/AudioSource/2/Assets/Footstep 2.wav', mode=0x0200C202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'E:/SIBERIAN GAMEJAM/RusssssJam2023/AudioSource/2/Assets/Footstep 2.wav'
-[LOG] SystemI::createSoundInternal             : Sample 0/0: name='(null)', format=2, channels=2, frequency=44100, lengthbytes=55128, lengthpcm=13782, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.000000.
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 70144
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 10624
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000005AEF4FF288
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFA9CE3FA0
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFA9CE3F60
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFA9CE4080
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFA9CE4140
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001942233ED78
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[ERR] CodecOggVorbis::openInternal             : failed to open as ogg
-[ERR] CodecMOD::openInternal                   : 'M.K.' etc ID check failed [}???]
-[ERR] CodecS3M::openInternal                   : 'SCRM' ID check failed [�&:]
-[ERR] CodecXM::openInternal                    : 'Extended Module: ' ID check failed [?i?]
-[ERR] CodecIT::openInternal                    : 'IMPM' etc ID check failed [?i?]
-[ERR] CodecMIDI::openInternal                  : 'HThd' ID check failed [?i?]
-[ERR] CodecMPEG::openInternal                  : failed to open as mpeg
-[ERR] ResourceLoader::asyncLoadResourceThread  : Failed to load waveform {57b8cf0f-b262-4a8b-9274-37ef0c0dc1db} (error 19)
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 70144
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 10624
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000005AEF4FF288
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFA9CE3FA0
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFA9CE3F60
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFA9CE4080
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFA9CE4140
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001942233ED78
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[ERR] CodecOggVorbis::openInternal             : failed to open as ogg
-[ERR] CodecMOD::openInternal                   : 'M.K.' etc ID check failed [}???]
-[ERR] CodecS3M::openInternal                   : 'SCRM' ID check failed [�&:]
-[ERR] CodecXM::openInternal                    : 'Extended Module: ' ID check failed [?i?]
-[ERR] CodecIT::openInternal                    : 'IMPM' etc ID check failed [?i?]
-[ERR] CodecMIDI::openInternal                  : 'HThd' ID check failed [?i?]
-[ERR] CodecMPEG::openInternal                  : failed to open as mpeg
-[ERR] ResourceLoader::asyncLoadResourceThread  : Failed to load waveform {ff256829-a1d6-419e-9554-27c7766b3c32} (error 19)
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 70144
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 10624
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000005AEF4FF288
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFA9CE3FA0
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFA9CE3F60
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFA9CE4080
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFA9CE4140
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001942233ED78
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[ERR] CodecOggVorbis::openInternal             : failed to open as ogg
-[ERR] CodecMOD::openInternal                   : 'M.K.' etc ID check failed [}???]
-[ERR] CodecS3M::openInternal                   : 'SCRM' ID check failed [�&:]
-[ERR] CodecXM::openInternal                    : 'Extended Module: ' ID check failed [?i?]
-[ERR] CodecIT::openInternal                    : 'IMPM' etc ID check failed [?i?]
-[ERR] CodecMIDI::openInternal                  : 'HThd' ID check failed [?i?]
-[ERR] CodecMPEG::openInternal                  : failed to open as mpeg
-[ERR] ResourceLoader::asyncLoadResourceThread  : Failed to load waveform {01608937-4709-44cf-8cde-65262e89fbb8} (error 19)
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 70144
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 10624
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000005AEF4FF288
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFA9CE3FA0
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFA9CE3F60
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFA9CE4080
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFA9CE4140
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001942233ED78
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[ERR] CodecOggVorbis::openInternal             : failed to open as ogg
-[ERR] CodecMOD::openInternal                   : 'M.K.' etc ID check failed [}???]
-[ERR] CodecS3M::openInternal                   : 'SCRM' ID check failed [�&:]
-[ERR] CodecXM::openInternal                    : 'Extended Module: ' ID check failed [?i?]
-[ERR] CodecIT::openInternal                    : 'IMPM' etc ID check failed [?i?]
-[ERR] CodecMIDI::openInternal                  : 'HThd' ID check failed [?i?]
-[ERR] CodecMPEG::openInternal                  : failed to open as mpeg
-[ERR] ResourceLoader::asyncLoadResourceThread  : Failed to load waveform {dcf86d3f-5f90-426d-b3c8-e45e9a38b8aa} (error 19)
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 70144
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 10624
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000005AEF4FF288
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFA9CE3FA0
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFA9CE3F60
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFA9CE4080
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFA9CE4140
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001942233ED78
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[ERR] CodecOggVorbis::openInternal             : failed to open as ogg
-[ERR] CodecMOD::openInternal                   : 'M.K.' etc ID check failed [}???]
-[ERR] CodecS3M::openInternal                   : 'SCRM' ID check failed [�&:]
-[ERR] CodecXM::openInternal                    : 'Extended Module: ' ID check failed [?i?]
-[ERR] CodecIT::openInternal                    : 'IMPM' etc ID check failed [?i?]
-[ERR] CodecMIDI::openInternal                  : 'HThd' ID check failed [?i?]
-[ERR] CodecMPEG::openInternal                  : failed to open as mpeg
-[ERR] ResourceLoader::asyncLoadResourceThread  : Failed to load waveform {ab14ef6a-09af-4cd1-999b-acf95f97cfd5} (error 19)
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 70144
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 10624
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000005AEF4FF288
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFA9CE3FA0
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFA9CE3F60
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFA9CE4080
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFA9CE4140
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001942233ED78
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[ERR] CodecOggVorbis::openInternal             : failed to open as ogg
-[ERR] CodecMOD::openInternal                   : 'M.K.' etc ID check failed [}???]
-[ERR] CodecS3M::openInternal                   : 'SCRM' ID check failed [�&:]
-[ERR] CodecXM::openInternal                    : 'Extended Module: ' ID check failed [?i?]
-[ERR] CodecIT::openInternal                    : 'IMPM' etc ID check failed [?i?]
-[ERR] CodecMIDI::openInternal                  : 'HThd' ID check failed [?i?]
-[ERR] CodecMPEG::openInternal                  : failed to open as mpeg
-[ERR] ResourceLoader::asyncLoadResourceThread  : Failed to load waveform {d00602a7-929b-4b90-8aef-0fd9be2bf0fa} (error 19)
-[WRN] EventModelAPIData::getSampleLoadingState : Event '{a5a486fe-be6c-4c68-9685-600bede4a365}' waveform in error state
-[WRN] SoundSourceInstrumentInstance::startChannelIfReady : Resource type 2 for instrument {b894c120-d5ce-4b43-a98b-f95008f09965} has returned 76 and will now stop.
-[LOG] SoundI::release                          : Footstep 2.wav (00000195203A6628)
-[LOG] SoundI::release                          : VILLAGE AMB (000001952CCA35F8)
-[LOG] SoundI::release                          :     VILLAGE AMB (000001944E524AE8)
-[LOG] SoundI::release                          :     VILLAGE AMB (000001952CCA2F38)
-[LOG] SoundI::release                          : Footstep 4.wav (000001952E5E5198)
-[LOG] SoundI::release                          : Footstep 5.wav (000001952E5E5338)
-[LOG] SoundI::release                          : Footstep 3.wav (00000194898960E8)
-[LOG] SoundI::release                          : Footstep 1.wav (000001952E5E54D8)
-[LOG] Thread::callback                         : FMOD Studio update thread finished.
-[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
-[LOG] ProfileClient::markForDead               : Closing client connection
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] FMOD_OS_Net_Read                         : Interrupted.[LOG] Thread::callback                         : FMOD profiler thread (send) finished.
-[LOG] ProfileClient::recvThreadLoopFunction    : Socket disconnected
-[LOG] Thread::callback                         : FMOD profiler thread (recv) finished.
-[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
-[LOG] LiveUpdate::release                      : 
-[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
-[LOG] Thread::callback                         : FMOD stream thread finished.
-[LOG] Thread::callback                         : FMOD mixer thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] SystemI::close                           : Closed.
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
@@ -341,5 +32,3 @@
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
 [LOG] SystemI::close                           : Closed.
-[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
-[LOG] Thread::callback                         : FMOD file thread finished.
