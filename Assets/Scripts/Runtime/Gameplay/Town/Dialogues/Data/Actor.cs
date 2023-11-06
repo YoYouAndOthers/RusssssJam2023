@@ -11,5 +11,6 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
     public Sprite Icon;
     public string Description;
     public Guid Id = Guid.NewGuid();
+    public GameObject DefaultAnimation;
   }
 }

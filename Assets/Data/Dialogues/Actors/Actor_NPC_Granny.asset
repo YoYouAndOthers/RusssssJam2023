@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: "\u0411\u0430\u0431\u043A\u0430"
   IsPlayer: 0
-  Icon: {fileID: 21300000, guid: b89b8fd807df61e4a90badb30ee29323, type: 3}
+  Icon: {fileID: 0}
   Description: 
+  DefaultAnimation: {fileID: 8239769760541085515, guid: 578b86bd0cf45ae4bbe7ba003ee4bf00, type: 3}

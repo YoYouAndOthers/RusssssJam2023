@@ -23,7 +23,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions
         return true;
       }
 
-      return action is PlayActorAnimation playActorAnimation;
+      return action is OverrideActorAnimation playActorAnimation;
     }
   }
 }

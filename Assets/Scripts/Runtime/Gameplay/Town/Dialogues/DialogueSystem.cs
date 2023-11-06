@@ -13,13 +13,14 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
   {
     private readonly ReactiveProperty<DialogueEntryModel> _currentDialogueEntry =
       new() { Value = DialogueEntryModel.Empty };
-    private readonly ReactiveProperty<ActorModel> _npcActor = new(){ Value = new ActorModel() };
-    private readonly ReactiveProperty<ActorModel> _playerActor = new(){ Value = new ActorModel() };
+
+    private readonly ReactiveProperty<ActorModel> _npcActor = new() { Value = new ActorModel() };
+    private readonly ReactiveProperty<ActorModel> _playerActor = new() { Value = new ActorModel() };
 
     private readonly IConversationDataBase _conversationDataBase;
     private readonly IConversationActionInvoker _actionInvoker;
     private readonly IPauseService _pauseService;
-    
+
     private Actor _currentActor;
 
     public IReactiveProperty<DialogueEntryModel> CurrentDialogueEntry => _currentDialogueEntry;
@@ -45,31 +46,52 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
             Debug.LogError($"Action {action.GetType().Name} not invoked!");
         _currentDialogueEntry.Value = new DialogueEntryModel(currentConversationEntry);
         HasNextDialogueEntry.Value = _currentDialogueEntryIndex < _currentConversation.Entries.Length - 1;
-        if (currentConversationEntry.Speaker.IsPlayer)
+        SetupAnimation(currentConversationEntry);
+      }
+    }
+
+    private void SetupAnimation(DialogueEntry currentConversationEntry)
+    {
+      var overrideAnimation = false;
+      if (currentConversationEntry.Speaker.IsPlayer)
+      {
+        foreach (DialogueActionBase actionBase in currentConversationEntry.Actions)
         {
-          foreach (DialogueActionBase actionBase in currentConversationEntry.Actions)
+          if (actionBase is OverrideActorAnimation animationAction)
           {
-            if (actionBase is PlayActorAnimation animationAction)
-              _playerActor.Value = new ActorModel
-                { AnimationPrefab = animationAction.AnimationPrefab };
+            _playerActor.Value = new ActorModel { AnimationPrefab = animationAction.AnimationPrefab };
+            overrideAnimation = true;
           }
-        }
-        else
-        {
-          foreach (DialogueActionBase actionBase in currentConversationEntry.Actions)
-          {
-            if (actionBase is PlayActorAnimation animationAction)
-              _npcActor.Value = new ActorModel
-                { AnimationPrefab = animationAction.AnimationPrefab };
-          }
+          break;
         }
       }
+      else
+      {
+        foreach (DialogueActionBase actionBase in currentConversationEntry.Actions)
+        {
+          if (actionBase is OverrideActorAnimation animationAction)
+          {
+            _npcActor.Value = new ActorModel { AnimationPrefab = animationAction.AnimationPrefab };
+            overrideAnimation = true;
+          }
+          break;
+        }
+      }
+
+      if (overrideAnimation)
+        return;
+
+      if (currentConversationEntry.Speaker.IsPlayer)
+        _playerActor.Value = new ActorModel { AnimationPrefab = currentConversationEntry.Speaker.DefaultAnimation };
+      else
+        _npcActor.Value = new ActorModel { AnimationPrefab = currentConversationEntry.Speaker.DefaultAnimation };
     }
 
     private Conversation _currentConversation;
     private int _currentDialogueEntryIndex;
 
-    public DialogueSystem(IConversationDataBase conversationDataBase, IConversationActionInvoker actionInvoker, IPauseService pauseService)
+    public DialogueSystem(IConversationDataBase conversationDataBase, IConversationActionInvoker actionInvoker,
+      IPauseService pauseService)
     {
       _conversationDataBase = conversationDataBase;
       _actionInvoker = actionInvoker;

@@ -81,6 +81,7 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Dialogues
 
     private void ChangeNpcAnimation(ActorModel actorModel)
     {
+      Debug.Log($"ChangeNpcAnimation {actorModel.AnimationPrefab}");
       if (actorModel.AnimationPrefab != null)
       {
         CleanAnimationPrefabs();
@@ -91,6 +92,7 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Dialogues
 
     private void ChangePlayerAnimation(ActorModel actorModel)
     {
+      Debug.Log($"ChangePlayerAnimation {actorModel.AnimationPrefab}");
       if (actorModel.AnimationPrefab != null)
       {
         CleanAnimationPrefabs();
