@@ -248,10 +248,10 @@ MonoBehaviour:
   Path: AudioSource/2/Build/Desktop/MC.bank
   Name: MC
   StudioPath: bank:/MC
-  lastModified: 638348896581971398
+  lastModified: 638348917745281445
   FileSizes:
   - Name: Desktop
-    Value: 80480
+    Value: 81152
   Exists: 1
 --- !u!114 &-7486384206581582406
 MonoBehaviour:
@@ -280,7 +280,7 @@ MonoBehaviour:
   - {fileID: -7759490629290154818}
   MinDistance: 1
   MaxDistance: 20
-  Length: 6821
+  Length: 8440
 --- !u!114 &-7300129516841881463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,7 +364,7 @@ MonoBehaviour:
   - {fileID: 4282712622615075993}
   MinDistance: 1
   MaxDistance: 20
-  Length: 7200
+  Length: 7022
 --- !u!114 &-6960896532921056165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,10 +448,10 @@ MonoBehaviour:
   Path: AudioSource/2/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638348896580288115
+  lastModified: 638348917744892666
   FileSizes:
   - Name: Desktop
-    Value: 1890
+    Value: 2346
   Exists: 1
 --- !u!114 &-6473535196265201894
 MonoBehaviour:
@@ -680,7 +680,7 @@ MonoBehaviour:
   Path: AudioSource/2/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638348896580318022
+  lastModified: 638348917744902448
   FileSizes:
   - Name: Desktop
     Value: 2464
@@ -923,10 +923,10 @@ MonoBehaviour:
   Path: "AudioSource/2/Build/Desktop/\u041E\u0417\u0412\u0423\u0427\u041A\u0410.bank"
   Name: "\u041E\u0417\u0412\u0423\u0427\u041A\u0410"
   StudioPath: "bank:/\u041E\u0417\u0412\u0423\u0427\u041A\u0410"
-  lastModified: 638348352870137108
+  lastModified: 638348906851248823
   FileSizes:
   - Name: Desktop
-    Value: 2455840
+    Value: 2501024
   Exists: 1
 --- !u!114 &-953750706769333247
 MonoBehaviour:
@@ -1089,7 +1089,7 @@ MonoBehaviour:
   - {fileID: -6517612318321120736}
   StringsBanks:
   - {fileID: -5352089671009890012}
-  cacheTime: 638348896581971398
+  cacheTime: 638348917745281445
   cacheVersion: 131608
 --- !u!114 &270712485063968445
 MonoBehaviour:
@@ -1377,7 +1377,7 @@ MonoBehaviour:
   - {fileID: 2601709842798483398}
   MinDistance: 1
   MaxDistance: 20
-  Length: 5794
+  Length: 7857
 --- !u!114 &3688079478923181824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1501,7 +1501,7 @@ MonoBehaviour:
   - {fileID: 6219336287091596653}
   MinDistance: 1
   MaxDistance: 20
-  Length: 8220
+  Length: 10049
 --- !u!114 &4435283062840657765
 MonoBehaviour:
   m_ObjectHideFlags: 0
