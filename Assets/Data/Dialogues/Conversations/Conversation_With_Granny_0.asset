@@ -25,17 +25,21 @@ MonoBehaviour:
     Text: "\u0422\u0435\u043A\u0441\u0442 \u0431\u0430\u0431\u043A\u0438 1"
     Actions:
     - rid: 7267942391778902021
+    - rid: 7267942425661800451
   - name: "\u0411\u0430\u0431\u043A\u0430: \u0422\u0435\u043A\u0441\u0442 \u0431\u0430\u0431\u043A\u0438
       2"
     Speaker: {fileID: 11400000, guid: 784b36f9c5a9eb14cbb61e6d9e9c5417, type: 2}
     Text: "\u0422\u0435\u043A\u0441\u0442 \u0431\u0430\u0431\u043A\u0438 2"
-    Actions: []
+    Actions:
+    - rid: 7267942425661800452
   - name: "\u0413\u0435\u0440\u043E\u0439: \u0422\u0435\u043A\u0441\u0442 \u0433\u0435\u0440\u043E\u044F
       1"
     Speaker: {fileID: 11400000, guid: 783c676b8838ee142a717f3489474e76, type: 2}
     Text: "\u0422\u0435\u043A\u0441\u0442 \u0433\u0435\u0440\u043E\u044F 1"
     Actions:
     - rid: 7267942391778902022
+    - rid: 7267942425661800453
+  OnEndActions: []
   references:
     version: 2
     RefIds:
@@ -57,3 +61,18 @@ MonoBehaviour:
         name: "\u0421\u0430\u043C\u043E\u0435 \u043D\u0430\u0447\u0430\u043B\u043E
           \u0438\u0433\u0440\u044B"
         QuestConfig: {fileID: 11400000, guid: f63c3b82bd8c377448cbcb8abef341fc, type: 2}
+    - rid: 7267942425661800451
+      type: {class: PlayActorAnimation, ns: RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions, asm: RussSurvivor.Runtime}
+      data:
+        name: "\u041F\u0440\u043E\u0438\u0433\u0440\u0430\u0442\u044C \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u044E"
+        AnimationPrefab: {fileID: 6830841025826352869, guid: 1d5f0695a19c77a48abb13a4b7343aaf, type: 3}
+    - rid: 7267942425661800452
+      type: {class: PlayActorAnimation, ns: RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions, asm: RussSurvivor.Runtime}
+      data:
+        name: "\u041F\u0440\u043E\u0438\u0433\u0440\u0430\u0442\u044C \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u044E"
+        AnimationPrefab: {fileID: 6830841025826352869, guid: 1d5f0695a19c77a48abb13a4b7343aaf, type: 3}
+    - rid: 7267942425661800453
+      type: {class: PlayActorAnimation, ns: RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions, asm: RussSurvivor.Runtime}
+      data:
+        name: "\u041F\u0440\u043E\u0438\u0433\u0440\u0430\u0442\u044C \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u044E"
+        AnimationPrefab: {fileID: 2720916103656156433, guid: b20809a33fd5d26489d6d10dac52775a, type: 3}

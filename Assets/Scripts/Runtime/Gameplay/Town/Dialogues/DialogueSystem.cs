@@ -13,11 +13,21 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
   {
     private readonly ReactiveProperty<DialogueEntryModel> _currentDialogueEntry =
       new() { Value = DialogueEntryModel.Empty };
+    private readonly ReactiveProperty<ActorModel> _npcActor = new(){ Value = new ActorModel() };
+    private readonly ReactiveProperty<ActorModel> _playerActor = new(){ Value = new ActorModel() };
 
     private readonly IConversationDataBase _conversationDataBase;
     private readonly IConversationActionInvoker _actionInvoker;
+    private readonly IPauseService _pauseService;
+    
+    private Actor _currentActor;
 
     public IReactiveProperty<DialogueEntryModel> CurrentDialogueEntry => _currentDialogueEntry;
+
+    public IReactiveProperty<ActorModel> NpcActor => _npcActor;
+
+    public IReactiveProperty<ActorModel> PlayerActor => _playerActor;
+
     public BoolReactiveProperty IsConversationActive { get; } = new(false);
     public BoolReactiveProperty HasNextDialogueEntry { get; } = new(false);
 
@@ -35,13 +45,29 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
             Debug.LogError($"Action {action.GetType().Name} not invoked!");
         _currentDialogueEntry.Value = new DialogueEntryModel(currentConversationEntry);
         HasNextDialogueEntry.Value = _currentDialogueEntryIndex < _currentConversation.Entries.Length - 1;
+        if (currentConversationEntry.Speaker.IsPlayer)
+        {
+          foreach (DialogueActionBase actionBase in currentConversationEntry.Actions)
+          {
+            if (actionBase is PlayActorAnimation animationAction)
+              _playerActor.Value = new ActorModel
+                { AnimationPrefab = animationAction.AnimationPrefab };
+          }
+        }
+        else
+        {
+          foreach (DialogueActionBase actionBase in currentConversationEntry.Actions)
+          {
+            if (actionBase is PlayActorAnimation animationAction)
+              _npcActor.Value = new ActorModel
+                { AnimationPrefab = animationAction.AnimationPrefab };
+          }
+        }
       }
     }
 
     private Conversation _currentConversation;
-    private Conversation _currentConversation1;
     private int _currentDialogueEntryIndex;
-    private IPauseService _pauseService;
 
     public DialogueSystem(IConversationDataBase conversationDataBase, IConversationActionInvoker actionInvoker, IPauseService pauseService)
     {

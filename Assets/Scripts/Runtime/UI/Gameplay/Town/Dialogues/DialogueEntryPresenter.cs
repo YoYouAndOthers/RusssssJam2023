@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
+using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Models;
 using UniRx;
 using UnityEngine;
@@ -23,10 +24,12 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Dialogues
     [SerializeField] private Image _npcIconImage;
 
     private IDialogueSystem _dialogueSystem;
+    private IInstantiator _instantiator;
 
     [Inject]
-    private void Construct(IDialogueSystem dialogueSystem)
+    private void Construct(IInstantiator instantiator, IDialogueSystem dialogueSystem)
     {
+      _instantiator = instantiator;
       _dialogueSystem = dialogueSystem;
     }
 
@@ -66,6 +69,40 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Dialogues
         .ObserveEveryValueChanged(k => k.Value)
         .Subscribe(SetDialogueEntryView)
         .AddTo(_disposables);
+      _dialogueSystem.NpcActor
+        .ObserveEveryValueChanged(k => k.Value)
+        .Subscribe(ChangeNpcAnimation)
+        .AddTo(_disposables);
+      _dialogueSystem.PlayerActor
+        .ObserveEveryValueChanged(k => k.Value)
+        .Subscribe(ChangePlayerAnimation)
+        .AddTo(_disposables);
+    }
+
+    private void ChangeNpcAnimation(ActorModel actorModel)
+    {
+      if (actorModel.AnimationPrefab != null)
+      {
+        foreach (Transform child in _playerIconImage.transform)
+          Destroy(child.gameObject);
+        foreach (Transform child in _npcIconImage.transform)
+          Destroy(child.gameObject);
+        GameObject animationGo =
+          _instantiator.InstantiatePrefab(actorModel.AnimationPrefab, _npcIconImage.transform);
+      }
+    }
+
+    private void ChangePlayerAnimation(ActorModel actorModel)
+    {
+      if (actorModel.AnimationPrefab != null)
+      {
+        foreach (Transform child in _playerIconImage.transform)
+          Destroy(child.gameObject);
+        foreach (Transform child in _npcIconImage.transform)
+          Destroy(child.gameObject);
+        GameObject animationGo =
+          _instantiator.InstantiatePrefab(actorModel.AnimationPrefab, _playerIconImage.transform);
+      }
     }
 
     private void SetDialogueEntryView(DialogueEntryModel dialogueEntryModel)
