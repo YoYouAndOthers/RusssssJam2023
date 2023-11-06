@@ -17,38 +17,34 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Common.Money
     {
       _moneyRegistry = moneyRegistry;
     }
-    
+
     private void Awake()
     {
       _moneyRegistry.Money.ObserveAdd()
         .Subscribe(OnMoneyChanged)
         .AddTo(this);
-      
+
       _moneyRegistry.Money.ObserveReplace()
         .Subscribe(OnMoneyChangedReplacaed)
         .AddTo(this);
     }
 
-    private void OnMoneyChanged( DictionaryAddEvent<CurrencyType, int> money)
+    private void OnMoneyChanged(DictionaryAddEvent<CurrencyType, int> money)
     {
       foreach (CurrencyType currency in _currencyIconByType.Keys)
-      {
-        if(_moneyRegistry.Money.TryGetValue(currency, out int amount))
+        if (_moneyRegistry.Money.TryGetValue(currency, out int amount))
           _currencyIconByType[currency].text = amount.ToString();
         else
           _currencyIconByType[currency].text = "0";
-      }
     }
-    
-    private void OnMoneyChangedReplacaed( DictionaryReplaceEvent<CurrencyType, int> money)
+
+    private void OnMoneyChangedReplacaed(DictionaryReplaceEvent<CurrencyType, int> money)
     {
       foreach (CurrencyType currency in _currencyIconByType.Keys)
-      {
-        if(_moneyRegistry.Money.TryGetValue(currency, out int amount))
+        if (_moneyRegistry.Money.TryGetValue(currency, out int amount))
           _currencyIconByType[currency].text = amount.ToString();
         else
           _currencyIconByType[currency].text = "0";
-      }
     }
   }
 }

@@ -7,7 +7,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Economics.Currency
   {
     IReadOnlyReactiveDictionary<CurrencyType, int> Money { get; }
     public void AddMoney(CurrencyType currencyType, int amount);
-    public bool TrySpendMoney(CurrencyType currencyType, int amount);
-    public bool CanSpendMoney(CurrencyType currencyType, int amount);
+    public bool TrySpendMoney(CurrencyType currencyType, int amount, bool isBeaten = false);
+    public bool CanSpendMoney(CurrencyType currencyType, int amount, bool isBeaten = false);
   }
 }

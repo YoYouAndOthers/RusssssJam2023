@@ -54,7 +54,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 
       Container.Resolve<ICooldownService>().RegisterUpdatable(Container.Resolve<IDayTimer>());
       Container.Resolve<IMoneyRegistry>().Initialize();
-      
+
       await LoadTownSceneIfNeeded();
       IsInitializing = false;
     }
@@ -170,7 +170,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
         .To<BattleSettingsService>()
         .FromNew()
         .AsSingle();
-      
+
       Container
         .Bind<IMoneyRegistry>()
         .To<MoneyRegistry>()

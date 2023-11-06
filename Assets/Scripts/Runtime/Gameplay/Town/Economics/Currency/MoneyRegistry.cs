@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 
@@ -24,47 +25,57 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Economics.Currency
         _money.Add(currencyType, amount);
     }
 
-    public bool TrySpendMoney(CurrencyType currencyType, int amount)
+    public bool TrySpendMoney(CurrencyType currencyType, int amount, bool isBeaten = false)
     {
-      if (!CanSpendMoney(currencyType, amount))
+      if (!CanSpendMoney(currencyType, amount, isBeaten))
         return false;
       _money[currencyType] -= amount;
       return true;
     }
 
-    public bool CanSpendMoney(CurrencyType currencyType, int amount)
+    public bool CanSpendMoney(CurrencyType currencyType, int amount, bool isBeaten = false)
     {
-      if(!_money.TryGetValue(currencyType, out int currentAmount))
+      Debug.Log($"Checking if can spend {amount} {currencyType} {(isBeaten ? "beaten" : "")}");
+      if (isBeaten)
+      {
+        bool polushkiExist = _money.TryGetValue(CurrencyType.Polushka, out int polushka);
+        bool zelkovyExists = _money.TryGetValue(CurrencyType.Zelkovyu, out int zelkovyu);
+        bool chetvertushkaExists = _money.TryGetValue(CurrencyType.Chetvertushka, out int chetvertushka);
+        bool serebryachokExists = _money.TryGetValue(CurrencyType.Serebryachok, out int serebryachok);
+
+        var result = new Dictionary<CurrencyType, int>
+        {
+          [CurrencyType.Zelkovyu] = 0,
+
+          [CurrencyType.Polushka] = polushkiExist
+            ? polushka / 2 + polushka % 2 + (zelkovyExists ? zelkovyu : 0)
+            : zelkovyExists
+              ? zelkovyu
+              : 0,
+
+          [CurrencyType.Serebryachok] = 0,
+          [CurrencyType.Chetvertushka] = serebryachokExists
+            ? serebryachok / 2 + serebryachok % 2 + (chetvertushkaExists ? chetvertushka : 0)
+            : chetvertushkaExists
+              ? chetvertushka
+              : 0
+        };
+
+        switch (currencyType)
+        {
+          case CurrencyType.Polushka:
+          case CurrencyType.Chetvertushka:
+            return result[currencyType] >= amount;
+          case CurrencyType.Zelkovyu:
+            return result[CurrencyType.Polushka] >= amount;
+          default:
+            return result[CurrencyType.Chetvertushka] >= amount;
+        }
+      }
+
+      if (!_money.TryGetValue(currencyType, out int currentAmount))
         return false;
       return currentAmount >= amount;
-    }
-
-    private int GetAllMoney()
-    {
-      if (!_money.TryGetValue(CurrencyType.Polushka, out int amountPolushka))
-      {
-        amountPolushka = 0;
-      }
-
-      if (!_money.TryGetValue(CurrencyType.Serebryachok, out int amountSerebryachok))
-      {
-        amountSerebryachok = 0;
-      }
-
-      if (!_money.TryGetValue(CurrencyType.Zelkovyu, out int amountZelkovyu))
-      {
-        amountZelkovyu = 0;
-      }
-
-      if (!_money.TryGetValue(CurrencyType.Chetvertushka, out int amountChetvertushka))
-      {
-        amountChetvertushka = 0;
-      }
-
-      return amountChetvertushka +
-             MoneyConverter.ConvertToChetvertushka(amountPolushka, CurrencyType.Polushka) +
-             MoneyConverter.ConvertToChetvertushka(amountSerebryachok, CurrencyType.Serebryachok) +
-             MoneyConverter.ConvertToChetvertushka(amountZelkovyu, CurrencyType.Zelkovyu);
     }
   }
 }
