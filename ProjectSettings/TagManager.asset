@@ -41,6 +41,30 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ground&Nature
+    uniqueID: 1378266649
+    locked: 0
+  - name: BuildingBehindWall
+    uniqueID: 732895069
+    locked: 0
+  - name: Walls
+    uniqueID: 2957341055
+    locked: 0
+  - name: ItemsBehindFences
+    uniqueID: 718663303
+    locked: 0
+  - name: FencesBehindBuildings
+    uniqueID: 1689149123
+    locked: 0
+  - name: Buildings
+    uniqueID: 1964808031
+    locked: 0
+  - name: Fences
+    uniqueID: 3041809757
+    locked: 0
+  - name: Items
+    uniqueID: 1533371777
+    locked: 0
   - name: Player
     uniqueID: 3721697179
     locked: 0
