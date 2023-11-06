@@ -47,6 +47,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
 
     protected override void PerformInteractionExit(PlayerTownBehaviour player)
     {
+      _traderService.EndTrade();
     }
   }
 }

@@ -18,6 +18,7 @@ using RussSurvivor.Runtime.Infrastructure.Content;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
 using RussSurvivor.Runtime.UI.Gameplay.Common.Quests;
 using RussSurvivor.Runtime.UI.Gameplay.Town.Dialogues;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -80,6 +81,13 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       _collectingQuestResolver.Initialize();
       _collectionQuestUi.Initialize(_collectingQuestResolver);
       Container.Resolve<ITraderService>().Initialize();
+      Container.Resolve<ITraderService>().WeaponsForTrade
+        .ObserveAdd()
+        .Subscribe(_ =>
+        {
+          Debug.Log($"Weapon {_.Value.Name} added for trade");
+        })
+        .AddTo(this);
       _curtain.Hide();
     }
 

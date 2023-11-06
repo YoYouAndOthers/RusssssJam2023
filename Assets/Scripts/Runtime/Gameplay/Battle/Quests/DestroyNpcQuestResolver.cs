@@ -20,6 +20,8 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Quests
           { DestructionQuestDescription.HostileObjectType.LizardCamp, EnemyType.LizardCamp }
         };
 
+    private readonly List<EnemyBehaviour> _npcs = new();
+
     [SerializeField]
     private SerializedDictionary<DestructionQuestDescription.HostileObjectType, Transform> _transformsByType;
 
@@ -27,7 +29,6 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Quests
     private EnemyFactory _enemyFactory;
     private IEnemyRegistry _enemyRegistry;
     private bool _initialized;
-    private readonly List<EnemyBehaviour> _npcs = new();
 
     private IQuestStateMachine _questStateMachine;
     private DestroyNpcQuestState _state;

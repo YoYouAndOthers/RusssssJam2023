@@ -5,6 +5,7 @@
         <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Id" />
     </ui:VisualElement>
     <uie:PropertyField name="Name" binding-path="Name" />
+    <uie:PropertyField name="CanBeTraded" binding-path="CanBeTraded" />
     <uie:PropertyField binding-path="Damage" name="Damage" />
     <uie:PropertyField name="DamageDirectionType" binding-path="DamageDirectionType" />
     <uie:PropertyField name="BaseSize" binding-path="BaseSize" />

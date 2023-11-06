@@ -10,24 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c1970d0a8924f978e333e26555ef04d, type: 3}
-  m_Name: Weapon_Fists
+  m_Name: Weapon_IronDagger
   m_EditorClassIdentifier: 
-  Name: Fistis
-  Description: 'Fists
-
-    Can crush not only enemies, but also trees and rocks'
-  InitialCooldown: 0.1
+  Name: "\u0416\u0435\u043B\u0435\u0437\u043D\u044B\u0439 \u043A\u0438\u043D\u0436\u0430\u043B"
+  Description: 
+  CanBeTraded: 1
+  InitialCooldown: 0.3
   Damage:
     DamageApplyType: 1
-    Value: 1
+    Value: 2
     DamageOverTimeRate: 0
     DamageOverTimeDuration: 0
   DamageDirectionType: 1
   BaseSize: 0
-  Prefab: {fileID: 1248958298678426504, guid: 4cb7e82d385b5784e9c97ef7d0a57b9f, type: 3}
+  Prefab: {fileID: 0}
   WeaponStats:
-    _serializedList:
-    - Key: 2
-      Value: -1
-  DamagableLayers: 192
-  Reach: 1
+    _serializedList: []
+  DamagableLayers: 64
+  Reach: 3

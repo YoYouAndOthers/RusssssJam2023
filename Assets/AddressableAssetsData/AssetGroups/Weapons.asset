@@ -23,6 +23,36 @@ MonoBehaviour:
     m_SerializedLabels:
     - Weapons
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa63205f069dad34c85ebf6ba2916001
+    m_Address: Weapon_IronAxe
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Weapons
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 20b8ab449573c6046a49496d31c9db37
+    m_Address: Weapon_IronDagger
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Weapons
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8cfc65284b80d3f4a885e798a8a2e65f
+    m_Address: Weapon_ShortSword
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Weapons
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f8494f0bd8d8a0b4c983387c86bb46b8
+    m_Address: Weapon_ShovelHandle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Weapons
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fce6a8338fbc6f7458a54180b9bfa47a
+    m_Address: Weapon_WoodenBow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Weapons
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 60d5ef9f1bdf56a4f9658dd75e1cb0ca, type: 2}
   m_SchemaSet:
