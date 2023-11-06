@@ -8,12 +8,14 @@ using UnityEngine.UI;
 namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
 {
   [RequireComponent(typeof(OnScreenControl))]
-  public class WeaponTradeUiItem : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
+  public class WeaponTradeUiItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
   {
     [SerializeField] private Image _weaponImage;
     private TradeUiPresenter _tradeUiPresenter;
     private WeaponConfig _weapon;
     private IMoneyRegistry _moneyRegistry;
+    private bool _dragged;
+    private Vector2 _delta;
 
     public void Initialize(WeaponConfig weapon, TradeUiPresenter tradeUiPresenter, IMoneyRegistry moneyRegistry)
     {
@@ -26,8 +28,24 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
       UpdateAvailability(_moneyRegistry.CanSpendMoney(_weapon.CostType, weapon.CostAmount));
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnBeginDrag(PointerEventData eventData)
     {
+      if(!_moneyRegistry.CanSpendMoney(_weapon.CostType, _weapon.CostAmount))
+        return;
+      
+      _delta = (Vector2)transform.position - eventData.position;
+      _dragged = true;
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+      if(_dragged)
+        transform.position = eventData.position + _delta;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+      _dragged = false;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
