@@ -510,6 +510,7 @@ MonoBehaviour:
   - Master
   Banks:
   - AMB
+  - MC
   - MUSIC
   - "\u041E\u0417\u0412\u0423\u0427\u041A\u0410"
   BanksToLoad: []
