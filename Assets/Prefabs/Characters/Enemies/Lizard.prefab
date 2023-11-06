@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 4179123273064340707}
   - component: {fileID: 3594207078240520876}
   - component: {fileID: 3734709291357793933}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Lizard
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -2,6 +2,7 @@
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Damage;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target;
 using RussSurvivor.Runtime.Gameplay.Common.Player;
+using RussSurvivor.Runtime.UI.Gameplay.Battle;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -45,12 +46,14 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
     private float _currentHealth;
     private IEnemyRegistry _enemyRegistry;
     private IPlayerRegistry _playerRegistry;
+    private IDamageCountService _damageCountService;
 
     [Inject]
-    private void Construct(IPlayerRegistry playerRegistry, IEnemyRegistry enemyRegistry)
+    private void Construct(IPlayerRegistry playerRegistry, IEnemyRegistry enemyRegistry, IDamageCountService damageCountService)
     {
       _playerRegistry = playerRegistry;
       _enemyRegistry = enemyRegistry;
+      _damageCountService = damageCountService;
     }
 
     private void Awake()
@@ -73,6 +76,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
         damage = damage * MaxHealth / 100;
 
       CurrentHealth -= damage;
+      _damageCountService.ShowDamageCount(Position, (int)damage);
       return true;
     }
 

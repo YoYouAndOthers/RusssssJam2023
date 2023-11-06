@@ -16,6 +16,7 @@ using RussSurvivor.Runtime.Gameplay.Common.Timing;
 using RussSurvivor.Runtime.Gameplay.Common.Transitions;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
 using RussSurvivor.Runtime.Infrastructure.Scenes;
+using RussSurvivor.Runtime.UI.Gameplay.Battle;
 using RussSurvivor.Runtime.UI.Gameplay.Common.Quests;
 using UnityEngine;
 using Zenject;
@@ -72,6 +73,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     public async void Initialize()
     {
       await UniTask.WaitWhile(() => _gameplayInstaller.IsInitializing);
+      await Container.Resolve<IDamageCountService>().InitializeAsync();
 
       _gameplayTransitionService.CurrentScene = SceneEntrance.SceneName.Battle;
       Debug.Log("Gameplay scene initializing");
@@ -167,6 +169,12 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
 
       Container
         .Bind<EnemyFactory>()
+        .FromNew()
+        .AsSingle();
+
+      Container
+        .Bind<IDamageCountService>()
+        .To<DamageCountService>()
         .FromNew()
         .AsSingle();
     }
