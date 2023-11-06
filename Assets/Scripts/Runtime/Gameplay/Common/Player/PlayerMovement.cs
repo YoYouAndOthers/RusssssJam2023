@@ -1,6 +1,7 @@
-using RussSurvivor.Runtime.Infrastructure.Inputs;
 using UnityEngine;
 using Zenject;
+using FMODUnity;
+using RussSurvivor.Runtime.Infrastructure.Inputs;
 
 namespace RussSurvivor.Runtime.Gameplay.Common.Player
 {
@@ -8,11 +9,17 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
   {
     [SerializeField] private float _speed = 5f;
     [SerializeField] private Rigidbody2D _rigidbody2D;
-
     [SerializeField] private CharecterViewController _view;
+    private Vector2 lastViewDirection;
 
     private IInputService _inputService;
-    private Vector2 lastViewDirection;
+
+    // Add the FMOD event path for footsteps
+    [EventRef] [SerializeField]
+    private string footstepsEventPath = "event:/Footsteps"; // Set this to the path of your FMOD footsteps event
+
+    private float footstepsCooldown = 0.3f; // Adjust the cooldown duration as needed
+    private float timeSinceLastFootstep = 0f;
 
     [Inject]
     private void Construct(IInputService inputService)
@@ -31,6 +38,14 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
         {
           lastViewDirection = direction;
           _view.PlayAnimation(CharecterViewController.AnimationState.Run, lastViewDirection);
+
+          // Check if enough time has passed since the last footstep
+          if (Time.time - timeSinceLastFootstep > footstepsCooldown)
+          {
+            // Trigger FMOD footsteps event
+            RuntimeManager.PlayOneShot(footstepsEventPath, transform.position);
+            timeSinceLastFootstep = Time.time; // Update the time of the last footstep
+          }
         }
         else
         {

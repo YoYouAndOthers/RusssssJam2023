@@ -1,6 +1,7 @@
 using System.Collections;
-using RussSurvivor.Runtime.Infrastructure.Inputs;
 using UnityEngine;
+using FMODUnity;
+using RussSurvivor.Runtime.Infrastructure.Inputs;
 using Zenject;
 
 namespace RussSurvivor.Runtime.Gameplay.Common.Player
@@ -12,11 +13,17 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
     [SerializeField] private float _dashDuration = 0.2f;
     [SerializeField] private float _dashCooldown = 1f;
     [SerializeField] private Rigidbody2D _rigidbody2D;
-    [SerializeField] private CharecterViewController _view;
     private float _dashCooldownTimer;
     private float _dashTimer;
     private IInputService _inputService;
+    [SerializeField] private CharecterViewController _view;
     private Vector2 dashVector;
+
+    // Add the FMOD event path
+    [EventRef] [SerializeField]
+    private string dashEventPath = "event:/Dash 1"; // Set this to the path of your FMOD event
+
+    private FMOD.Studio.EventInstance dashEventInstance;
 
     [Inject]
     private void Construct(IInputService inputService)
@@ -50,14 +57,18 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
         return;
 
       _view?.PlayAnimation(CharecterViewController.AnimationState.Dash, dashVector);
-      StartCoroutine(Delay());
 
-      IEnumerator Delay()
-      {
-        yield return new WaitForSeconds(_dashDelay);
-        _dashTimer = _dashDuration;
-        _dashCooldownTimer = _dashCooldown;
-      }
+      // Trigger the FMOD event
+      RuntimeManager.PlayOneShot(dashEventPath, transform.position);
+
+      StartCoroutine(Delay());
+    }
+
+    private IEnumerator Delay()
+    {
+      yield return new WaitForSeconds(_dashDelay);
+      _dashTimer = _dashDuration;
+      _dashCooldownTimer = _dashCooldown;
     }
   }
 }
