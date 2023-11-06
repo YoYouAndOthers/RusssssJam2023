@@ -19,7 +19,6 @@ using RussSurvivor.Runtime.Infrastructure.Scenes;
 using RussSurvivor.Runtime.UI.Gameplay.Common.Quests;
 using RussSurvivor.Runtime.UI.Gameplay.Town.Dialogues;
 using RussSurvivor.Runtime.UI.Gameplay.Town.Trade;
-using UniRx;
 using UnityEngine;
 using Zenject;
 

@@ -13,6 +13,8 @@
         </ui:VisualElement>
     </ui:VisualElement>
     <uie:PropertyField binding-path="Damage" name="Damage" />
+    <uie:PropertyField name="CostType" binding-path="CostType" />
+    <uie:PropertyField name="CostAmount" binding-path="CostAmount" />
     <uie:PropertyField name="DamageDirectionType" binding-path="DamageDirectionType" />
     <uie:PropertyField name="BaseSize" binding-path="BaseSize" />
     <uie:PropertyField name="Reach" binding-path="Reach" />

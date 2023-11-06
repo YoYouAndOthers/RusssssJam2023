@@ -1,5 +1,6 @@
 using System;
 using AYellowpaper.SerializedCollections;
+using RussSurvivor.Runtime.Gameplay.Town.Economics.Currency;
 using UnityEngine;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
@@ -11,6 +12,9 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
     public string Description;
     public bool CanBeTraded;
     public Sprite Icon;
+    public CurrencyType CostType;
+    public int CostAmount;
+
     [Tooltip("Cooldown without modifiers in seconds")] public float InitialCooldown;
     public WeaponDamage Damage;
     [Tooltip("Direction of weapon attack")] public DamageDirectionType DamageDirectionType;
