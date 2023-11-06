@@ -83,10 +83,7 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Dialogues
     {
       if (actorModel.AnimationPrefab != null)
       {
-        foreach (Transform child in _playerIconImage.transform)
-          Destroy(child.gameObject);
-        foreach (Transform child in _npcIconImage.transform)
-          Destroy(child.gameObject);
+        CleanAnimationPrefabs();
         GameObject animationGo =
           _instantiator.InstantiatePrefab(actorModel.AnimationPrefab, _npcIconImage.transform);
       }
@@ -96,13 +93,18 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Dialogues
     {
       if (actorModel.AnimationPrefab != null)
       {
-        foreach (Transform child in _playerIconImage.transform)
-          Destroy(child.gameObject);
-        foreach (Transform child in _npcIconImage.transform)
-          Destroy(child.gameObject);
+        CleanAnimationPrefabs();
         GameObject animationGo =
           _instantiator.InstantiatePrefab(actorModel.AnimationPrefab, _playerIconImage.transform);
       }
+    }
+
+    private void CleanAnimationPrefabs()
+    {
+      foreach (Transform child in _playerIconImage.transform)
+        Destroy(child.gameObject);
+      foreach (Transform child in _npcIconImage.transform)
+        Destroy(child.gameObject);
     }
 
     private void SetDialogueEntryView(DialogueEntryModel dialogueEntryModel)
