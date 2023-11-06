@@ -37,16 +37,16 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 4863828444875664101}
-    m_Position: {x: 260, y: 20, z: 0}
+    m_Position: {x: 280, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4178463025371663956}
-    m_Position: {x: 235, y: 65, z: 0}
+    m_Position: {x: 280, y: 60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3849413386508524283}
-    m_Position: {x: 270, y: 130, z: 0}
+    m_Position: {x: 280, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2309237136597954992}
-    m_Position: {x: 305, y: 195, z: 0}
+    m_Position: {x: 280, y: 180, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -86,7 +86,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AttackDow
+  m_Name: AttackBow
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
