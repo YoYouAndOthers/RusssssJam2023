@@ -64,7 +64,7 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
 
     public void UpdateAvailability(bool canSpendMoney)
     {
-      _weaponImage.color = canSpendMoney ?
+      transform.parent.GetComponent<Image>().color = canSpendMoney ?
         new Color(0, 0.9f, 0, 0.2f) : 
         new Color(0.9f, 0, 0, 0.2f);
     }

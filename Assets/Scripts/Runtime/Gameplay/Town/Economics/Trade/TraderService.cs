@@ -47,5 +47,10 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Economics.Trade
       Debug.Log("Trade ended");
       _pauseService.Resume();
     }
+
+    public void AddToCart(WeaponConfig weapon)
+    {
+      
+    }
   }
 }

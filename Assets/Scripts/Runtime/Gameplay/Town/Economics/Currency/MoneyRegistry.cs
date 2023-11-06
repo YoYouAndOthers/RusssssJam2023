@@ -34,10 +34,9 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Economics.Currency
 
     public bool CanSpendMoney(CurrencyType currencyType, int amount)
     {
-      int allMoney = GetAllMoney();
-      int amountInChetvertushka = MoneyConverter.ConvertToChetvertushka(amount, currencyType);
-
-      return allMoney >= amountInChetvertushka;
+      if(!_money.TryGetValue(currencyType, out int currentAmount))
+        return false;
+      return currentAmount >= amount;
     }
 
     private int GetAllMoney()

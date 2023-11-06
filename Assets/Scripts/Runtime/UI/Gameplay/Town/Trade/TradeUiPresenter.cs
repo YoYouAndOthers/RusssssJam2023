@@ -16,11 +16,9 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
     private IInstantiator _instantiator;
     private ITraderService _traderService;
 
-    [SerializeField] private TextMeshProUGUI _weaponCostAmountText;
-    [SerializeField] private TextMeshProUGUI _weaponCostTypeText;
-
-    [SerializeField] private SerializedDictionary<CurrencyType, GameObject> _currencyTypeToIcon = new();
-    [SerializeField] private SerializedDictionary<CurrencyType, string> _currencyDescriptionTexts = new();
+    [SerializeField] private SerializedDictionary<CurrencyType, Sprite> _currencyIconByType = new();
+    [SerializeField] private SerializedDictionary<CurrencyType, TextMeshProUGUI> _amountsByType = new();
+    [SerializeField] private SerializedDictionary<CurrencyType, Image> _iconsByType = new();
 
     [SerializeField] private GameObject _weaponCostContainer;
     [SerializeField] private Transform[] _weaponSlots;
@@ -78,15 +76,17 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
 
     public void ShowWeaponCost(WeaponConfig weapon)
     {
-      foreach (GameObject obj in _currencyTypeToIcon.Values)
-        obj.SetActive(false);
-      _currencyTypeToIcon[weapon.CostType].SetActive(true);
-      _weaponCostAmountText.text = weapon.CostAmount.ToString();
-      _weaponCostTypeText.text = _currencyDescriptionTexts[weapon.CostType];
+      Debug.Log($"Show weapon cost {weapon.name}");
+      foreach (Image image in _iconsByType.Values)
+        image.gameObject.SetActive(false);
+      foreach (TextMeshProUGUI text in _amountsByType.Values)
+        text.gameObject.SetActive(false);
+      
       _weaponCostContainer.SetActive(true);
-
-      LayoutRebuilder.ForceRebuildLayoutImmediate(_weaponCostContainer.GetComponent<RectTransform>());
-      Canvas.ForceUpdateCanvases();
+      _iconsByType[weapon.CostType].gameObject.SetActive(true);
+      _iconsByType[weapon.CostType].sprite = _currencyIconByType[weapon.CostType];
+      _amountsByType[weapon.CostType].gameObject.SetActive(true);
+      _amountsByType[weapon.CostType].text = weapon.CostAmount.ToString();
     }
 
     public void HideWeaponCost()
