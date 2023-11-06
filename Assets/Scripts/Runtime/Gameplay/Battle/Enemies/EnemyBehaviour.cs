@@ -25,7 +25,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
         {
           _currentHealth = MaxHealth;
         }
-        else if (value < 0)
+        else if (value <= 0)
         {
           _currentHealth = 0;
           Kill();
