@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
 {
@@ -22,6 +23,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
     public void Remove(EnemyBehaviour enemyBehaviour)
     {
       _allEnemies.Remove(enemyBehaviour);
+      Debug.Log(_allEnemies.All(k => k == null));
       _enemiesByType[enemyBehaviour.EnemyType].Remove(enemyBehaviour);
     }
 

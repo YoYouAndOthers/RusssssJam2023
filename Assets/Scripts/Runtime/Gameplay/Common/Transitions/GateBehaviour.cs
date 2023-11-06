@@ -32,8 +32,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Transitions
           .Where(k => k is EndSpawningState)
           .Subscribe(_ =>
           {
-            if (_enemyRegistry.AllEnemiesDead && _enemyRegistry.NoBoss)
-              _pathBlocker.SetActive(false);
+            
           })
           .AddTo(this);
 
@@ -48,6 +47,21 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Transitions
     {
       if (other.TryGetComponent(out PlayerBehaviourBase _))
         _transitionService.GoThroughGates();
+    }
+
+    private void Update()
+    {
+      if (_battleStateMachine != null && _enemyRegistry != null)
+      {
+        if (_enemyRegistry.AllEnemiesDead && _enemyRegistry.NoBoss && _pathBlocker != null &&
+            _battleStateMachine.CurrentState.Value is EndSpawningState)
+          _pathBlocker.SetActive(false);
+        else
+        {
+          if (_pathBlocker != null)
+            _pathBlocker.SetActive(true);
+        }
+      }
     }
   }
 }

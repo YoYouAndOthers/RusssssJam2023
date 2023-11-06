@@ -12,7 +12,7 @@ using Zenject;
 
 namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Resolvers
 {
-  public class CollectingQuestResolver : MonoBehaviour
+  public class CollectingQuestResolver : MonoBehaviour, IDisposable
   {
     private readonly List<IDisposable> _disposables = new();
     private readonly HashSet<CollectableItem> _collectables = new();

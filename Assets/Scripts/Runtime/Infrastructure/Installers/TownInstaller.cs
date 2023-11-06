@@ -67,7 +67,6 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     {
       _gameplayTransitionService.CurrentScene = SceneEntrance.SceneName.Town;
       await UniTask.WhenAll(
-        _conversationDataBase.InitializeAsync(),
         Container.Resolve<IPlayerPrefabProvider>().InitializeAsync(),
         Container.Resolve<IQuestRegistry>().InitializeAsync(),
         Container.Resolve<ICollectableItemPrefabProvider>().InitializeAsync());

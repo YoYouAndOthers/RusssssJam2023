@@ -55,6 +55,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
     protected override void PerformInteraction(PlayerTownBehaviour player)
     {
       Debug.Log("Starting conversation");
+      Debug.Log(Conversations.Count());
       Debug.Assert(Conversations != null, "Conversations != null");
       Func<ConditionToStartBase, bool>
         conditionPredicate = l => _conversationConditionSolver.IsConversationAvailable(l);
@@ -72,8 +73,11 @@ namespace RussSurvivor.Runtime.Gameplay.Town.NPC
 
     protected override void PerformInteractionExit(PlayerTownBehaviour player)
     {
+      if (_dialogueSystem.IsConversationActive.Value == false)
+        return;
+
       Debug.Log("Leaving conversation");
-      if(_dialogueSystem.HasNextDialogueEntry.Value)
+      if (_dialogueSystem.HasNextDialogueEntry.Value)
         _dialogueSystem.CancelConversation();
       else
         _dialogueSystem.FinishConversation();

@@ -2,7 +2,8 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
 {
   public enum EnemyType
   {
-    None,
-    Lizard
+    None = 0,
+    Lizard = 1,
+    LizardCamp = 2,
   }
 }

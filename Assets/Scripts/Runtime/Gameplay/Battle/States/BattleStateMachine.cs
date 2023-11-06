@@ -40,5 +40,10 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.States
         _currentBattleState.Value = _states[typeof(TState)] as TState;
       return _states[typeof(TState)] as TState;
     }
+
+    public void Dispose()
+    {
+      _currentBattleState?.Dispose();
+    }
   }
 }

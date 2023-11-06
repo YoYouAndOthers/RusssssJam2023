@@ -18,7 +18,13 @@ MonoBehaviour:
   m_GUID: b7877ea8870695d43b9227dbd09dd4c1
   m_SerializeEntries:
   - m_GUID: b6548c38ea6c1564f8d58a9e8b774739
-    m_Address: Enemy_0
+    m_Address: Enemy_Lizard
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Enemies
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1e0ab1d1a4360dd449dc8fef587621bb
+    m_Address: Enemy_LizardCamp
     m_ReadOnly: 0
     m_SerializedLabels:
     - Enemies

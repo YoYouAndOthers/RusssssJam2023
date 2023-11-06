@@ -19,7 +19,7 @@ MonoBehaviour:
   InitialCooldown: 1
   Damage:
     DamageApplyType: 1
-    Value: 1
+    Value: 3
     DamageOverTimeRate: 0
     DamageOverTimeDuration: 0
   DamageDirectionType: 1

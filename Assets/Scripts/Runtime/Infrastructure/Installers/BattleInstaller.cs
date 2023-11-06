@@ -4,7 +4,7 @@ using RussSurvivor.Runtime.Gameplay.Battle.Characters;
 using RussSurvivor.Runtime.Gameplay.Battle.Enemies;
 using RussSurvivor.Runtime.Gameplay.Battle.Environment.Navigation;
 using RussSurvivor.Runtime.Gameplay.Battle.Environment.Obstacles;
-using RussSurvivor.Runtime.Gameplay.Battle.Settings;
+using RussSurvivor.Runtime.Gameplay.Battle.Quests;
 using RussSurvivor.Runtime.Gameplay.Battle.States;
 using RussSurvivor.Runtime.Gameplay.Battle.Timing;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
@@ -28,7 +28,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     [SerializeField] private PlayerSpawnPoint _playerSpawnPoint;
     [SerializeField] private NavMeshService _navMeshService;
     [SerializeField] private EnemySpawner _enemySpawner;
-    private IBattleSettingsService _battleSettingsService;
+    [SerializeField] private DestroyNpcQuestResolver _destroyNpcQuestResolver;
 
     private CameraFollower _cameraFollower;
     private CollectingQuestResolver _collectingQuestResolver;
@@ -43,7 +43,6 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       ICurtain curtain,
       ICooldownService cooldownService,
       IConversationDataBase conversationDataBase,
-      IBattleSettingsService battleSettingsService,
       IGameplayTransitionService gameplayTransitionService,
       CameraFollower cameraFollower,
       CollectingQuestResolver collectingQuestResolver,
@@ -52,7 +51,6 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
     {
       _curtain = curtain;
       _cooldownService = cooldownService;
-      _battleSettingsService = battleSettingsService;
       _gameplayTransitionService = gameplayTransitionService;
       _cameraFollower = cameraFollower;
       _collectingQuestResolver = collectingQuestResolver;
@@ -85,6 +83,7 @@ namespace RussSurvivor.Runtime.Infrastructure.Installers
       Container.Resolve<ClosestTargetPickerFactory>().Initialize();
 
       _playerSpawnPoint.Initialize();
+      _destroyNpcQuestResolver.Initialize();
       Container.Resolve<ObstacleSpawner>().SpawnObstacles();
       _cameraFollower.Initialize(Container.Resolve<IPlayerRegistry>().GetPlayer());
       _collectingQuestResolver.Initialize();

@@ -38,6 +38,13 @@ MonoBehaviour:
     - Conversation
     - Dialogues
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 86e259b6b28fee443a0133a17e4c96c3
+    m_Address: Conversation_With_Guardian_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Dialogues
+    - Conversation
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 60d5ef9f1bdf56a4f9658dd75e1cb0ca, type: 2}
   m_SchemaSet:

@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c66b5e57444094afd37602113605dc, type: 3}
+  m_Name: Conversation_With_Guardian_1
+  m_EditorClassIdentifier: 
+  Actors:
+  - {fileID: 11400000, guid: 783c676b8838ee142a717f3489474e76, type: 2}
+  - {fileID: 11400000, guid: f70f1dfe785d13748b65b0bfe0048d56, type: 2}
+  IsRepeatable: 0
+  ConditionsToStart:
+  - rid: 7267942400013107205
+  - rid: 7267942425661800449
+  - rid: 7267942425661800450
+  Entries:
+  - name: "\u0421\u0442\u0440\u0430\u0436\u043D\u0438\u043A: \u0422\u0435\u043A\u0441\u0442
+      \u0441\u0442\u0440\u0430\u0436\u043D\u0438\u043A\u0430 1 "
+    Speaker: {fileID: 11400000, guid: f70f1dfe785d13748b65b0bfe0048d56, type: 2}
+    Text: "\u0440\u0430\u043F\u0440\u0430\u043F\u0440\u0430\u043F\u0440\u0430\u043F"
+    Actions: []
+  - name: "\u0421\u0442\u0440\u0430\u0436\u043D\u0438\u043A: \u0422\u0435\u043A\u0441\u0442
+      \u0441\u0442\u0440\u0430\u0436\u043D\u0438\u043A\u0430 2"
+    Speaker: {fileID: 11400000, guid: f70f1dfe785d13748b65b0bfe0048d56, type: 2}
+    Text: "\u0430\u043F\u0440\u0430\u043F\u0440\u0430"
+    Actions: []
+  - name: "\u0421\u0442\u0440\u0430\u0436\u043D\u0438\u043A: \u0422\u0435\u043A\u0441\u0442
+      \u0441\u0442\u0440\u0430\u0436\u043D\u0438\u043A\u0430 2"
+    Speaker: {fileID: 11400000, guid: 783c676b8838ee142a717f3489474e76, type: 2}
+    Text: "\u0422\u0435\u043A\u0441\u0442 \u0433\u0435\u0440\u043E\u044F"
+    Actions: []
+  OnEndActions:
+  - rid: 7267942425661800448
+  references:
+    version: 2
+    RefIds:
+    - rid: 7267942400013107205
+      type: {class: CurrentQuestIs, ns: RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Conditions, asm: RussSurvivor.Runtime}
+      data:
+        name: "\u0423\u0431\u0438\u043B \u044F\u0449\u0435\u0440\u043E\u0432"
+        QuestConfig: {fileID: 11400000, guid: 7b57e500af9cfea4f946972fdaa65409, type: 2}
+    - rid: 7267942425661800448
+      type: {class: CompleteQuestAction, ns: RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions, asm: RussSurvivor.Runtime}
+      data:
+        name: "\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u044C \u043A\u0432\u0435\u0441\u0442"
+        Quest: {fileID: 11400000, guid: 7b57e500af9cfea4f946972fdaa65409, type: 2}
+    - rid: 7267942425661800449
+      type: {class: CurrentQuestStateIs, ns: RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Conditions, asm: RussSurvivor.Runtime}
+      data:
+        name: Quest State Is
+        QuestStateType: 2
+    - rid: 7267942425661800450
+      type: {class: OtherConversationDone, ns: RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Conditions, asm: RussSurvivor.Runtime}
+      data:
+        name: OtherConversationDone
+        Conversation: {fileID: 11400000, guid: 26e11d1d1e4f7984782e10aecbb082af, type: 2}

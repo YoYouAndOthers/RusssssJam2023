@@ -25,7 +25,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
       _cancellationTokenSource = null;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
       if (!other.attachedRigidbody.TryGetComponent(out IDamagable damageable))
         return;
@@ -65,13 +65,15 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
       _collider.enabled = true;
       await MoveFist(direction, reach + transform.localPosition.magnitude, _cancellationTokenSource.Token);
       _collider.enabled = false;
-      await ReturnToStart();
+      await ReturnToStart(_cancellationTokenSource.Token);
     }
 
-    private IEnumerator ReturnToStart()
+    private IEnumerator ReturnToStart(CancellationToken cancellationToken)
     {
       while ((transform.localPosition - _initialPosition).magnitude > 0.01f)
       {
+        if (cancellationToken.IsCancellationRequested)
+          yield break;
         transform.localPosition = Vector3.Lerp(transform.localPosition, _initialPosition, Time.deltaTime * _speed);
         yield return null;
       }

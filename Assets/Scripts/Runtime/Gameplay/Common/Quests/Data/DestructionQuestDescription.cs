@@ -1,4 +1,6 @@
 using System;
+using RussSurvivor.Runtime.Gameplay.Battle.Enemies;
+using UnityEngine;
 
 namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Data
 {
@@ -18,5 +20,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.Data
 
     public HostileObjectType HostileObject;
     public int AmountToDestroy;
+    public Vector2 Position;
+    public EnemyBehaviour Prefab;
   }
 }

@@ -151,6 +151,6 @@ MonoBehaviour:
   PlayerDash: {fileID: 3323138724721099733}
   <Fists>k__BackingField: {fileID: 11400000, guid: c5a6e6544644fe342b296313e94032fd, type: 2}
   <WeaponsContainer>k__BackingField: {fileID: 3754884759858497961}
-  <CurrentHealth>k__BackingField: 10
+  <CurrentHealthValue>k__BackingField: 10
   <MaxHealth>k__BackingField: 10
   <RegenerationPerSec>k__BackingField: 0

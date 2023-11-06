@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace RussSurvivor.Runtime.Gameplay.Common.Player
 {
   public class BattlePlayerRegistry : IBattlePlayerRegistry
@@ -7,6 +9,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
     public void RegisterPlayer(PlayerBehaviourBase player)
     {
       _playerBattleBehaviour = player as PlayerBattleBehaviour;
+      Debug.Log(_playerBattleBehaviour);
     }
 
     public PlayerBehaviourBase GetPlayer()

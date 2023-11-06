@@ -13,27 +13,14 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Settings
       Waves = new[]
       {
         new EnemyWaveSettings
-          { SpawnDuration = 15, EnemyNumbersByType = new Dictionary<EnemyType, int> { [EnemyType.Lizard] = 5 } },
+          { SpawnDuration = 10, EnemyNumbersByType = new Dictionary<EnemyType, int> { [EnemyType.Lizard] = 5 } },
         new EnemyWaveSettings
-          { SpawnDuration = 15, EnemyNumbersByType = new Dictionary<EnemyType, int> { [EnemyType.Lizard] = 10 } },
+          { SpawnDuration = 10, EnemyNumbersByType = new Dictionary<EnemyType, int> { [EnemyType.Lizard] = 7 } },
         new EnemyWaveSettings
-          { SpawnDuration = 15, EnemyNumbersByType = new Dictionary<EnemyType, int> { [EnemyType.Lizard] = 15 } },
-        new EnemyWaveSettings
-          { SpawnDuration = 15, EnemyNumbersByType = new Dictionary<EnemyType, int> { [EnemyType.Lizard] = 25 } },
-        new EnemyWaveSettings
-          { SpawnDuration = 15, EnemyNumbersByType = new Dictionary<EnemyType, int> { [EnemyType.Lizard] = 35 } },
-        new EnemyWaveSettings
-          { SpawnDuration = 15, EnemyNumbersByType = new Dictionary<EnemyType, int> { [EnemyType.Lizard] = 45 } },
-        new EnemyWaveSettings
-          { SpawnDuration = 15, EnemyNumbersByType = new Dictionary<EnemyType, int> { [EnemyType.Lizard] = 55 } },
-        new EnemyWaveSettings
-          { SpawnDuration = 15, EnemyNumbersByType = new Dictionary<EnemyType, int> { [EnemyType.Lizard] = 65 } },
-        new EnemyWaveSettings
-          { SpawnDuration = 15, EnemyNumbersByType = new Dictionary<EnemyType, int> { [EnemyType.Lizard] = 75 } }
+          { SpawnDuration = 10, EnemyNumbersByType = new Dictionary<EnemyType, int> { [EnemyType.Lizard] = 10 } },
       }
     };
 
-    public float MainStateDuration => Waves.Sum(w => w.SpawnDuration);
     public float BossStateDuration;
     public float EndSpawnDuration;
     public EnemyWaveSettings[] Waves;

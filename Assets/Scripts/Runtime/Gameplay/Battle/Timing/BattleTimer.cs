@@ -1,10 +1,11 @@
+using System;
 using RussSurvivor.Runtime.Gameplay.Battle.Settings;
 using RussSurvivor.Runtime.Gameplay.Battle.States;
 using RussSurvivor.Runtime.Gameplay.Common.Timing;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.Timing
 {
-  public class BattleTimer : IBattleTimer
+  public class BattleTimer : IBattleTimer, IDisposable
   {
     private readonly ICooldownService _cooldownService;
     private readonly IDayTimer _dayTimer;
@@ -55,6 +56,11 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Timing
         if (_bossTimeLeft < 0)
           _battleStateMachine.SetState<EndBattleState>();
       }
+    }
+
+    public void Dispose()
+    {
+      _cooldownService.UnregisterUpdatable(this);      
     }
   }
 }

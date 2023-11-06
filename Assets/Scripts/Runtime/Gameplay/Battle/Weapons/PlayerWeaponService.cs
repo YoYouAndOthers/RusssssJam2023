@@ -75,17 +75,18 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
 
     public void Dispose()
     {
+      ClearWeapons();
       _cooldownService.UnregisterUpdatable(this);
     }
 
     public void ClearWeapons()
     {
       _cooldownService.UnregisterUpdatable(_fists);
-      Object.Destroy(_fists);
+      Object.DestroyImmediate(_fists);
       foreach (WeaponBehaviourBase weapon in _weapons)
       {
         _cooldownService.UnregisterUpdatable(weapon);
-        Object.Destroy(weapon);
+        Object.DestroyImmediate(weapon);
       }
     }
 

@@ -66,6 +66,9 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Transitions
             _questStateMachine.NextState<ReturnToTownQuestState>();
           return;
         }
+        case DestructionQuestDescription:
+          _questStateMachine.NextState<DestroyNpcQuestState>();
+          return;
       }
     }
 
@@ -89,6 +92,9 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Transitions
 
           return;
         }
+        case DestructionQuestDescription:
+          _questStateMachine.NextState<TalkToNpcQuestState>();
+          return;
       }
     }
   }

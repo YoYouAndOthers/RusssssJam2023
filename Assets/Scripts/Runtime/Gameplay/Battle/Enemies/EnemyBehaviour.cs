@@ -1,77 +1,65 @@
 ﻿using RussSurvivor.Runtime.Gameplay.Battle.Combat;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Damage;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Target;
-using RussSurvivor.Runtime.Gameplay.Common.Player;
 using RussSurvivor.Runtime.UI.Gameplay.Battle;
+using UniRx;
 using UnityEngine;
-using UnityEngine.AI;
 using Zenject;
 
 namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
 {
   public abstract class EnemyBehaviour : MonoBehaviour, ITarget, IHealth, IDamagable, ICollisionDamage
   {
-    [SerializeField] private NavMeshAgent _agent;
     public float TimeLeft { get; private set; }
 
-    public bool IsReady => CurrentHealth >= MaxHealth;
+    public bool IsReady => CurrentHealth.Value >= MaxHealth;
 
-    public float CurrentHealth
+    public FloatReactiveProperty CurrentHealth { get; } = new();
+    
+    private float CurrentHealthValue
     {
       get => _currentHealth;
-      private set
+      set
       {
         if (value > MaxHealth)
         {
           _currentHealth = MaxHealth;
+          CurrentHealth.Value = MaxHealth;
         }
         else if (value <= 0)
         {
           _currentHealth = 0;
+          CurrentHealth.Value = 0;
           Kill();
         }
         else
         {
           _currentHealth = value;
+          CurrentHealth.Value = value;
         }
       }
     }
 
     public float MaxHealth { get; private set; }
     public float RegenerationPerSec { get; private set; }
-    public Vector3 Position => transform.position + Vector3.up;
+    public Vector3 Position => gameObject != null ? transform.position + Vector3.up : Vector3.positiveInfinity;
 
     public int Damage { get; private set; }
 
     public float Delay { get; private set; }
 
     public EnemyType EnemyType { get; set; }
-
+    
     private float _currentHealth;
+
     private IEnemyRegistry _enemyRegistry;
-    private IPlayerRegistry _playerRegistry;
     private IDamageCountService _damageCountService;
 
     [Inject]
-    private void Construct(IPlayerRegistry playerRegistry, IEnemyRegistry enemyRegistry, IDamageCountService damageCountService)
+    private void Construct(IEnemyRegistry enemyRegistry, IDamageCountService damageCountService)
     {
-      _playerRegistry = playerRegistry;
       _enemyRegistry = enemyRegistry;
       _damageCountService = damageCountService;
-    }
-
-    private void Awake()
-    {
-      _agent.updateRotation = false;
-      _agent.updateUpAxis = false;
-    }
-
-    private void Update()
-    {
-      PlayerBehaviourBase playerBehaviourBase = _playerRegistry.GetPlayer();
-      if (playerBehaviourBase == null)
-        return;
-      _agent.SetDestination(playerBehaviourBase.transform.position);
     }
 
     public bool TryTakeDamage(float damage, bool percent = false)
@@ -79,7 +67,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
       if (percent)
         damage = damage * MaxHealth / 100;
 
-      CurrentHealth -= damage;
+      CurrentHealthValue -= damage;
       _damageCountService.ShowDamageCount(Position, (int)damage);
       return true;
     }
@@ -87,9 +75,8 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
     public void Kill()
     {
       _enemyRegistry.Remove(this);
-      foreach (ClosestTargetPicker targetPicker in FindObjectsOfType<ClosestTargetPicker>())
-        targetPicker.RemoveTarget(this);
-      Destroy(gameObject);
+      if(gameObject != null)
+        Destroy(gameObject);
     }
 
     public void UpdateCooldown(float deltaTime)
@@ -97,7 +84,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
       TimeLeft -= deltaTime;
       if (TimeLeft <= 0)
       {
-        CurrentHealth += RegenerationPerSec * deltaTime;
+        CurrentHealthValue += RegenerationPerSec * deltaTime;
         TimeLeft = 1;
       }
     }
@@ -106,7 +93,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Enemies
     {
       EnemyType = config.Type;
       MaxHealth = config.MaxHealth;
-      CurrentHealth = config.MaxHealth;
+      CurrentHealthValue = config.MaxHealth;
       RegenerationPerSec = config.RegenerationPerSec;
       Damage = config.Damage;
       Delay = config.DamageDelay;

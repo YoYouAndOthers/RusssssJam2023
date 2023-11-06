@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6dd245f18a50434498c1cedd67f53605, type: 3}
-  m_Name: Enemy_0
+  m_Name: Enemy_Lizard
   m_EditorClassIdentifier: 
   Type: 1
   MaxHealth: 3

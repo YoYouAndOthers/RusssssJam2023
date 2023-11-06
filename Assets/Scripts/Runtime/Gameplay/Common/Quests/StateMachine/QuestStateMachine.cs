@@ -21,6 +21,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
 
     public void NextState<T>() where T : QuestState
     {
+      Debug.Log($"Next state {typeof(T)}");
       CurrentState.Value = States.First(k => k.GetType() == typeof(T));
     }
 

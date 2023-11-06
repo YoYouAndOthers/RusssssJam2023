@@ -2,7 +2,7 @@ using RussSurvivor.Runtime.Gameplay.Battle.Combat;
 using RussSurvivor.Runtime.Gameplay.Battle.States;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons;
 using RussSurvivor.Runtime.Gameplay.Battle.Weapons.Damage;
-using RussSurvivor.Runtime.Gameplay.Common.Cinema;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -13,11 +13,13 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
     [field: SerializeField] public WeaponConfig Fists { get; private set; }
     [field: SerializeField] public Transform WeaponsContainer { get; private set; }
     public Vector3 Position => transform.position;
-    [field: SerializeField] public float CurrentHealth { get; private set; }
+    [field: SerializeField] public float CurrentHealthValue { get; private set; }
     [field: SerializeField] public float MaxHealth { get; private set; }
     [field: SerializeField] public float RegenerationPerSec { get; private set; }
     public float TimeLeft { get; }
-    public bool IsReady => CurrentHealth >= MaxHealth;
+    
+    public FloatReactiveProperty CurrentHealth { get; private set; } = new();
+    public bool IsReady => CurrentHealth.Value >= MaxHealth;
 
     private IPlayerWeaponService _playerWeaponService;
     private IBattleStateMachine _battleStateMachine;
@@ -29,15 +31,20 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
       _playerWeaponService = playerWeaponService;
     }
 
+    private void Awake()
+    {
+      CurrentHealth.Value = CurrentHealthValue;
+    }
+
     public bool TryTakeDamage(float damage, bool percent = false)
     {
       Debug.Log($"Player take damage: {damage}");
       if (percent)
         damage = MaxHealth * damage / 100f;
 
-      CurrentHealth -= damage;
+      CurrentHealth.Value -= damage;
 
-      if (CurrentHealth <= 0 && _battleStateMachine.CurrentState.Value is not GameOverState)
+      if (CurrentHealth.Value <= 0 && _battleStateMachine.CurrentState.Value is not GameOverState)
       {
         Kill();
         return false;
@@ -48,8 +55,8 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Player
 
     public void UpdateCooldown(float deltaTime)
     {
-      CurrentHealth += deltaTime * RegenerationPerSec;
-      CurrentHealth = Mathf.Clamp(CurrentHealth, 0f, MaxHealth);
+      CurrentHealth.Value += deltaTime * RegenerationPerSec;
+      CurrentHealth.Value = Mathf.Clamp(CurrentHealth.Value, 0f, MaxHealth);
     }
 
     public void Kill()

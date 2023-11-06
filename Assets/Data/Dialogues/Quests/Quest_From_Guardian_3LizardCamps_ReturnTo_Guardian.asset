@@ -24,3 +24,5 @@ MonoBehaviour:
         QuestRewardGiver: {fileID: 11400000, guid: f70f1dfe785d13748b65b0bfe0048d56, type: 2}
         HostileObject: 5
         AmountToDestroy: 3
+        Position: {x: 32, y: -20}
+        Prefab: {fileID: 5877179077654868306, guid: e195f4ddfa979894cadd5966477f9b95, type: 3}
