@@ -27,7 +27,7 @@ MonoBehaviour:
     DamageOverTimeDuration: 0
   DamageDirectionType: 1
   BaseSize: 0
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 1248958298678426504, guid: 4cb7e82d385b5784e9c97ef7d0a57b9f, type: 3}
   WeaponStats:
     _serializedList: []
   DamagableLayers: 64

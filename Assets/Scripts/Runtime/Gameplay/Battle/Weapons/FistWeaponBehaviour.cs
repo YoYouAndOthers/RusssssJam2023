@@ -15,7 +15,10 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
     {
       Debug.Log("Fists initialized");
       base.Initialize(config, targetDirectionPickStrategy, damageMaker);
-      _fists.Initialize(config.DamagableLayers, config.WeaponStats[WeaponStatType.Piercing]);
+      if(!config.WeaponStats.ContainsKey(WeaponStatType.Piercing))
+        _fists.Initialize(config.DamagableLayers, -1);
+      else
+        _fists.Initialize(config.DamagableLayers, config.WeaponStats[WeaponStatType.Piercing]);
       _reach = config.Reach;
     }
 

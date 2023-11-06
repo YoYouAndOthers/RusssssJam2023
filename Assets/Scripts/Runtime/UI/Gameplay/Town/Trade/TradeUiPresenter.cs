@@ -26,6 +26,7 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
     [SerializeField] private RectTransform[] _weaponToByuSlots;
     [SerializeField] private Button _beatButton;
     [SerializeField] private Transform _traderIconTransform;
+    [SerializeField] private Button _leaveButton;
 
     private IInstantiator _instantiator;
     private IMoneyRegistry _moneyRegistry;
@@ -69,6 +70,11 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
       _traderService.IsBeaten
         .ObserveEveryValueChanged(k => k.Value)
         .Subscribe(isBeaten => _beatButton.gameObject.SetActive(!isBeaten))
+        .AddTo(this);
+
+      _leaveButton
+        .OnClickAsObservable()
+        .Subscribe(k => _traderService.EndTrade())
         .AddTo(this);
 
       _weaponCostContainer.SetActive(false);
