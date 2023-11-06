@@ -48,7 +48,7 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
     public void OnEndDrag(PointerEventData eventData)
     {
       _dragged = false;
-      if(!_tradeUiPresenter.TrySetWeaponBought(transform.position, _weapon))
+      if(!_tradeUiPresenter.TrySetWeaponBought(this, _weapon))
         transform.position = _startPosition;
     }
 

@@ -94,10 +94,14 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Town.Trade
       _weaponCostContainer.SetActive(false);
     }
 
-    public bool TrySetWeaponBought(Vector3 transformPosition, WeaponConfig weapon)
+    public bool TrySetWeaponBought(WeaponTradeUiItem item, WeaponConfig weapon)
     {
-      if (_weaponToByuSlots.Any(slot => RectTransformUtility.RectangleContainsScreenPoint(slot, transformPosition)))
+      if (_weaponToByuSlots.Any(slot => 
+            RectTransformUtility.RectangleContainsScreenPoint(slot, item.transform.position) &&
+            slot.GetComponent<InventoryContainerUi>().Size == weapon.Size))
       {
+        item.transform.position = _weaponToByuSlots.First(slot =>
+          RectTransformUtility.RectangleContainsScreenPoint(slot, item.transform.position)).position;
         _traderService.AddToCart(weapon);
         return true;
       }

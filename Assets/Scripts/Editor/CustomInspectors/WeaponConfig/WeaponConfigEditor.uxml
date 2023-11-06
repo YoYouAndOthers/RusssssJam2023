@@ -8,6 +8,7 @@
                 <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Id" />
             </ui:VisualElement>
             <uie:PropertyField name="Name" binding-path="Name" />
+            <uie:PropertyField name="Size" binding-path="Size" />
             <uie:PropertyField name="Icon" binding-path="Icon" />
             <uie:PropertyField name="CanBeTraded" binding-path="CanBeTraded" />
         </ui:VisualElement>

@@ -16,6 +16,7 @@ MonoBehaviour:
   Description: 
   CanBeTraded: 1
   Icon: {fileID: 21300000, guid: 6872f63ba5393a644a92b2fcac6ba67a, type: 3}
+  Size: 1
   CostType: 3
   CostAmount: 6
   InitialCooldown: 0.4

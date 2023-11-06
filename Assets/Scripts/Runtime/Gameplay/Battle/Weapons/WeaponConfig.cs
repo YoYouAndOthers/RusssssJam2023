@@ -1,5 +1,6 @@
 using System;
 using AYellowpaper.SerializedCollections;
+using RussSurvivor.Runtime.Gameplay.Common.Items;
 using RussSurvivor.Runtime.Gameplay.Town.Economics.Currency;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace RussSurvivor.Runtime.Gameplay.Battle.Weapons
     public string Description;
     public bool CanBeTraded;
     public Sprite Icon;
+    public Size Size;
     public CurrencyType CostType;
     public int CostAmount;
 
