@@ -1,12 +1,10 @@
-using System;
-
 namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
 {
   public abstract class QuestState
   {
-    public Guid QuestId { get; }
+    public string QuestId { get; }
 
-    protected QuestState(Guid questId) =>
+    protected QuestState(string questId) =>
       QuestId = questId;
   }
 }

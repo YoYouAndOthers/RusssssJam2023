@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UniRx;
@@ -25,7 +24,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
       CurrentState.Value = States.First(k => k.GetType() == typeof(T));
     }
 
-    public void StartNewQuest(Guid questId)
+    public void StartNewQuest(string questId)
     {
       Debug.Log($"Starting new quest {questId}");
       States = _questStateListFactory.Create(questId, _questRegistry.GetQuestConfig(questId).Description);

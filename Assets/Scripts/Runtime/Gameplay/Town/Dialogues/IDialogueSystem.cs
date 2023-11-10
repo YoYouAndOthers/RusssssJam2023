@@ -1,4 +1,3 @@
-using System;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data.Actions;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Models;
@@ -14,7 +13,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
     BoolReactiveProperty IsConversationActive { get; }
     BoolReactiveProperty HasNextDialogueEntry { get; }
     Conversation CurrentConversation { get; }
-    void StartConversation(Guid conversationId);
+    void StartConversation(string conversationId);
     void NextPhrase();
     void CancelConversation();
     void FinishConversation();

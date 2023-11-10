@@ -23,13 +23,6 @@ namespace RussSurvivor.Editor.CustomInspectors
       if (_data == null)
         return _root;
 
-      if (_data.Id == Guid.Empty)
-      {
-        EditorUtility.SetDirty(_data);
-        _data.Id = Guid.NewGuid();
-        AssetDatabase.SaveAssets();
-      }
-
       _root.Q<Label>("Id").text = $"Id: {_data.Id.ToString()}";
 
       Sprite icon = _data.Icon;

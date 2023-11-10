@@ -1,4 +1,3 @@
-using System;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.Data;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
     public readonly int NpcToDestroyCount;
     private readonly Vector2 _position;
 
-    public DestroyNpcQuestState(Guid questId,
+    public DestroyNpcQuestState(string questId,
       DestructionQuestDescription description) : base(questId)
     {
       DestructionQuestHostileType = description.HostileObject;

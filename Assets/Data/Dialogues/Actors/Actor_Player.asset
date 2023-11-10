@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: "\u0414\u0440\u043E\u0447\u0435\u0441\u043B\u0430\u0432"
   IsPlayer: 1
+  IsTrader: 0
   Icon: {fileID: 0}
   Description: 
   DefaultAnimation: {fileID: 513925137179982293, guid: 768626063324416419d57ae36a2af5a5, type: 3}
+  Id: 783c676b8838ee142a717f3489474e76

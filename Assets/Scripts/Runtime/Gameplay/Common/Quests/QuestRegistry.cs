@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
@@ -9,7 +8,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests
 {
   public class QuestRegistry : IQuestRegistry
   {
-    private Dictionary<Guid, QuestConfig> _questConfigs = new();
+    private Dictionary<string, QuestConfig> _questConfigs = new();
 
     public async UniTask InitializeAsync()
     {
@@ -18,7 +17,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests
       _questConfigs = allQuests.ToDictionary(x => x.Id, x => x);
     }
 
-    public QuestConfig GetQuestConfig(Guid id)
+    public QuestConfig GetQuestConfig(string id)
     {
       return _questConfigs[id];
     }

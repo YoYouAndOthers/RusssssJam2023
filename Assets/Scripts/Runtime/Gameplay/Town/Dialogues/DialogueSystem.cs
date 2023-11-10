@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using RussSurvivor.Runtime.Gameplay.Common.Timing;
 using RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data;
@@ -61,7 +60,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues
       _pauseService = pauseService;
     }
 
-    public void StartConversation(Guid conversationId)
+    public void StartConversation(string conversationId)
     {
       if (_conversationDataBase.TryGetConversationById(conversationId, out _currentConversation))
       {

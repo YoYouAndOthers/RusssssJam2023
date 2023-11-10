@@ -1,11 +1,10 @@
-using System;
 using UnityEngine;
 
 namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
 {
   public class ReturnToTownQuestState : QuestWithDirectionState
   {
-    public ReturnToTownQuestState(Guid questId) : base(questId)
+    public ReturnToTownQuestState(string questId) : base(questId)
     {
     }
 

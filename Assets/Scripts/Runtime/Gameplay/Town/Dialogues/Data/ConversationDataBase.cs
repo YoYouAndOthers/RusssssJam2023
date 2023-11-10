@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
@@ -11,11 +10,11 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
   {
     private readonly List<string> _conversationKeys = new() { "Dialogues", "Conversation" };
     private readonly List<string> _actorKeys = new() { "Dialogues", "Actor" };
-    private readonly Dictionary<Guid, Conversation> _finishedConversationsById = new();
-    private Dictionary<Guid, Actor> _actorsById = new();
-    private Dictionary<Guid, IEnumerable<Conversation>> _actorsConversationsById = new();
+    private readonly Dictionary<string, Conversation> _finishedConversationsById = new();
+    private Dictionary<string, Actor> _actorsById = new();
+    private Dictionary<string, IEnumerable<Conversation>> _actorsConversationsById = new();
 
-    private Dictionary<Guid, Conversation> _conversationsById = new();
+    private Dictionary<string, Conversation> _conversationsById = new();
 
     public async UniTask InitializeAsync()
     {
@@ -40,22 +39,22 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
       Debug.Log("Dialogue database initialization finished");
     }
 
-    public bool TryGetConversationById(Guid id, out Conversation conversation)
+    public bool TryGetConversationById(string id, out Conversation conversation)
     {
       return _conversationsById.TryGetValue(id, out conversation);
     }
 
-    public bool IsConversationFinished(Guid conversationId)
+    public bool IsConversationFinished(string conversationId)
     {
       return _finishedConversationsById.ContainsKey(conversationId);
     }
 
-    public bool GetActorById(Guid id, out Actor actor)
+    public bool GetActorById(string id, out Actor actor)
     {
       return _actorsById.TryGetValue(id, out actor);
     }
 
-    public bool GetActorsConversations(Guid actorId, out IEnumerable<Conversation> conversations)
+    public bool GetActorsConversations(string actorId, out IEnumerable<Conversation> conversations)
     {
       if (_actorsConversationsById.TryGetValue(actorId, out IEnumerable<Conversation> allConversations))
       {
@@ -67,7 +66,7 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
       return false;
     }
 
-    public void SetFinishedConversation(Guid conversationId)
+    public void SetFinishedConversation(string conversationId)
     {
       Debug.Assert(_conversationsById.ContainsKey(conversationId), "_conversationsById.ContainsKey(conversationId)");
       if (!_conversationsById[conversationId].IsRepeatable)

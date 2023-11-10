@@ -1,5 +1,7 @@
-using System;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
 {
@@ -12,6 +14,17 @@ namespace RussSurvivor.Runtime.Gameplay.Town.Dialogues.Data
     public Sprite Icon;
     public string Description;
     public GameObject DefaultAnimation;
-    public Guid Id = Guid.NewGuid();
+    public string Id;
+
+#if UNITY_EDITOR
+    public void Reset()
+    {
+      if (GUID.TryParse(AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(this)), out GUID guid))
+        Id = guid.ToString();
+    }
+
+    private void OnValidate() =>
+      Reset();
+#endif
   }
 }

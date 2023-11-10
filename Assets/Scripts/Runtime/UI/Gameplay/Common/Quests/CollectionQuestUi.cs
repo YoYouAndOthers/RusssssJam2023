@@ -25,7 +25,7 @@ namespace RussSurvivor.Runtime.UI.Gameplay.Common.Quests
     [FormerlySerializedAs("_returnText"), SerializeField]
     private SerializedDictionary<CollectItemsQuestDescription.CollectableType, string> _returnTextByType = new();
 
-    private Guid _currentQuestId;
+    private string _currentQuestId;
     private ICollectableItemPrefabProvider _prefabProvider;
 
     private IQuestStateMachine _questStateMachine;

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using RussSurvivor.Runtime.Gameplay.Common.Quests.Data;
 using RussSurvivor.Runtime.Gameplay.Town.Characters;
@@ -12,7 +11,7 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
     public QuestStateListFactory(IActorRegistry actorRegistry) =>
       _actorRegistry = actorRegistry;
 
-    public List<QuestState> Create(Guid questId, QuestDescriptionBase description)
+    public List<QuestState> Create(string questId, QuestDescriptionBase description)
     {
       var states = new List<QuestState>();
       if (description is CollectItemsQuestDescription collectingQuest)

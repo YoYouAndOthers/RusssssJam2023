@@ -7,10 +7,10 @@ namespace RussSurvivor.Runtime.Gameplay.Common.Quests.StateMachine
 {
   public class TalkToNpcQuestState : QuestWithDirectionState
   {
-    private readonly Guid _npcId;
+    private readonly string _npcId;
     private readonly IActorRegistry _actorRegistry;
 
-    public TalkToNpcQuestState(Guid questId, Guid npcId, IActorRegistry actorRegistry) : base(questId)
+    public TalkToNpcQuestState(string questId, string npcId, IActorRegistry actorRegistry) : base(questId)
     {
       _npcId = npcId;
       _actorRegistry = actorRegistry;

@@ -22,12 +22,6 @@ namespace RussSurvivor.Editor.CustomInspectors
 
       if (_data == null)
         return _root;
-      if (_data.Id == Guid.Empty)
-      {
-        EditorUtility.SetDirty(_data);
-        _data.Id = Guid.NewGuid();
-        AssetDatabase.SaveAssets();
-      }
 
       _root.Q<Label>("Id").text = _data.Id.ToString();
       _root.Q<PropertyField>("Damage").RegisterValueChangeCallback(
