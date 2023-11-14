@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b708d82aea384b0890c5584cb697a53f, type: 3}
   m_Name: Actor_NPC_Guardian
   m_EditorClassIdentifier: 
-  Name: "\u0421\u0442\u0440\u0430\u0436\u043D\u0438\u043A"
+  Name: "\u0413\u0430\u0447\u0438\u0441\u043B\u0430\u0432"
   IsPlayer: 0
   IsTrader: 0
   Icon: {fileID: 0}
