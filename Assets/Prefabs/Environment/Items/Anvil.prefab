@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8854980991295087119}
   - component: {fileID: 3085018512758377824}
-  - component: {fileID: 7045232954691739302}
+  - component: {fileID: 5595929560964868707}
   m_Layer: 0
   m_Name: Anvil
   m_TagString: Untagged
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1533371777
-  m_SortingLayer: 8
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 206ec9df93203944d99d8ad3b492aba8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &7045232954691739302
+--- !u!60 &5595929560964868707
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,25 +129,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.5, y: 0.19}
-      - {x: 0.53, y: 0.35}
-      - {x: 0.53, y: 0.48}
-      - {x: 0.52, y: 0.51}
-      - {x: 0.44, y: 0.56}
-      - {x: 0.32999998, y: 0.56}
-      - {x: 0.13, y: 0.44}
-      - {x: 0.01, y: 0.42}
-      - {x: -0.39, y: 0.22999999}
-      - {x: -0.45, y: 0.099999994}
-      - {x: -0.53999996, y: -0.01}
-      - {x: -0.53999996, y: -0.12}
-      - {x: -0.45, y: -0.26}
-      - {x: -0.42, y: -0.42}
-      - {x: -0.38, y: -0.45999998}
-      - {x: -0.11, y: -0.56}
-      - {x: -0.01, y: -0.56}
-      - {x: 0.19999999, y: -0.45999998}
-      - {x: 0.47, y: -0.29999998}
-      - {x: 0.53, y: -0.26}
-      - {x: 0.47, y: 0.06}
+    - - {x: -0.07665777, y: -0.50937706}
+      - {x: 0.42793202, y: -0.27365533}
+      - {x: 0.1125443, y: -0.18210557}
+      - {x: -0.37106085, y: -0.41565347}
   m_UseDelaunayMesh: 0

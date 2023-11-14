@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy_Lizard 2
   m_EditorClassIdentifier: 
   Type: 1
-  MaxHealth: 3
+  MaxHealth: 1
   RegenerationPerSec: 0
   Damage: 1
   DamageDelay: 0.6
