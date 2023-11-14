@@ -455,7 +455,7 @@ MonoBehaviour:
   Path: AudioSource/2/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638349008361651418
+  lastModified: 638352449836205439
   FileSizes:
   - Name: Desktop
     Value: 2346
@@ -686,7 +686,7 @@ MonoBehaviour:
   Path: AudioSource/2/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638349008361661424
+  lastModified: 638352449836215441
   FileSizes:
   - Name: Desktop
     Value: 2590
@@ -706,7 +706,7 @@ MonoBehaviour:
   Path: AudioSource/2/Build/Desktop/MUSIC.bank
   Name: MUSIC
   StudioPath: bank:/MUSIC
-  lastModified: 638349008361641749
+  lastModified: 638352449836195425
   FileSizes:
   - Name: Desktop
     Value: 4595072
@@ -1032,7 +1032,7 @@ MonoBehaviour:
   Path: "AudioSource/2/Build/Desktop/\u041E\u0417\u0412\u0423\u0427\u041A\u0410.bank"
   Name: "\u041E\u0417\u0412\u0423\u0427\u041A\u0410"
   StudioPath: "bank:/\u041E\u0417\u0412\u0423\u0427\u041A\u0410"
-  lastModified: 638349008361821599
+  lastModified: 638352449836499188
   FileSizes:
   - Name: Desktop
     Value: 2501024
@@ -1150,7 +1150,7 @@ MonoBehaviour:
   - {fileID: -6517612318321120736}
   StringsBanks:
   - {fileID: -5352089671009890012}
-  cacheTime: 638349008361821599
+  cacheTime: 638352449836499188
   cacheVersion: 131608
 --- !u!114 &519767662927483463
 MonoBehaviour:
@@ -1736,7 +1736,7 @@ MonoBehaviour:
   Path: AudioSource/2/Build/Desktop/MC.bank
   Name: MC
   StudioPath: bank:/MC
-  lastModified: 638349008361408275
+  lastModified: 638352449836032523
   FileSizes:
   - Name: Desktop
     Value: 225312
